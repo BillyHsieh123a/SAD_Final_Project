@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Shop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Clothe</h1>
+    </div>
+    <nav>
+      <button class="nav-btn" data-gender="woman">W</button>
+      <button class="nav-btn" data-gender="man">M</button>
+    </nav>
+  </header>
+
+  <section class="categories hidden" id="categories">
+    <button class="category">Clothing</button>
+    <button class="category">Dresses</button>
+    <button class="category">Trousers</button>
+    <button class="category">New In</button>
+    <button class="category">Jackets</button>
+  </section>
+
+  <main>
+    <div id="item-grid" class="item-grid">
+      <!-- Product cards will be displayed here dynamically -->
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
