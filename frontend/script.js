@@ -1,5 +1,3 @@
-// script.js
-
 // Selectors
 const navButtons = document.querySelectorAll(".nav-btn");
 const categoriesSection = document.getElementById("categories");
@@ -17,31 +15,39 @@ const products = {
   ],
 };
 
-// Show Categories and Filter Products
-navButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const gender = button.dataset.gender;
-
-    // Show categories
-    categoriesSection.classList.remove("hidden");
-
-    // Display products
-    displayProducts(gender);
-  });
-});
-
-// Function to Display Products
+// Function to display products for a given gender
 function displayProducts(gender) {
   itemGrid.innerHTML = ""; // Clear current products
 
-  products[gender].forEach(product => {
-    const card = document.createElement("div");
-    card.className = "item-card";
-    card.innerHTML = `
-      <img src="${product.img}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p class="price">${product.price}</p>
-    `;
-    itemGrid.appendChild(card);
-  });
+  if (products[gender]) {
+    // Iterate over the products and create cards
+    products[gender].forEach(product => {
+      const card = document.createElement("div");
+      card.className = "item-card";
+      card.innerHTML = `
+        <img src="${product.img}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p class="price">${product.price}</p>
+      `;
+      itemGrid.appendChild(card);
+    });
+  }
 }
+
+// Add click event listener to each navigation button
+navButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Toggle 'active' class to the clicked button
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    // Get gender from button's data attribute
+    const gender = button.dataset.gender;
+
+    // Show categories section
+    categoriesSection.classList.remove("hidden");
+
+    // Display products based on selected gender
+    displayProducts(gender);
+  });
+});
