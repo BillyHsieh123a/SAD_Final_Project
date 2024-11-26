@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign-In</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="login-page">
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a>
+                <h1>Polaritique</h1>
+            </a>
+        </div>
+
+        <div class="account-title">
+            <h2>MY ACCOUNT</h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Left Box - Login -->
+            <div class="box login-box">
+                <h3>LOG IN</h3>
+                <form action="#" method="POST">
+                    <label for="login-email">Account (Email/Phone)</label>
+                    <input type="text" id="login-email" name="email" placeholder="Enter your email or phone" required>
+
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- Right Box - Sign In -->
+            <div class="box sign-in-box">
+                <h3>New User?</h3>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- External JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
