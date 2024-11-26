@@ -76,12 +76,6 @@ nav {
 .search-bar i {
     font-size: 20px;
     color: #fff;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.search-bar i:hover {
-    color: #ccc;
 }
 
 /* Icons Container */
