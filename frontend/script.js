@@ -87,6 +87,10 @@ navButtons.forEach(button => {
 // Add event listener to category buttons (Category selection)
 categoryButtons.forEach(button => {
     button.addEventListener('click', function() {
+        // Toggle active class for the clicked button
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
         // Set selected category based on the clicked button
         selectedCategory = button.dataset.category;
 

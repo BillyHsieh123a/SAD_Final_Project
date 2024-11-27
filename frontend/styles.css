@@ -55,7 +55,7 @@ nav {
     background-color: #ccc;
 }
 
-.nav-btn:active {
+.nav-btn.active {
     background-color: #999; /* Color when the button is pressed */
 }
 
@@ -118,6 +118,10 @@ nav {
 
 .categories .category:hover {
     background-color: #555;
+}
+
+.categories .category.active {
+    background-color: #999; /* Color when the button is pressed */
 }
 
 .hidden {
