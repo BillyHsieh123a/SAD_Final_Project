@@ -66,40 +66,60 @@ const products = {
 let selectedGender = null;
 let selectedCategory = null;
 
-// Add click event listener to each nav button (Gender selection)
-navButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        // Toggle active class for the clicked button
-        navButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+// Function to toggle welcome picture visibility
+function toggleWelcomePicture() {
+    const welcomePicture = document.getElementById("welcome-picture");
+    const itemGrid = document.getElementById("item-grid");
 
-        // Get the gender from the clicked button
+    if ((selectedGender || selectedCategory || searchInput.value.trim() !== "")) {
+        welcomePicture.classList.add("hidden");
+        itemGrid.classList.remove("hidden");
+    } else {
+        welcomePicture.classList.remove("hidden");
+        itemGrid.classList.add("hidden");
+    }
+}
+
+// Add event listener to gender buttons
+navButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        // Existing logic for selecting gender
+        navButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
         selectedGender = button.dataset.gender;
 
         // Show categories section
         categoriesSection.classList.remove("hidden");
 
-        // Display products based on selected gender
+        // Toggle welcome picture and display products
+        toggleWelcomePicture();
         displayProducts();
     });
 });
 
-// Add event listener to category buttons (Category selection)
+// Add event listener to category buttons
 categoryButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        // Toggle active class for the clicked button
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        // Set selected category based on the clicked button
+    button.addEventListener("click", function () {
+        // Existing logic for selecting category
+        categoryButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
         selectedCategory = button.dataset.category;
 
-        // Display products based on selected gender and category
+        // Toggle welcome picture and display products
+        toggleWelcomePicture();
         displayProducts();
     });
 });
 
-// Function to display products based on selected gender and category
+// Event listener for search input
+searchInput.addEventListener("input", function () {
+    // Re-display products with search filter applied
+    toggleWelcomePicture();
+    if (selectedGender) {
+        displayProducts();
+    }
+});
+
 function displayProducts() {
     itemGrid.innerHTML = ""; // Clear current products
 
@@ -114,24 +134,24 @@ function displayProducts() {
                 return product.name.toLowerCase().includes(searchText);
             });
 
-            // If products are found, display them
-            if (filteredProducts.length > 0) {
-                filteredProducts.forEach(product => {
-                    const card = document.createElement("div");
-                    card.className = "item-card";
-                    card.innerHTML = `
-                        <img src="${product.img}" alt="${product.name}">
-                        <h3>${product.name}</h3>
-                        <p class="price">${product.price}</p>
-                    `;
-                    itemGrid.appendChild(card);
-                });
-            } else {
-                // If no products found for the selected category
+            // Display filtered products
+            filteredProducts.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "item-card";
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" class="product-image" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
+                `;
+                itemGrid.appendChild(card);
+            });
+
+            // If no products match
+            if (filteredProducts.length === 0) {
                 itemGrid.innerHTML = "<p>No items available in this category.</p>";
             }
         } else {
-            // If no category is selected, show all products for the selected gender
+            // Display all products for the selected gender
             let allProducts = [];
             for (const category in genderProducts) {
                 allProducts = allProducts.concat(genderProducts[category]);
@@ -142,30 +162,35 @@ function displayProducts() {
                 return product.name.toLowerCase().includes(searchText);
             });
 
-            // If products are found, display them
-            if (filteredProducts.length > 0) {
-                filteredProducts.forEach(product => {
-                    const card = document.createElement("div");
-                    card.className = "item-card";
-                    card.innerHTML = `
-                        <img src="${product.img}" alt="${product.name}">
-                        <h3>${product.name}</h3>
-                        <p class="price">${product.price}</p>
-                    `;
-                    itemGrid.appendChild(card);
-                });
-            } else {
-                // If no products found
+            filteredProducts.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "item-card";
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" class="product-image" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price}</p>
+                `;
+                itemGrid.appendChild(card);
+            });
+
+            // If no products match
+            if (filteredProducts.length === 0) {
                 itemGrid.innerHTML = "<p>No products found matching your search.</p>";
             }
         }
     }
-}
 
-// Event listener for search input (Search filtering)
-searchInput.addEventListener("input", function() {
-    // Re-display products with the search filter applied
-    if (selectedGender) {
-        displayProducts();
-    }
-});
+    // Add event listener to product images for redirection
+    const productImages = document.querySelectorAll(".product-image");
+    productImages.forEach(image => {
+        image.addEventListener("click", function () {
+            // Get product details from data attributes
+            const productName = image.dataset.productName;
+            const productPrice = image.dataset.productPrice;
+            const productImg = image.dataset.productImg;
+
+            // Redirect to item.html with product details (query parameters)
+            window.location.href = `item.html?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}`;
+        });
+    });
+}
