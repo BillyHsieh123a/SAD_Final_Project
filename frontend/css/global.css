@@ -1,6 +1,6 @@
 /* Base Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Times New Roman;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4; /* Add a light background color for the page */
@@ -9,7 +9,6 @@ body {
 /* Header Section */
 header {
     display: flex;
-    justify-content: space-between;
     align-items: center; /* Ensures vertical alignment of child elements */
     background-color: #000;
     color: #fff;
@@ -18,6 +17,7 @@ header {
 }
 
 .btn {
+    font-family: Times New Roman;
     background-color: #000;
     color: #fff;
     border: none;
@@ -60,6 +60,7 @@ nav {
 }
 
 .nav-btn {
+    font-family: Times New Roman;
     background-color: #fff;
     border: none;
     padding: 10px 20px;
@@ -82,11 +83,11 @@ nav {
     display: flex;
     align-items: center; /* Align input and icon vertically */
     gap: 10px;
-    flex-grow: 1;
     margin: 0 15px;
 }
 
 .search-bar input {
+    font-family: Times New Roman;
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -101,6 +102,8 @@ nav {
 /* Icons Container */
 .icons {
     display: flex;
+    justify-content: right;
+    flex-grow: 1;
     gap: 15px;
 }
 
@@ -125,6 +128,7 @@ nav {
 }
 
 .categories .category {
+    font-family: Times New Roman;
     background-color: #000;
     color: #fff;
     border: none;

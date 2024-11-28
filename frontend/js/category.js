@@ -61,7 +61,6 @@ const products = {
     }
 };
 
-
 // Store current selected gender and category
 let selectedGender = null;
 let selectedCategory = null;
@@ -71,14 +70,18 @@ function toggleWelcomePicture() {
     const welcomePicture = document.getElementById("welcome-picture");
     const itemGrid = document.getElementById("item-grid");
 
-    if ((selectedGender || selectedCategory || searchInput.value.trim() !== "")) {
+    // Check if gender or category or search query is set
+    if (selectedGender || selectedCategory || searchInput.value.trim() !== "") {
         welcomePicture.classList.add("hidden");
         itemGrid.classList.remove("hidden");
+        categoriesSection.classList.remove("hidden");  // Ensure categories section is shown if gender is selected
     } else {
         welcomePicture.classList.remove("hidden");
         itemGrid.classList.add("hidden");
+        categoriesSection.classList.add("hidden");  // Hide categories section if no gender is selected
     }
 }
+
 
 // Add event listener to gender buttons
 navButtons.forEach(button => {
@@ -90,6 +93,9 @@ navButtons.forEach(button => {
 
         // Show categories section
         categoriesSection.classList.remove("hidden");
+
+        // Save the state to sessionStorage
+        saveState();
 
         // Toggle welcome picture and display products
         toggleWelcomePicture();
@@ -105,6 +111,9 @@ categoryButtons.forEach(button => {
         button.classList.add("active");
         selectedCategory = button.dataset.category;
 
+        // Save the state to sessionStorage
+        saveState();
+
         // Toggle welcome picture and display products
         toggleWelcomePicture();
         displayProducts();
@@ -114,12 +123,24 @@ categoryButtons.forEach(button => {
 // Event listener for search input
 searchInput.addEventListener("input", function () {
     // Re-display products with search filter applied
+    saveState();
     toggleWelcomePicture();
     if (selectedGender) {
         displayProducts();
     }
 });
 
+// Save current filter state to sessionStorage
+function saveState() {
+    const state = {
+        selectedGender,
+        selectedCategory,
+        searchQuery: searchInput.value.trim(),
+    };
+    sessionStorage.setItem("filtersState", JSON.stringify(state));
+}
+
+// Function to display products based on selected filters
 function displayProducts() {
     itemGrid.innerHTML = ""; // Clear current products
 
@@ -184,6 +205,14 @@ function displayProducts() {
     const productImages = document.querySelectorAll(".product-image");
     productImages.forEach(image => {
         image.addEventListener("click", function () {
+            // Save the current state in sessionStorage
+            const state = {
+                selectedGender,
+                selectedCategory,
+                searchQuery: searchInput.value.trim(),
+            };
+            sessionStorage.setItem("filtersState", JSON.stringify(state));
+
             // Get product details from data attributes
             const productName = image.dataset.productName;
             const productPrice = image.dataset.productPrice;
@@ -194,3 +223,31 @@ function displayProducts() {
         });
     });
 }
+
+// Restore state from sessionStorage
+window.addEventListener("load", function () {
+    const savedState = JSON.parse(sessionStorage.getItem("filtersState"));
+
+    if (savedState) {
+        // Restore gender
+        selectedGender = savedState.selectedGender;
+        if (selectedGender) {
+            const activeGenderButton = document.querySelector(`.nav-btn[data-gender="${selectedGender}"]`);
+            if (activeGenderButton) activeGenderButton.classList.add("active");
+        }
+
+        // Restore category
+        selectedCategory = savedState.selectedCategory;
+        if (selectedCategory) {
+            const activeCategoryButton = document.querySelector(`.category[data-category="${selectedCategory}"]`);
+            if (activeCategoryButton) activeCategoryButton.classList.add("active");
+        }
+
+        // Restore search input
+        searchInput.value = savedState.searchQuery || "";
+
+        // Display products based on restored state
+        toggleWelcomePicture();
+        displayProducts();
+    }
+});

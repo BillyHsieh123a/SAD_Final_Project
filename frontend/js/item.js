@@ -16,8 +16,6 @@ const productImgElement = document.getElementById("product-img");
 // Adjust image dimensions
 productImgElement.style.width = "400px";  // Set the width to 400px
 productImgElement.style.height = "600px";  // Set the height to 600px
-
-// Ensure the image is cropped properly
 productImgElement.style.objectFit = "cover";  // Crop and fill the box
 
 // Handle "Add to Bag" button
@@ -31,11 +29,20 @@ document.getElementById("try-on").addEventListener("click", function () {
 });
 
 // Handle "Add to Favorite" button (heart icon)
-document.getElementById("favorite-icon").addEventListener("click", function () {
+document.getElementById("add-to-favorite").addEventListener("click", function () {
     this.classList.toggle("active");  // Toggle the heart icon (favorite or not)
     if (this.classList.contains("active")) {
         alert(`${productName} has been added to your favorites.`);
     } else {
         alert(`${productName} has been removed from your favorites.`);
     }
+});
+
+// Get the Go Back button
+const goBackButton = document.querySelector(".nav-btn");
+
+// Add an event listener to handle the click event
+goBackButton.addEventListener("click", function () {
+    // Navigate back to category.html
+    window.location.href = "category.html";
 });
