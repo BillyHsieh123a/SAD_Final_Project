@@ -17,6 +17,24 @@ header {
     height: 60px; /* Explicitly define height for the header */
 }
 
+.btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
 .logo {
     margin-right: 20px; /* Space between logo and the other elements */
 }
