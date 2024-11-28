@@ -39,7 +39,7 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
 });
 
 // Get the Go Back button
-const goBackButton = document.querySelector(".nav-btn");
+const goBackButton = document.querySelector(".go-back-btn");
 
 // Add an event listener to handle the click event
 goBackButton.addEventListener("click", function () {

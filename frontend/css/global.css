@@ -3,17 +3,16 @@ body {
     font-family: Times New Roman;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Add a light background color for the page */
+    background-color: #ffffff; /* Add a light background color for the page */
 }
 
 /* Header Section */
 header {
     display: flex;
     align-items: center; /* Ensures vertical alignment of child elements */
-    background-color: #000;
+    background-color: #000000;
     color: #fff;
-    padding: 10px 20px;
-    height: 60px; /* Explicitly define height for the header */
+    height: 40px; /* Explicitly define height for the header */
 }
 
 .btn {
@@ -36,7 +35,8 @@ header {
 }
 
 .logo {
-    margin-right: 20px; /* Space between logo and the other elements */
+    margin-left: 20px; 
+    margin-right: 20px;/* Space between logo and the other elements */
 }
 
 .logo a {
@@ -49,13 +49,12 @@ header {
 }
 
 .logo h1 {
-    margin: 0;
+    margin: 0px;
     font-size: 24px; /* Adjust logo font size */
 }
 
 nav {
     display: flex;
-    gap: 10px;
     align-items: center; /* Ensures nav items are aligned vertically */
 }
 
@@ -64,10 +63,13 @@ nav {
     background-color: #fff;
     border: none;
     padding: 10px 20px;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    height: 100%; /* Ensure buttons take full height of their container */
+    height: 40px; 
+    width: 70px;
 }
 
 .nav-btn:hover {
@@ -76,6 +78,19 @@ nav {
 
 .nav-btn.active {
     background-color: #999; /* Color when the button is pressed */
+}
+
+.go-back-btn {
+    font-family: Times New Roman;
+    background-color: #ffffff;
+    width: 70px;
+    border: none;
+    height: 40px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.go-back-btn:hover {
+    background-color: #ccc;
 }
 
 /* Search Bar */
@@ -103,6 +118,7 @@ nav {
 .icons {
     display: flex;
     justify-content: right;
+    margin-right: 20px;
     flex-grow: 1;
     gap: 15px;
 }
@@ -121,76 +137,30 @@ nav {
 /* Categories Section */
 .categories {
     display: flex;
-    gap: 10px;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
+    background-color: #555;
+    height: 30px;
 }
 
 .categories .category {
     font-family: Times New Roman;
-    background-color: #000;
+    background-color: #555;
     color: #fff;
     border: none;
     padding: 8px 15px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s;
+    width: 100px;
 }
 
 .categories .category:hover {
-    background-color: #555;
+    background-color: #999;
 }
 
 .categories .category.active {
-    background-color: #999; /* Color when the button is pressed */
+    background-color: #888888; /* Color when the button is pressed */
 }
 
 .hidden {
     display: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .logo h1 {
-        font-size: 20px;
-    }
-
-    .nav-btn {
-        padding: 8px 15px;
-        font-size: 14px;
-    }
-
-    .search-bar input {
-        font-size: 12px;
-        padding: 6px;
-    }
-
-    .icons i {
-        font-size: 18px;
-    }
-
-    .item-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .search-bar {
-        margin: 10px 0;
-    }
-
-    .icons {
-        justify-content: center;
-    }
-
-    .categories {
-        flex-direction: column;
-        align-items: center;
-    }
 }
