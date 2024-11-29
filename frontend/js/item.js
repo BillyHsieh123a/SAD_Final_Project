@@ -14,7 +14,7 @@ document.getElementById("product-img").alt = productName;
 const productImgElement = document.getElementById("product-img");
 
 // Adjust image dimensions
-productImgElement.style.width = "400px";  // Set the width to 400px
+productImgElement.style.width = "500px";  // Set the width to 400px
 productImgElement.style.height = "600px";  // Set the height to 600px
 productImgElement.style.objectFit = "cover";  // Crop and fill the box
 

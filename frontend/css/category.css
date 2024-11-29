@@ -34,14 +34,28 @@
 /* Product Grid Section */
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Default behavior */
+    gap: 10px;
+    padding: 10px;
 }
 
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+    .item-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Fewer items fit naturally */
+    }
+}
+
+@media (max-width: 480px) {
+    .item-grid {
+        grid-template-columns: repeat(1, minmax(200px, 1fr)); /* One item per row */
+    }
+}
+
+
 .item-card {
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: 2px solid #000000;
+    padding: 5px;
     text-align: center;
     background-color: #fff;
     border-radius: 8px; /* Added rounded corners */

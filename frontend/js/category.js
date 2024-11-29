@@ -12,25 +12,89 @@ const products = {
             { name: "T-shirt", price: "60 NTD", img: "https://via.placeholder.com/150" },
             { name: "Sweater", price: "150 NTD", img: "https://via.placeholder.com/150" },
             { name: "Tank Top", price: "50 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Crop Top", price: "70 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "T-shirt", price: "60 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweater", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Tank Top", price: "50 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Crop Top", price: "70 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "T-shirt", price: "60 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweater", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Tank Top", price: "50 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Crop Top", price: "70 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/150" } // New product
         ],
         bottoms: [
             { name: "Skirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
             { name: "Jeans", price: "120 NTD", img: "https://via.placeholder.com/150" },
             { name: "Leggings", price: "100 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Cargo Pants", price: "140 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Cargo Pants", price: "140 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Wide-leg Pants", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Skirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leggings", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "140 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Wide-leg Pants", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Skirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leggings", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "140 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Wide-leg Pants", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Skirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leggings", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "140 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Wide-leg Pants", price: "110 NTD", img: "https://via.placeholder.com/150" } // New product
         ],
         outerwear: [
             { name: "Leather Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
             { name: "Denim Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
             { name: "Trench Coat", price: "250 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Cardigan", price: "110 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Cardigan", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer Jacket", price: "210 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leather Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Denim Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trench Coat", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cardigan", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer Jacket", price: "210 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leather Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Denim Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trench Coat", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cardigan", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer Jacket", price: "210 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Leather Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Denim Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trench Coat", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cardigan", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer Jacket", price: "210 NTD", img: "https://via.placeholder.com/150" } // New product
         ],
         dresses: [
             { name: "Summer Dress", price: "130 NTD", img: "https://via.placeholder.com/150" },
             { name: "Party Dress", price: "250 NTD", img: "https://via.placeholder.com/150" },
             { name: "Maxi Dress", price: "180 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Cocktail Dress", price: "300 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Cocktail Dress", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bodycon Dress", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Summer Dress", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Party Dress", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Maxi Dress", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cocktail Dress", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bodycon Dress", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Summer Dress", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Party Dress", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Maxi Dress", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cocktail Dress", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bodycon Dress", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Summer Dress", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Party Dress", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Maxi Dress", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cocktail Dress", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bodycon Dress", price: "200 NTD", img: "https://via.placeholder.com/150" } // New product
         ]
     },
     man: {
@@ -38,25 +102,93 @@ const products = {
             { name: "Shirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
             { name: "Sweatshirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
             { name: "Polo Shirt", price: "100 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Henley Shirt", price: "110 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Henley Shirt", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Hoodie", price: "130 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Graphic Tee", price: "75 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatshirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Polo Shirt", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Henley Shirt", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Hoodie", price: "130 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Graphic Tee", price: "75 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatshirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Polo Shirt", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Henley Shirt", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Hoodie", price: "130 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Graphic Tee", price: "75 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shirt", price: "80 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatshirt", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Polo Shirt", price: "100 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Henley Shirt", price: "110 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Hoodie", price: "130 NTD", img: "https://via.placeholder.com/150" }, // New product
+            { name: "Graphic Tee", price: "75 NTD", img: "https://via.placeholder.com/150" } // New product, // New product
         ],
         bottoms: [
             { name: "Jeans", price: "130 NTD", img: "https://via.placeholder.com/150" },
             { name: "Trousers", price: "150 NTD", img: "https://via.placeholder.com/150" },
             { name: "Chinos", price: "150 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Cargo Pants", price: "170 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Cargo Pants", price: "170 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shorts", price: "60 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trousers", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Chinos", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "170 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shorts", price: "60 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trousers", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Chinos", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "170 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shorts", price: "60 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jeans", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Trousers", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Chinos", price: "150 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Cargo Pants", price: "170 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Shorts", price: "60 NTD", img: "https://via.placeholder.com/150" } // New product
         ],
         outerwear: [
             { name: "Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
             { name: "Bomber Jacket", price: "220 NTD", img: "https://via.placeholder.com/150" },
             { name: "Blazer", price: "250 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Windbreaker", price: "180 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Windbreaker", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Parka", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bomber Jacket", price: "220 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Windbreaker", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Parka", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bomber Jacket", price: "220 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Windbreaker", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Parka", price: "300 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Jacket", price: "200 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Bomber Jacket", price: "220 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Blazer", price: "250 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Windbreaker", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Parka", price: "300 NTD", img: "https://via.placeholder.com/150" } // New product
         ],
         activewear: [
             { name: "Gym Shorts", price: "90 NTD", img: "https://via.placeholder.com/150" },
             { name: "Sweatpants", price: "120 NTD", img: "https://via.placeholder.com/150" },
             { name: "Track Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
-            { name: "Sports T-shirt", price: "70 NTD", img: "https://via.placeholder.com/150" }
+            { name: "Sports T-shirt", price: "70 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Compression Tights", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Gym Shorts", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatpants", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Track Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sports T-shirt", price: "70 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Compression Tights", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Gym Shorts", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatpants", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Track Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sports T-shirt", price: "70 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Compression Tights", price: "130 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Gym Shorts", price: "90 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sweatpants", price: "120 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Track Jacket", price: "180 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Sports T-shirt", price: "70 NTD", img: "https://via.placeholder.com/150" },
+            { name: "Compression Tights", price: "130 NTD", img: "https://via.placeholder.com/150" } // New product
         ]
     }
 };
@@ -91,8 +223,8 @@ navButtons.forEach(button => {
         button.classList.add("active");
         selectedGender = button.dataset.gender;
 
-        // Show categories section
-        categoriesSection.classList.remove("hidden");
+        // Show categories section based on the selected gender
+        updateCategoryButtons();
 
         // Save the state to sessionStorage
         saveState();
@@ -102,6 +234,26 @@ navButtons.forEach(button => {
         displayProducts();
     });
 });
+
+// Function to update category buttons based on selected gender
+function updateCategoryButtons() {
+    // Get all category buttons
+    const categoryButtons = document.querySelectorAll(".category");
+
+    // Clear all existing categories
+    categoryButtons.forEach(button => button.classList.add("hidden"));
+
+    // Get category buttons for the selected gender
+    const genderCategories = selectedGender === 'woman' ? ['tops', 'bottoms', 'outerwear', 'dresses'] : ['tops', 'bottoms', 'outerwear', 'activewear'];
+
+    // Show only the categories relevant to the selected gender
+    genderCategories.forEach(category => {
+        const categoryButton = document.querySelector(`.category[data-category="${category}"]`);
+        if (categoryButton) {
+            categoryButton.classList.remove("hidden");
+        }
+    });
+}
 
 // Add event listener to category buttons
 categoryButtons.forEach(button => {
@@ -234,6 +386,9 @@ window.addEventListener("load", function () {
         if (selectedGender) {
             const activeGenderButton = document.querySelector(`.nav-btn[data-gender="${selectedGender}"]`);
             if (activeGenderButton) activeGenderButton.classList.add("active");
+
+            // Update the categories based on the selected gender
+            updateCategoryButtons();
         }
 
         // Restore category
@@ -251,3 +406,4 @@ window.addEventListener("load", function () {
         displayProducts();
     }
 });
+

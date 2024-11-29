@@ -1,20 +1,21 @@
 /* Product Detail Styles */
 .product-detail {
     display: flex;
-    padding: 40px;
+    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.product-images {
+.product-image {
     flex: 1;
     padding-right: 20px;
 }
 
-.product-images img {
+.product-image img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 2px solid #000;  /* Add border here */
 }
 
 .thumbnail-images {
