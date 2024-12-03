@@ -51,6 +51,43 @@ if (e.target.classList.contains("remove-btn")) {
   }
 }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  // 處理 Logo 點擊事件
+  const logoLink = document.querySelector(".logo a");
+  if (logoLink) {
+      logoLink.addEventListener("click", function (event) {
+          event.preventDefault(); // 防止默認行為，測試是否能手動控制跳轉
+          const targetUrl = logoLink.getAttribute("href");
+          if (targetUrl) {
+              window.location.href = targetUrl; // 手動跳轉到目標頁面
+          } else {
+              console.error("連結沒有指定目標頁面");
+          }
+      });
+  } else {
+      console.error("找不到 .logo a 元素");
+  }
+  const wButton = document.querySelector(".nav-btn[data-gender='woman']"); 
+  if (wButton) {
+      wButton.addEventListener("click", function() {
+          console.log("女性按鈕被點擊");
+          window.location.href = `category.html?gender=woman`;  
+      });
+  } else {
+      console.error("找不到女性性別按鈕");
+  }
+
+  const mButton = document.querySelector(".nav-btn[data-gender='man']");
+  if (mButton) {
+      mButton.addEventListener("click", function() {
+          console.log("男性按鈕被點擊");
+          window.location.href = `category.html?gender=man`;
+      });
+  } else {
+      console.error("找不到男性性別按鈕");
+  }
+});
+
 
 // 初始化購物車畫面
 renderCart();
