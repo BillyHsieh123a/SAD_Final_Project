@@ -25,8 +25,10 @@ document.getElementById("add-to-bag").addEventListener("click", function () {
 
 // Handle "Try On" button
 document.getElementById("try-on").addEventListener("click", function () {
-    alert(`You are trying on the ${productName}.`);
+    // Redirect to the try-on page
+    window.location.href = "try-on.html";
 });
+
 
 // Handle "Add to Favorite" button (heart icon)
 document.getElementById("add-to-favorite").addEventListener("click", function () {
@@ -46,3 +48,4 @@ goBackButton.addEventListener("click", function () {
     // Navigate back to category.html
     window.location.href = "category.html";
 });
+
