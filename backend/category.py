@@ -29,8 +29,16 @@ def category_load_clothes_data():
     updated_all_clothes_image = []
     for cloth in all_clothes_images:
         new_cloth = list(cloth)
-        new_cloth[7] = url_for("static", '/image' + cloth[7])
+        new_cloth[7] = url_for("static", '/image/' + cloth[7])
         updated_all_clothes_image.append(new_cloth)
 
-    return updated_all_clothes_image
+    return jsonify({"clothes_id": updated_all_clothes_image[0], 
+                    "name": updated_all_clothes_image[1], 
+                    "part": updated_all_clothes_image[2], 
+                    "gender": updated_all_clothes_image[3], 
+                    "price": updated_all_clothes_image[4], 
+                    "description": updated_all_clothes_image[5], 
+                    "color": updated_all_clothes_image[6], 
+                    "img": updated_all_clothes_image[7]
+                    }), 200
 
