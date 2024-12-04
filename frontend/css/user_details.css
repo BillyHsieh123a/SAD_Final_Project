@@ -1,9 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f3f3f3;
     box-sizing: border-box;
+}
+
+.button {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
 }
 
 .user-page {
@@ -46,27 +50,31 @@ body {
 
 /* .main-container {
     width: 100%;
-    max-width: 660px;           
+    max-width: 660px;         
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 80px;            
+    margin-top: 80px;           
 } */
 
-/* .sidebar { 
-    background-color: #f3f3f3;
+/* .sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 300px; 
+    height: calc(100vh - 80px); 
+    background-color: #f3f3f3; 
     padding: 20px;
-    width: 300px;
-    flex-shrink: 0; 
-}  */
+    box-sizing: border-box; 
+} */
 
 .main-container {
     display: flex;
-    justify-content: center; /* 水平置中 */
-    align-items: center;    /* 垂直置中 */
-    min-height: 100vh;      /* 滿屏高度 */
-    gap: 40px;              /* 左右間距 */
-    padding: 20px;          /* 避免貼邊 */
+    justify-content: center; 
+    align-items: center;   
+    min-height: 100vh;      
+    gap: 40px;              
+    padding: 20px;          
     box-sizing: border-box;
 }
 
@@ -78,14 +86,32 @@ body {
 }
 
 .content {
-    /* flex-grow: 1;           表單佔據剩餘空間 */
-    max-width: 660px;       /* 表單最大寬度 */
+    flex-grow: 1;           /* 表單佔據剩餘空間 */
+    width: 660px;       /* 表單最大寬度 */
     background-color: #fff;
-    /* padding: 20px; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     box-sizing: border-box;
     margin-top: 80px;
 }
+
+/* .content {
+    background-color: #fff;
+    width: flexibility;
+    margin-left: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 660px; 
+} */
+
+/* .content {
+    flex-grow: 1; 
+    background-color: #fff;
+    margin-left: 20px; 
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 300px - 40px);
+    box-sizing: border-box; 
+} */
 
 .user-info {
     display: flex;
@@ -158,13 +184,6 @@ body {
     text-align: center;
 }
 
-/* .content {
-    background-color: #fff;
-    width: flexibility;
-    margin-left: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
-
 .clothing-collage {
     display: flex;
     flex-wrap: wrap;
@@ -182,7 +201,41 @@ body {
     object-fit: cover; 
 }
 
+.input-field select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.input-field .note {
+    font-size: 12px;
+    color: #666;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 5px;
+}
+
+.input-field label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.input-field input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
 .submit-button {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -204,3 +257,44 @@ body {
 .submit-button .sign-out-text { 
     margin-left: 15px; 
 }
+
+.save-change {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50%;
+    margin-top: 20px;
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+    text-align: center;
+}
+    
+
+.save-change:hover {
+    background-color: #444;
+}
+
+.section h3 {
+    background-color: #fff;
+    text-align: left;
+    /* margin-bottom: 20px;*/
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+} 
+
+
+.note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+

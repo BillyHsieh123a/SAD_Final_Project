@@ -1,9 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f3f3f3;
     box-sizing: border-box;
+}
+
+.button {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
 }
 
 .user-page {
@@ -181,7 +185,8 @@ body {
     text-align: center;
 }
 
-.select-button {
+.submit-button {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -196,11 +201,11 @@ body {
     margin: 10px;
 }
 
-.select-button:hover {
+.submit-button:hover {
     background-color: #d9d9d9;
 }
 
-.select-button .sign-out-text { 
+.submit-button .sign-out-text { 
     margin-left: 15px; 
 }
 

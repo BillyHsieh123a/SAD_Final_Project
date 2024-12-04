@@ -24,3 +24,23 @@ logoLink.addEventListener("click", function (event) {
     // Reset the display of products (or show welcome message if no filters)
     displayProducts();
 });
+
+// Select the icons
+const profileIcon = document.getElementById("profile-icon");
+const likeIcon = document.getElementById("like-icon");
+const bagIcon = document.getElementById("bag-icon");
+
+// Wrap each icon with an <a> tag and set the href attribute
+function wrapIconWithLink(icon, href) {
+    const link = document.createElement("a");
+    link.href = href;
+
+    // Insert the link before the icon and move the icon inside it
+    icon.parentNode.insertBefore(link, icon);
+    link.appendChild(icon);
+}
+
+// Add links to each icon
+wrapIconWithLink(profileIcon, "user_account_base.html");
+wrapIconWithLink(likeIcon, "favorite.html");
+wrapIconWithLink(bagIcon, "bag.html");
