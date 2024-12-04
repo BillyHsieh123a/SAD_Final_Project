@@ -18,7 +18,7 @@
 const detailButtons = document.querySelectorAll('.more-details');
     detailButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const details = button.nextElementSibling;
+        const details = button.previousElementSibling;
         const isHidden = details.style.display === 'none' || details.style.display === '';
         
         if (isHidden) {
