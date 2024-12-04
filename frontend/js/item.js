@@ -3,6 +3,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const productName = urlParams.get('name');
 const productPrice = urlParams.get('price');
 const productImg = urlParams.get('img');
+const productClothID = urlParams.get('clothes_id');
+const productColor = urlParams.get('color');
 
 // Update HTML elements with product details
 document.getElementById("product-name").textContent = productName;
