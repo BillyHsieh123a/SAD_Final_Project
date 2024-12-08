@@ -25,7 +25,7 @@ def bag_load_bag():
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = list(cloth)
-        new_cloth[8] = url_for("static", '/image/' + cloth[7])
+        new_cloth[8] = url_for("static", '/image/' + cloth[8])
         update_all_clothes_in_bag_data.append(new_cloth)
 
     psql_conn.commit()

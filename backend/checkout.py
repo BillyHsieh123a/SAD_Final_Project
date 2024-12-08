@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import psql_conn
 
-checkout = Blueprint("bag", __name__)
+checkout = Blueprint("checkout", __name__)
 
 # return cloth name, price, image url, cloth_id, color
 @checkout.route('/checkout_load_bag', methods=['GET'])
@@ -25,7 +25,7 @@ def checkout_load_bag():
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = list(cloth)
-        new_cloth[8] = url_for("static", '/image/' + cloth[7])
+        new_cloth[8] = url_for("static", '/image/' + cloth[8])
         update_all_clothes_in_bag_data.append(new_cloth)
 
     psql_conn.commit()
