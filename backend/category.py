@@ -31,6 +31,7 @@ def category_load_clothes_data():
         new_cloth[7] = url_for("static", '/image/' + cloth[7])
         updated_all_clothes_image.append(new_cloth)
 
+    psql_conn.commit()
     return jsonify({"clothes_id": updated_all_clothes_image[0], 
                     "name": updated_all_clothes_image[1], 
                     "part": updated_all_clothes_image[2], 

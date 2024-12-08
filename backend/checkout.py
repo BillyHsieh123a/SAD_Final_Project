@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import psql_conn
 
-bag = Blueprint("bag", __name__)
+checkout = Blueprint("bag", __name__)
 
 # return cloth name, price, image url, cloth_id, color
-@bag.route('/bag_load_bag', methods=['GET'])
-def bag_load_bag():
+@checkout.route('/checkout_load_bag', methods=['GET'])
+def checkout_load_bag():
     cur = psql_conn.cursor()
     user_id = request.args.get('user_id')
 
@@ -41,23 +41,48 @@ def bag_load_bag():
                     "purchase_qty": update_all_clothes_in_bag_data[9]
                     }), 200
 
-@bag.route('/bag_delete_item', methods=['POST'])
-def bag_delete_item():
+@checkout.route('/checkout_', methods=['POST'])
+def checkout_():
     cur = psql_conn.cursor()
 
     data = request.json
     user_id = data.get('user_id')
-    clothes_id = data.get('clothes_id')
-    color = data.get('color')
-    size = data.get('size')
+    sub_total = data.get('sub_total')
+    shipping_fee = data.get('shipping_fee')
+    payment_type = data.get('payment_type')
+    address = data.get('address')
+    order_date = data.get('order_date')
+    ideal_rcv_date =data.get('ideal_rcv_date')
 
+    # add the order into "order", assume order_id will add by dbms
     cur.execute(
-        '''
-        DELETE FROM bag 
-        WHERE user_id = %s AND clothes_id = %s AND color = %s AND "size" = %s;
-        ''',
-        (user_id, clothes_id, color, size)
+        """
+        INSERT INTO public."user" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        RETURNING order_id
+        """,
+        (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
+    )
+    order_id = cur.fetchone()[0]
+
+    # get items in "bag" and add them into "order_contains", then delete them from "bag"
+    cur.execute(
+        """
+        WITH moved_data AS (
+            SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
+            FROM bag
+            WHERE bag.user_id = %s
+        )
+        INSERT INTO public."order_contains" (order_id, clothes_id, color, size, purchase_qty)
+        SELECT %s, clothes_id, color, size, purchase_qty
+        FROM moved_data;
+
+        DELETE FROM bag
+        WHERE user_id = %s;
+        """,
+        (user_id, order_id, user_id)
     )
 
+
     psql_conn.commit()
-    return jsonify({"message": "successfully deleted!"}), 200
+    return jsonify({"message": "successfully bought items!!!"})
