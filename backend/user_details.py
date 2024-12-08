@@ -59,4 +59,4 @@ def user_details_change_user_data():
         (fname, lname, phone, email, bir, gender, user_id)
     )
 
-    return {"message": "successfully changed data!!!!"}
+    return jsonify({"message": "successfully changed data!!!!"}), 200
