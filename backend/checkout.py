@@ -57,7 +57,7 @@ def checkout_():
     # add the order into "order", assume order_id will add by dbms
     cur.execute(
         """
-        INSERT INTO public."user" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
+        INSERT INTO public."order" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         RETURNING order_id
         """,
