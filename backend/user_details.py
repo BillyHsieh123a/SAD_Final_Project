@@ -59,4 +59,5 @@ def user_details_change_user_data():
         (fname, lname, phone, email, bir, gender, user_id)
     )
 
+    psql_conn.commit()
     return jsonify({"message": "successfully changed data!!!!"}), 200
