@@ -11,15 +11,14 @@ def category_load_clothes_data():
     cur.execute(
         '''
         WITH RankedClothes AS (
-            SELECT 
-                *,
+            SELECT *,
                 ROW_NUMBER() OVER (PARTITION BY clothes_id ORDER BY clothes_id ASC) AS row_num
             FROM 
                 clothes_color
         )
-        SELECT c.clothes_id, c.name, c.part, c.gender, c.price, c.description, rc.color, i.filepath
-        FROM clothes AS c
-        JOIN RankedClothes AS rc ON c.clothes_id = rc.clothes_id
+        SELECT cl.clothes_id, cl.name, cl.part, cl.gender, cl.price, cl.description, rc.color, i.path
+        FROM clothes AS cl
+        JOIN RankedClothes AS rc ON cl.clothes_id = rc.clothes_id
         JOIN image AS i ON rc.image_filename = i.filename
         WHERE rc.row_num = 1;
         '''
@@ -32,6 +31,7 @@ def category_load_clothes_data():
         new_cloth[7] = url_for("static", '/image/' + cloth[7])
         updated_all_clothes_image.append(new_cloth)
 
+    psql_conn.commit()
     return jsonify({"clothes_id": updated_all_clothes_image[0], 
                     "name": updated_all_clothes_image[1], 
                     "part": updated_all_clothes_image[2], 
