@@ -7,13 +7,12 @@ from item import item
 from login import login
 from try_on import try_on
 
-
 # Global Flask app (SUBJECT TO CHANGE)
 app = Flask(__name__, template_folder="../frontend/html", static_folder="../frontend/assets")
 app.register_blueprint(category)
-app.register_blueprint(item)
-app.register_blueprint(login)
-app.register_blueprint(try_on)
+# app.register_blueprint(item)
+# app.register_blueprint(login)
+# app.register_blueprint(try_on)
 
 
 # Initialize the app and connect to the database.

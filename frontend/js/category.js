@@ -4,7 +4,7 @@ const categoriesSection = document.getElementById("categories");
 const itemGrid = document.getElementById("item-grid");
 const searchInput = document.getElementById("search-input");
 const categoryButtons = document.querySelectorAll(".category");
-
+const serverURL = "http://127.0.0.1:5000"
 // const products = {
 //     woman: {
 //         tops: [
@@ -196,7 +196,7 @@ const categoryButtons = document.querySelectorAll(".category");
 products = {}
 window.onload = async function () {
     try {
-        const response = await fetch('/category_load_clothes_data');
+        const response = await fetch(`${serverURL}/category_load_clothes_data`);
         const result = await response.json();
         products = result
         console.log(result); // Log the response from Flask
