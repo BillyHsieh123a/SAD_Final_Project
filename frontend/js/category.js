@@ -193,7 +193,7 @@ const serverURL = "http://127.0.0.1:5000"
 //     }
 // };
 
-products = {}
+let products = {}; // Declare the products object outside to ensure it is available globally
 window.onload = async function () {
     try {
         const response = await fetch(`${serverURL}/category_load_clothes_data`, {
@@ -202,12 +202,16 @@ window.onload = async function () {
                 'Content-Type': 'application/json',
             },
         });
-        
+
         // Check if the response is successful
         if (response.ok) {
             const result = await response.json();
-            products = result;
+            products = result; // Set the result from the API into the products object
             console.log(result); // Log the response from Flask
+
+            // Now that data is fetched and stored in 'products', convert it to the desired format
+            products = convertToCategoryFormat(products);
+            console.log(products); // Log the formatted products
         } else {
             console.error("Failed to fetch data:", response.status, response.statusText);
         }
@@ -215,6 +219,58 @@ window.onload = async function () {
         console.error('Error:', error);
     }
 };
+
+function convertToCategoryFormat(data) {
+    const result = {
+        woman: {
+            tops: [],
+            bottoms: [],
+            outerwear: [],
+            activewear: [],
+        },
+        man: {
+            tops: [],
+            bottoms: [],
+            outerwear: [],
+            activewear: [],
+        }
+    };
+
+    data.forEach(item => {
+        // Determine the gender
+        const gender = item.gender === "M" ? "man" : "woman"; // Adjust if there are more genders
+
+        // Determine the category by the 'part' field
+        let category = "";
+        switch (item.part) {
+            case "T":
+                category = "tops";
+                break;
+            case "B":
+                category = "bottoms";
+                break;
+            case "O":
+                category = "outerwear";
+                break;
+            case "A":
+                category = "activewear";
+                break;
+            default:
+                break;
+        }
+
+        // Add the item to the correct gender and category
+        if (category) {
+            result[gender][category].push({
+                name: item.name,
+                price: `${item.price} NTD`,
+                img: ".." + item.img,
+            });
+        }
+    });
+
+    return result;
+}
 
 // Store current selected gender and category
 let selectedGender = null;
