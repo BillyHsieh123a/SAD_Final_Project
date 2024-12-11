@@ -1,37 +1,14 @@
 // 商品數據
-// const cartItems = [
-//   { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
-//   { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
-//   { id: 3, name: "Blazer", color: "red", size: "M", price: 100, quantity: 2 },
-//   { id: 4, name: "Blazer", color: "pink", size: "M", price: 80, quantity: 1 },
-// ];
+const cartItems = [
+  { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
+  { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
+  { id: 3, name: "Blazer", color: "red", size: "M", price: 100, quantity: 2 },
+  { id: 4, name: "Blazer", color: "pink", size: "M", price: 80, quantity: 1 },
+];
 
 // 初始化購物車
 const cartContainer = document.getElementById("cart-items");
 const subtotalElement = document.getElementById("subtotal");
-
-cartItems = []
-window.onload = async function () {
-  try {
-      const response = await fetch(`${serverURL}/bag_load_bag?user_id=${user_id}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-      
-      // Check if the response is successful
-      if (response.ok) {
-          const result = await response.json();
-          cartItems = result;
-          console.log(result); // Log the response from Flask
-      } else {
-          console.error("Failed to fetch data:", response.status, response.statusText);
-      }
-  } catch (error) {
-      console.error('Error:', error);
-  }
-};
 
 function renderCart() {
 cartContainer.innerHTML = ""; // 清空購物車

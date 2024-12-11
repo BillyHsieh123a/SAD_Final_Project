@@ -30,9 +30,6 @@ const profileIcon = document.getElementById("profile-icon");
 const likeIcon = document.getElementById("like-icon");
 const bagIcon = document.getElementById("bag-icon");
 
-const serverURL = "http://127.0.0.1:5000"
-let user_id = 0
-
 // Wrap each icon with an <a> tag and set the href attribute
 function wrapIconWithLink(icon, href) {
     const link = document.createElement("a");
