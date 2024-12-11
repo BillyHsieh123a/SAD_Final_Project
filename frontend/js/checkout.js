@@ -1,8 +1,11 @@
 // 購物車資料
-const cartItems = [
-    { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
-    { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
-];
+// const cartItems = [
+//     { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
+//     { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
+// ];
+cartItems = []
+
+
 const defaultAddress = {
     firstName: 'John',
     lastName: 'Doe',
@@ -32,7 +35,7 @@ function loadCartItems() {
         // 只顯示商品圖片
         itemDiv.innerHTML = `
             <div class="itempic">
-                <img src="https://via.placeholder.com/50" alt="${item.name}">
+                <img src=${".." + item.img} alt="${item.name}">
             </div>
         `;
 
@@ -206,11 +209,32 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
 // 合併初始化邏輯
-window.onload = function() {
-    loadDefaultAddress();
-    loadCartItems();
-    updateTotal(); // 確保頁面加載時就計算一次總金額
+window.onload = async function() {
+    try {
+        const response = await fetch(`${serverURL}/checkout_load_bag?user_id=${user_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            cartItems = result;
+            console.log(cartItems); // Log the response from Flask
+            // Call the existing functions
+            loadDefaultAddress();
+            loadCartItems(); // Make sure to load the cart items after fetching data
+            updateTotal(); // 確保頁面加載時就計算一次總金額
+        } else {
+            console.error("Failed to fetch data:", response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 };
+
 
 document.getElementById("buy-now").addEventListener("click", () => {
     window.location.href = "ordered.html"; // 這裡將導向結帳頁面
