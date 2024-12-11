@@ -43,7 +43,7 @@ main {
 .product-card .add-to-bag {
     padding: 8px 15px;
     font-size: 1rem;
-    background-color: #28a745; /* Green color */
+    background-color: #999; /* Green color */
     color: white;
     border: none;
     border-radius: 5px;
@@ -51,6 +51,10 @@ main {
     transition: background-color 0.3s ease;
 }
 
+.product-card .add-to-bag:hover {
+    background-color: #000000; /* 修改為更亮眼的綠色 */
+    color: white; /* 確保文字仍然清晰 */
+}
 .product-card img {
     width: 100px;
     height: 150px;

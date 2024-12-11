@@ -31,13 +31,17 @@
             <div class="section account-section">
                 <div class="input-field">
                     <label>Account</label>
-                    <input type="text" placeholder="Email or Phone" required>
+                    <input id="login-email-or-phone" type="text" placeholder="Email or Phone" required>
                 </div>
                 <div class="input-field">
                     <label>Password</label>
-                    <input type="password" placeholder="Password" required>
+                    <input id="login-password" type="password" placeholder="Password" required>
                 </div>
-                <button class="submit-button">SUBMIT</button>
+                <button class="submit-button" id="login-button">SUBMIT</button>
+
+                <div>
+                    <label id="login-result"></label>
+                </div>
             </div>
         </div>
 

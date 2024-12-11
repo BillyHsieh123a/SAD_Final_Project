@@ -9,6 +9,8 @@ from login import login
 from try_on import try_on
 from bag import bag
 from checkout import checkout
+from favorite import favorite
+
 from page_serve import page_serve
 
 serverURL = "http://127.0.0.1:5000"
@@ -16,12 +18,13 @@ serverURL = "http://127.0.0.1:5000"
 # Global Flask app (SUBJECT TO CHANGE)
 app = Flask(__name__, template_folder="../frontend/html", static_folder="../frontend/assets")
 CORS(app)
+app.register_blueprint(login)
 app.register_blueprint(page_serve)
 app.register_blueprint(category)
 app.register_blueprint(bag)
 app.register_blueprint(checkout)
+app.register_blueprint(favorite)
 # app.register_blueprint(item)
-# app.register_blueprint(login)
 # app.register_blueprint(try_on)
 
 
