@@ -59,6 +59,13 @@ def checkout_():
     sub_total = data.get('sub_total')
     shipping_fee = data.get('shipping_fee')
     payment_type = data.get('payment_type')
+    if payment_type == 'Visa':
+        payment_type = 'V'
+    elif payment_type == 'MasterCard':
+        payment_type = 'M'
+    elif payment_type == 'PayPal':
+        payment_type = 'P'
+        
     address = data.get('address')
 
     # add the order into "order", assume order_id will add by dbms
@@ -71,6 +78,7 @@ def checkout_():
         (user_id, sub_total, shipping_fee, payment_type, address)
     )
     order_id = cur.fetchone()[0]
+    # print("090909")
 
     # get items in "bag" and add them into "order_contains", then delete them from "bag"
     cur.execute(
@@ -89,7 +97,7 @@ def checkout_():
         """,
         (user_id, order_id, user_id)
     )
-
+    # print("1234124132")
 
     psql_conn.commit()
     return jsonify({"message": "successfully bought items!!!"})

@@ -227,7 +227,8 @@ async function checkout() {
     const shipping_fee = document.querySelector('input[name="shipping"]:checked') ? parseInt(document.querySelector('input[name="shipping"]:checked').value, 10) : 0; 
     const address = document.getElementById('address').value;
     const payment_type = getSelectedPaymentType();
-
+    console.log(address)
+    console.log(payment_type)
     // Create the data object to send
     const data = {
         user_id: user_id,
@@ -289,5 +290,5 @@ window.onload = async function() {
 
 document.getElementById("buy-now").addEventListener("click", () => {
     checkout();
-    window.location.href = "ordered.html"; // 這裡將導向結帳頁面
+    // window.location.href = "ordered.html"; // 這裡將導向結帳頁面
   });
