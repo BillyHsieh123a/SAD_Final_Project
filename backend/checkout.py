@@ -22,7 +22,7 @@ def checkout_load_bag():
     )
 
     all_clothes_in_bag_data = cur.fetchall()
-        update_all_clothes_in_bag_data = []
+    update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = {
             "clothes_id": cloth[0], 
