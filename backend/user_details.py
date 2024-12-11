@@ -44,7 +44,11 @@ def user_details_load_user_data():
 
 @user_details.route('/user_details_change_user_data', methods=['POST'])
 def user_details_change_user_data():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     data = request.json
     user_id = data.get('user_id')
