@@ -6,6 +6,33 @@ const cartItems = [
   { id: 4, name: "Blazer", color: "pink", size: "M", price: 80, quantity: 1 },
 ];
 
+<<<<<<< HEAD
+=======
+cartItems = []
+window.onload = async function () {
+  try {
+      const response = await fetch(`${serverURL}/bag_load_bag?user_id=${user_id}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+      
+      // Check if the response is successful
+      if (response.ok) {
+          const result = await response.json();
+          cartItems = result;
+          console.log(cartItems); // Log the response from Flask
+          renderCart();
+      } else {
+          console.error("Failed to fetch data:", response.status, response.statusText);
+      }
+  } catch (error) {
+      console.error('Error:', error);
+  }
+};
+
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
 // 初始化購物車
 const cartContainer = document.getElementById("cart-items");
 const subtotalElement = document.getElementById("subtotal");
@@ -15,6 +42,7 @@ cartContainer.innerHTML = ""; // 清空購物車
 let subtotal = 0;
 
 cartItems.forEach((item) => {
+  console.log("no");
   subtotal += item.price * item.quantity;
 
   const cartItem = document.createElement("div");
@@ -22,7 +50,7 @@ cartItems.forEach((item) => {
 
   cartItem.innerHTML = `
     <div class="item-details">
-      <img src="https://via.placeholder.com/50" alt="${item.name}">
+      <img src=${".." + item.img} alt="${item.name}">
       <ul>
         <li>ITEM NAME: ${item.name}</li>
         <li>ITEM STYLE: (${item.color}, ${item.size})</li>
@@ -40,12 +68,42 @@ cartItems.forEach((item) => {
 subtotalElement.textContent = subtotal;
 }
 
+async function deleteItemFromBag(user_id, clothes_id, color, size) {
+  const data = {
+      user_id: user_id,
+      clothes_id: clothes_id,
+      color: color,
+      size: size
+  };
+
+  try {
+      const response = await fetch(`${serverURL}/bag_delete_item`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)  // Send the data in the request body as JSON
+      });
+
+      // Check if the response is successful
+      if (response.ok) {
+          const result = await response.json();
+          console.log(result.message); // Output: "successfully deleted!"
+      } else {
+          console.error('Failed to delete item from bag:', response.status, response.statusText);
+      }
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
+
 // 移除商品功能
 cartContainer.addEventListener("click", (e) => {
 if (e.target.classList.contains("remove-btn")) {
   const id = parseInt(e.target.dataset.id);
   const index = cartItems.findIndex((item) => item.id === id);
   if (index !== -1) {
+    deleteItemFromBag(user_id, cartItems[index].id, cartItems[index].color, cartItems[index].size);
     cartItems.splice(index, 1); // 移除商品
     renderCart();
   }

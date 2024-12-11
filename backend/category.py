@@ -39,7 +39,7 @@ def category_load_clothes_data():
             "price": cloth[4],
             "description": cloth[5],
             "color": cloth[6],
-            "img": url_for("static", filename='image/' + cloth[7])
+            "img": url_for("static", filename='images/' + cloth[7])
         }
         updated_all_clothes_image.append(new_cloth)
     # print(updated_all_clothes_image)

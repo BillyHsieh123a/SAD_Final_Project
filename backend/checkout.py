@@ -6,7 +6,16 @@ checkout = Blueprint("checkout", __name__)
 # return cloth name, price, image url, cloth_id, color
 @checkout.route('/checkout_load_bag', methods=['GET'])
 def checkout_load_bag():
+<<<<<<< HEAD
     cur = psql_conn.cursor()
+=======
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
+
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
     user_id = request.args.get('user_id')
 
     cur.execute(
@@ -25,16 +34,16 @@ def checkout_load_bag():
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = {
-            "clothes_id": cloth[0], 
-                    "name": cloth[1], 
-                    "part": cloth[2], 
-                    "gender": cloth[3], 
-                    "price": cloth[4], 
-                    "description": cloth[5], 
-                    "color": cloth[6], 
-                    "size": cloth[7], 
-                    "img": cloth[8], 
-                    "purchase_qty": cloth[9]
+            "id": cloth[0], 
+            "name": cloth[1], 
+            "part": cloth[2], 
+            "gender": cloth[3], 
+            "price": cloth[4], 
+            "description": cloth[5], 
+            "color": cloth[6], 
+            "size": cloth[7], 
+            "img": url_for("static", filename='images/' + cloth[8]),
+            "quantity": cloth[9]
         }
         update_all_clothes_in_bag_data.append(new_cloth)
     # print(update_all_clothes_in_bag_data)
@@ -43,7 +52,11 @@ def checkout_load_bag():
 
 @checkout.route('/checkout_', methods=['POST'])
 def checkout_():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     data = request.json
     user_id = data.get('user_id')
@@ -51,17 +64,15 @@ def checkout_():
     shipping_fee = data.get('shipping_fee')
     payment_type = data.get('payment_type')
     address = data.get('address')
-    order_date = data.get('order_date')
-    ideal_rcv_date =data.get('ideal_rcv_date')
 
     # add the order into "order", assume order_id will add by dbms
     cur.execute(
         """
         INSERT INTO public."order" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, NOW(), NOW() + INTERVAL '3 days')
         RETURNING order_id
         """,
-        (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
+        (user_id, sub_total, shipping_fee, payment_type, address)
     )
     order_id = cur.fetchone()[0]
 

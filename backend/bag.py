@@ -25,6 +25,7 @@ def bag_load_bag():
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = {
+<<<<<<< HEAD
             "clothes_id": cloth[0], 
                     "name": cloth[1], 
                     "part": cloth[2], 
@@ -35,6 +36,18 @@ def bag_load_bag():
                     "size": cloth[7], 
                     "img": cloth[8], 
                     "purchase_qty": cloth[9]
+=======
+            "id": cloth[0], 
+            "name": cloth[1], 
+            "part": cloth[2], 
+            "gender": cloth[3], 
+            "price": cloth[4], 
+            "description": cloth[5], 
+            "color": cloth[6], 
+            "size": cloth[7], 
+            "img": url_for("static", filename='images/' + cloth[8]),
+            "quantity": cloth[9]
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
         }
         update_all_clothes_in_bag_data.append(new_cloth)
     # print(update_all_clothes_in_bag_data)
@@ -43,7 +56,11 @@ def bag_load_bag():
 
 @bag.route('/bag_delete_item', methods=['POST'])
 def bag_delete_item():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     data = request.json
     user_id = data.get('user_id')

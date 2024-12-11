@@ -7,6 +7,11 @@ from category import category
 from item import item
 from login import login
 from try_on import try_on
+<<<<<<< HEAD
+=======
+from bag import bag
+from checkout import checkout
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
 
 serverURL = "http://127.0.0.1:5000"
 
@@ -14,6 +19,11 @@ serverURL = "http://127.0.0.1:5000"
 app = Flask(__name__, template_folder="../frontend/html", static_folder="../frontend/assets")
 CORS(app)
 app.register_blueprint(category)
+<<<<<<< HEAD
+=======
+app.register_blueprint(bag)
+app.register_blueprint(checkout)
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
 # app.register_blueprint(item)
 # app.register_blueprint(login)
 # app.register_blueprint(try_on)

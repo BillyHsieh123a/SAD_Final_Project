@@ -6,7 +6,16 @@ user_details = Blueprint("user_details", __name__)
 # return cloth name, price, image url, cloth_id, color
 @user_details.route('/user_details_load_user_data', methods=['GET'])
 def user_details_load_user_data():
+<<<<<<< HEAD
     cur = psql_conn.cursor()
+=======
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
+
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
     user_id = request.args.get('user_id')
 
     cur.execute(
@@ -24,7 +33,7 @@ def user_details_load_user_data():
 
     user_data = cur.fetchone()
     new_user_data = list(user_data)
-    new_user_data[2] = url_for("static", filename='/image/' + user_data[2])
+    new_user_data[2] = url_for("static", filename='/images/' + user_data[2])
 
     psql_conn.commit()
     return jsonify({
@@ -39,7 +48,11 @@ def user_details_load_user_data():
 
 @user_details.route('/user_details_change_user_data', methods=['POST'])
 def user_details_change_user_data():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     data = request.json
     user_id = data.get('user_id')
