@@ -11,7 +11,6 @@ def favorite_load_favorite_clothes():
         cur = psql_conn.cursor()
     else:
         print("Failed to connect to the database.")
-
     user_id = request.args.get('user_id')
 
     cur.execute(
@@ -58,7 +57,7 @@ def favorite_delete_item():
     cur.execute(
         '''
         DELETE FROM favorite 
-        WHERE user_id = %s AND clothes_id = %s AND color = %s AND "size" = %s;
+        WHERE user_id = %s AND clothes_id = %s AND color = %s;
         ''',
         (user_id, clothes_id, color)
     )

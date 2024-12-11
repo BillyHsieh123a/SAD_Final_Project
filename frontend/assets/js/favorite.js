@@ -1,12 +1,35 @@
-const products = [
-    { id: 1, name: "Blazer", price: "100 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 2, name: "T-shirt", price: "60 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 3, name: "Sweater", price: "150 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 4, name: "Tank Top", price: "50 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 5, name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 6, name: "Crop Top", price: "70 NTD", img: "https://via.placeholder.com/100x150" },
-    { id: 7, name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/100x150" },
-];
+// const products = [
+//     { id: 1, name: "Blazer", price: "100 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 2, name: "T-shirt", price: "60 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 3, name: "Sweater", price: "150 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 4, name: "Tank Top", price: "50 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 5, name: "Blouse", price: "80 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 6, name: "Crop Top", price: "70 NTD", img: "https://via.placeholder.com/100x150" },
+//     { id: 7, name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/100x150" },
+// ];
+
+let products = []; // Declare the products object outside to ensure it is available globally
+window.onload = async function () {
+    try {
+        const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${user_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            products = result; // Set the result from the API into the products object
+            console.log(result); // Log the response from Flask
+        } else {
+            console.error("Failed to fetch data:", response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
 const container = document.getElementById("favorites");
 
