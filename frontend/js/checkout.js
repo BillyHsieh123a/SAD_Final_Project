@@ -206,13 +206,28 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("找不到男性性別按鈕");
     }
   });
-  
-async function checkout(payment_type, address, order_date, ideal_rcv_date, serverURL) {
-    const url = `${serverURL}/checkout_`;  // Define the server endpoint
 
+  function getSelectedPaymentType() {
+    // Get all radio buttons with the name "payment-type"
+    const paymentOptions = document.getElementsByName('payment-type');
+
+    // Loop through the options to find the selected one
+    for (const option of paymentOptions) {
+        if (option.checked) {
+            return option.value; // Return the value of the selected option
+        }
+    }
+
+    // If no option is selected, return null or a default value
+    return null;
+}
+
+async function checkout() {
     const sub_total = parseInt(document.getElementById("subtotal").innerText, 10);
     const shipping_fee = document.querySelector('input[name="shipping"]:checked') ? parseInt(document.querySelector('input[name="shipping"]:checked').value, 10) : 0; 
     const address = document.getElementById('address').value;
+    const payment_type = getSelectedPaymentType();
+
     // Create the data object to send
     const data = {
         user_id: user_id,
@@ -224,7 +239,7 @@ async function checkout(payment_type, address, order_date, ideal_rcv_date, serve
 
     try {
         // Send a POST request with the data as JSON
-        const response = await fetch(url, {
+        const response = await fetch(`${serverURL}/checkout_`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -273,5 +288,6 @@ window.onload = async function() {
 
 
 document.getElementById("buy-now").addEventListener("click", () => {
+    checkout();
     window.location.href = "ordered.html"; // 這裡將導向結帳頁面
   });
