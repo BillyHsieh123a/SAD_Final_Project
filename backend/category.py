@@ -42,7 +42,7 @@ def category_load_clothes_data():
             "img": url_for("static", filename='image/' + cloth[7])
         }
         updated_all_clothes_image.append(new_cloth)
-    print(updated_all_clothes_image)
+    # print(updated_all_clothes_image)
     psql_conn.commit()
     return jsonify(updated_all_clothes_image), 200
 

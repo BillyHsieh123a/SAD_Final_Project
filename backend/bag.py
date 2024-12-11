@@ -24,22 +24,22 @@ def bag_load_bag():
     all_clothes_in_bag_data = cur.fetchall()
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
-        new_cloth = list(cloth)
-        new_cloth[8] = url_for("static", '/image/' + cloth[8])
+        new_cloth = {
+            "clothes_id": cloth[0], 
+                    "name": cloth[1], 
+                    "part": cloth[2], 
+                    "gender": cloth[3], 
+                    "price": cloth[4], 
+                    "description": cloth[5], 
+                    "color": cloth[6], 
+                    "size": cloth[7], 
+                    "img": cloth[8], 
+                    "purchase_qty": cloth[9]
+        }
         update_all_clothes_in_bag_data.append(new_cloth)
-
+    # print(update_all_clothes_in_bag_data)
     psql_conn.commit()
-    return jsonify({"clothes_id": update_all_clothes_in_bag_data[0], 
-                    "name": update_all_clothes_in_bag_data[1], 
-                    "part": update_all_clothes_in_bag_data[2], 
-                    "gender": update_all_clothes_in_bag_data[3], 
-                    "price": update_all_clothes_in_bag_data[4], 
-                    "description": update_all_clothes_in_bag_data[5], 
-                    "color": update_all_clothes_in_bag_data[6], 
-                    "size": update_all_clothes_in_bag_data[7], 
-                    "img": update_all_clothes_in_bag_data[8], 
-                    "purchase_qty": update_all_clothes_in_bag_data[9]
-                    }), 200
+    return jsonify(update_all_clothes_in_bag_data), 200
 
 @bag.route('/bag_delete_item', methods=['POST'])
 def bag_delete_item():
