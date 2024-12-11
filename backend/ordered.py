@@ -2,56 +2,46 @@ from flask import Blueprint, jsonify, request
 from db import get_psql_conn
 
 ordered = Blueprint("ordered", __name__)
-
-# Return cloth name, price, image url, cloth_id, color
+# 定義一個查詢訂單資料的路由
 @ordered.route('/ordered', methods=['GET'])
-def fetchOrderData():
-    # Get PostgreSQL connection
-    psql_conn = get_psql_conn()
-    if psql_conn is None:
-        return jsonify({"error": "Failed to connect to the database"}), 500
+def get_order():
+    # 獲取查詢參數中的 ordered_id
+    ordered_id = request.args.get('ordered_id')
+    
+    if not ordered_id:
+        return jsonify({"error": "Missing ordered_id"}), 400
 
     try:
-        cur = psql_conn.cursor()
+        # 建立與資料庫的連接
+        conn = get_psql_conn()
+        cursor = conn.cursor()
 
-        # Get the ordered_id from query parameters
-        ordered_id = request.args.get('ordered_id')
-        if not ordered_id:
-            return jsonify({"error": "ordered_id is required"}), 400
-
-        # Execute the query
-        cur.execute(
-            '''
-            SELECT o.order_id, o.order_date, o.address, o.sub_total, o."shipping fee"
-            FROM orders o
+        # 查詢訂單資料
+        query = """
+            SELECT o.order_id, o.order_date, o.address, o.sub_total, o.shipping_fee
+            FROM "order" as o
             WHERE o.order_id = %s
-            ''',
-            (ordered_id,)
-        )
+        """
+        cursor.execute(query, (ordered_id,))
+        result = cursor.fetchone()
+        # 關閉資料庫連接
+        cursor.close()
+        conn.close()
 
-        # Fetch the result
-        order = cur.fetchone()
-        print(order)  # Print the order details to the console (for debugging)
-        if not order:
+        # 如果找不到訂單
+        if not result:
             return jsonify({"error": "Order not found"}), 404
 
-        # Format the response
+        # 返回訂單資料
         order_data = {
-            "order_id": order[0],
-            "order_date": order[1],
-            "address": order[2],
-            "sub_total": order[3],
-            "shipping_fee": order[4]
+            "order_id": result[0],
+            "sub_total": float(result[1]),
+            "shipping_fee": float(result[2]),
+            "address": result[3],
+            "order_date": result[4].strftime("%Y-%m-%d")  # 格式化日期
         }
-
-        return jsonify(order_data), 200
+        return jsonify(order_data)
 
     except Exception as e:
-        return jsonify({"error": "Internal server error"}), 500
-
-    finally:
-        # Ensure the cursor and connection are closed
-        if cur:
-            cur.close()
-        if psql_conn:
-            psql_conn.close()
+        # 處理其他錯誤
+        return jsonify({"error": str(e)}), 500

@@ -1,6 +1,6 @@
 const Transaction = [
 ];
-
+const serverURL = "http://127.0.0.1:5000";
 // Function to fetch order data from the backend
 window.onload = async function () {
     try {
@@ -39,7 +39,7 @@ window.onload = async function () {
         console.error("Network error:", error);
     }
 }
-
+fetchOrderData();
 
 
 document.getElementById("orderNumber").textContent = Transaction[0].orderid;
