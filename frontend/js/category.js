@@ -391,7 +391,7 @@ function displayProducts() {
                 const card = document.createElement("div");
                 card.className = "item-card";
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
+                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}" data-product-clothes_id="${product.clothes_id}" data-product-color="${product.color}">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                 `;
@@ -487,4 +487,3 @@ window.addEventListener("load", function () {
         displayProducts();
     }
 });
-
