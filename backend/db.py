@@ -12,10 +12,10 @@ def init_db_conn():
     # Use load_dotenv to set variables in environment
     load_dotenv()
 
-    DB_USER_NAME     = os.getenv('postgres')
-    DB_USER_PASSWORD = os.getenv('021202')
-    DB_ADDRESS       = os.getenv('localhost')
-    DB_NAME          = os.getenv('Web')
+    DB_USER_NAME     = os.getenv('DB_USER_NAME')
+    DB_USER_PASSWORD = os.getenv('DB_USER_PASSWORD')
+    DB_ADDRESS       = os.getenv('DB_ADDRESS')
+    DB_NAME          = os.getenv('DB_NAME')
     
     try:
         psql_conn = psycopg2.connect(
