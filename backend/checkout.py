@@ -11,7 +11,7 @@ def checkout_load_bag():
         cur = psql_conn.cursor()
     else:
         print("Failed to connect to the database.")
-        
+
     user_id = request.args.get('user_id')
 
     cur.execute(
@@ -48,7 +48,11 @@ def checkout_load_bag():
 
 @checkout.route('/checkout_', methods=['POST'])
 def checkout_():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     data = request.json
     user_id = data.get('user_id')
