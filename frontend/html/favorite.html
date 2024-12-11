@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Shop</title>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/favorite.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/global.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/favorite.css')}}">
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -14,7 +14,7 @@
     <header>
         <!-- Logo Section -->
         <div class="logo">
-            <a href="category.html">
+            <a href="category">
                 <h1>Polaritique</h1>
             </a>
         </div>         
@@ -66,17 +66,17 @@
         <div class="footer-content">
             <p>&copy; 2024 Polaritique. All rights reserved.</p>
             <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+                <a href="about">About Us</a>
+                <a href="contact">Contact</a>
+                <a href="privacy-policy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
             </div>
         </div>
     </footer>
 
     <!-- External JavaScript Files -->
-    <script src="../js/global.js"></script>  <!-- Include global.js first -->
-    <script src="../js/favorite.js"></script> <!-- Then include category.js -->
+    <script src="{{url_for('static', filename='/js/global.js')}}"></script>  <!-- Include global.js first -->
+    <script src="{{url_for('static', filename='/js/favorite.js')}}"></script> <!-- Then include category.js -->
     
 </body>
 

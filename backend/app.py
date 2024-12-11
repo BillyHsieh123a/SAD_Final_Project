@@ -9,12 +9,14 @@ from login import login
 from try_on import try_on
 from bag import bag
 from checkout import checkout
+from page_serve import page_serve
 
 serverURL = "http://127.0.0.1:5000"
 
 # Global Flask app (SUBJECT TO CHANGE)
 app = Flask(__name__, template_folder="../frontend/html", static_folder="../frontend/assets")
 CORS(app)
+app.register_blueprint(page_serve)
 app.register_blueprint(category)
 app.register_blueprint(bag)
 app.register_blueprint(checkout)
@@ -28,14 +30,6 @@ def init_app():
     init_db_conn()
     app.secret_key = os.urandom(32)  # session key
 
-
-# index html
-@app.route('/')
-def index():
-    if session.get("login"):
-        return redirect("/category")
-    else:
-        return redirect("/login")  # redirect to login page if not logged in
 
 
 if __name__ == '__main__':

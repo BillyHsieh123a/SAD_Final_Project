@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Try-On - Polaritique</title>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/try-on.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/global.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/try-on.css')}}">
 </head>
 <body>
     <header>
@@ -33,16 +33,16 @@
         <div class="footer-content">
             <p>&copy; 2024 Polaritique. All rights reserved.</p>
             <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+                <a href="about">About Us</a>
+                <a href="contact">Contact</a>
+                <a href="privacy-policy">Privacy Policy</a>
+                <a href="terms">Terms & Conditions</a>
             </div>
         </div>
     </footer>
 
 
-    <script src="../js/global.js"></script>
-    <script src="../js/try-on.js"></script>
+    <script src="{{url_for('static', filename='/js/global.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/try-on.js')}}"></script>
 </body>
 </html>
