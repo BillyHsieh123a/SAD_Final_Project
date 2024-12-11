@@ -11,7 +11,7 @@ def user_account_base_load_user_data():
         cur = psql_conn.cursor()
     else:
         print("Failed to connect to the database.")
-        
+
     user_id = request.args.get('user_id')
 
     cur.execute(
@@ -29,7 +29,7 @@ def user_account_base_load_user_data():
 
     user_data = cur.fetchone()
     new_user_data = list(user_data)
-    new_user_data[2] = url_for("static", filename='/image/' + user_data[2])
+    new_user_data[2] = url_for("static", filename='/images/' + user_data[2])
 
     psql_conn.commit()
     return jsonify({

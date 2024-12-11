@@ -37,7 +37,7 @@ def bag_load_bag():
             "description": cloth[5], 
             "color": cloth[6], 
             "size": cloth[7], 
-            "img": url_for("static", filename='image/' + cloth[8]),
+            "img": url_for("static", filename='images/' + cloth[8]),
             "quantity": cloth[9]
         }
         update_all_clothes_in_bag_data.append(new_cloth)
