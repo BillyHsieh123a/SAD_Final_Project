@@ -1,12 +1,16 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
-from db import psql_conn
+from db import get_psql_conn
 
 category = Blueprint("category", __name__)
 
 # return cloth name, price, image url, cloth_id, color
 @category.route('/category_load_clothes_data', methods=['GET'])
 def category_load_clothes_data():
-    cur = psql_conn.cursor()
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
 
     cur.execute(
         '''
@@ -28,7 +32,7 @@ def category_load_clothes_data():
     updated_all_clothes_image = []
     for cloth in all_clothes_images:
         new_cloth = list(cloth)
-        new_cloth[7] = url_for("static", '/image/' + cloth[7])
+        new_cloth[7] = url_for("static", filename='/image/' + cloth[7])
         updated_all_clothes_image.append(new_cloth)
 
     psql_conn.commit()

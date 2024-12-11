@@ -8,6 +8,7 @@ psql_conn = None
 
 
 def init_db_conn():
+    global psql_conn
     # Use load_dotenv to set variables in environment
     load_dotenv()
 
@@ -16,9 +17,21 @@ def init_db_conn():
     DB_ADDRESS       = os.getenv('DB_ADDRESS')
     DB_NAME          = os.getenv('DB_NAME')
     
-    psql_conn = psycopg2.connect(
-        dbname = DB_NAME,
-        user = DB_USER_NAME,
-        host = DB_ADDRESS,
-        password = DB_USER_PASSWORD
-    )
+    try:
+        psql_conn = psycopg2.connect(
+            dbname = DB_NAME,
+            user = DB_USER_NAME,
+            host = DB_ADDRESS,
+            password = DB_USER_PASSWORD
+        )
+        
+    except Exception as e:
+        # print(f"Error connecting to database: {e}")
+        psql_conn = None
+
+    # print(f"conneted to database: {psql_conn}")
+
+
+def get_psql_conn():
+    # print(psql_conn)
+    return psql_conn
