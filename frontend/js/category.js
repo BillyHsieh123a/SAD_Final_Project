@@ -4,7 +4,7 @@ const categoriesSection = document.getElementById("categories");
 const itemGrid = document.getElementById("item-grid");
 const searchInput = document.getElementById("search-input");
 const categoryButtons = document.querySelectorAll(".category");
-const serverURL = "http://127.0.0.1:5000"
+
 // const products = {
 //     woman: {
 //         tops: [
