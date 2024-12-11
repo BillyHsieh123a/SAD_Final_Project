@@ -46,6 +46,6 @@ function wrapIconWithLink(icon, href) {
 }
 
 // Add links to each icon
-wrapIconWithLink(profileIcon, "user_account_base.html");
-wrapIconWithLink(likeIcon, "favorite.html");
-wrapIconWithLink(bagIcon, "bag.html");
+wrapIconWithLink(profileIcon, "user_account_base");
+wrapIconWithLink(likeIcon, "favorite");
+wrapIconWithLink(bagIcon, "bag");

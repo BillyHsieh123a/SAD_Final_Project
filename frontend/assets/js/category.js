@@ -194,31 +194,6 @@ const categoryButtons = document.querySelectorAll(".category");
 // };
 
 let products = {}; // Declare the products object outside to ensure it is available globally
-window.onload = async function () {
-    try {
-        const response = await fetch(`${serverURL}/category_load_clothes_data`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        // Check if the response is successful
-        if (response.ok) {
-            const result = await response.json();
-            products = result; // Set the result from the API into the products object
-            console.log(result); // Log the response from Flask
-
-            // Now that data is fetched and stored in 'products', convert it to the desired format
-            products = convertToCategoryFormat(products);
-            console.log(products); // Log the formatted products
-        } else {
-            console.error("Failed to fetch data:", response.status, response.statusText);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
 
 function convertToCategoryFormat(data) {
     const result = {
@@ -452,13 +427,37 @@ function displayProducts() {
             const productColor = image.dataset.productColor;
 
             // Redirect to item.html with product details (query parameters)
-            window.location.href = `item.html?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}&cloth_id=${encodeURIComponent(productClothID)}&color=${encodeURIComponent(productColor)}`;
+            window.location.href = `item?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}&cloth_id=${encodeURIComponent(productClothID)}&color=${encodeURIComponent(productColor)}`;
         });
     });
 }
 
 // Restore state from sessionStorage
-window.addEventListener("load", function () {
+window.addEventListener("load", async function () {
+    try {
+        const response = await fetch(`${serverURL}/category_load_clothes_data`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            products = result; // Set the result from the API into the products object
+            console.log(result); // Log the response from Flask
+
+            // Now that data is fetched and stored in 'products', convert it to the desired format
+            products = convertToCategoryFormat(products);
+            console.log(products); // Log the formatted products
+        } else {
+            console.error("Failed to fetch data:", response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
     const savedState = JSON.parse(sessionStorage.getItem("filtersState"));
 
     if (savedState) {

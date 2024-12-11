@@ -28,7 +28,7 @@ document.getElementById("add-to-bag").addEventListener("click", function () {
 // Handle "Try On" button
 document.getElementById("try-on").addEventListener("click", function () {
     // Redirect to the try-on page
-    window.location.href = "try-on.html";
+    window.location.href = "try-on";
 });
 
 
@@ -47,7 +47,7 @@ const goBackButton = document.querySelector(".go-back-btn");
 
 // Add an event listener to handle the click event
 goBackButton.addEventListener("click", function () {
-    // Navigate back to category.html
-    window.location.href = "category.html";
+    // Navigate back to category
+    window.location.href = "category";
 });
 
