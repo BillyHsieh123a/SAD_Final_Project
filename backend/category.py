@@ -31,18 +31,19 @@ def category_load_clothes_data():
     all_clothes_images = cur.fetchall()
     updated_all_clothes_image = []
     for cloth in all_clothes_images:
-        new_cloth = list(cloth)
-        new_cloth[7] = url_for("static", filename='/image/' + cloth[7])
+        new_cloth = {
+            "clothes_id": cloth[0],
+            "name": cloth[1],
+            "part": cloth[2],
+            "gender": cloth[3],
+            "price": cloth[4],
+            "description": cloth[5],
+            "color": cloth[6],
+            "img": url_for("static", filename='image/' + cloth[7])
+        }
         updated_all_clothes_image.append(new_cloth)
-
+    print(updated_all_clothes_image)
     psql_conn.commit()
-    return jsonify({"clothes_id": updated_all_clothes_image[0], 
-                    "name": updated_all_clothes_image[1], 
-                    "part": updated_all_clothes_image[2], 
-                    "gender": updated_all_clothes_image[3], 
-                    "price": updated_all_clothes_image[4], 
-                    "description": updated_all_clothes_image[5], 
-                    "color": updated_all_clothes_image[6], 
-                    "img": updated_all_clothes_image[7]
-                    }), 200
+    return jsonify(updated_all_clothes_image), 200
+
 

@@ -24,7 +24,7 @@ def user_details_load_user_data():
 
     user_data = cur.fetchone()
     new_user_data = list(user_data)
-    new_user_data[2] = url_for("static", '/image/' + user_data[2])
+    new_user_data[2] = url_for("static", filename='/image/' + user_data[2])
 
     psql_conn.commit()
     return jsonify({

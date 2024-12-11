@@ -196,10 +196,21 @@ const serverURL = "http://127.0.0.1:5000"
 products = {}
 window.onload = async function () {
     try {
-        const response = await fetch(`${serverURL}/category_load_clothes_data`);
-        const result = await response.json();
-        products = result
-        console.log(result); // Log the response from Flask
+        const response = await fetch(`${serverURL}/category_load_clothes_data`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            products = result;
+            console.log(result); // Log the response from Flask
+        } else {
+            console.error("Failed to fetch data:", response.status, response.statusText);
+        }
     } catch (error) {
         console.error('Error:', error);
     }
