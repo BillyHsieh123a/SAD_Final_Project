@@ -1,39 +1,41 @@
 from flask import Blueprint, jsonify, request, session, render_template
-from db import psql_conn
+from db import get_psql_conn
 
 
 login = Blueprint("login", __name__)
 
-@login.route('/login', methods = 'POST')
+@login.post('/submit_login')
 def handle_login():
-    if request.method == 'POST':
-        # check email or phone
-        accountInput = request.form.get('email')
-        password = request.form.get('password')
-        cmd = """"""
+    # check email or phone
+    accountInput = request.json['email_or_phone']
+    password = request.json['user_password']
+    cmd = """"""
+    
+    # phone num
+    if accountInput.isdigit():
+        cmd = """
+        SELECT user_id, phone, password
+        FROM "user"
+        WHERE phone = %s AND password = %s
+        """
 
-        # phone num
-        if accountInput.isdigit():
-            cmd = """
-            select user.phone, user.email, user.password
-            from public.user
-            where user.phone = %s and user.password = %s
-            """
-
-        else:
-            cmd = """
-            select user.phone, user.email, user.password
-            from public.user
-            where user.email = %s and user.password = %s
-            """
-
-    psql_conn.execute(cmd, [accountInput, password])
-
-    rows = psql_conn.fetchall()
+    else:
+        cmd = """
+        SELECT user_id, email, password
+        FROM "user"
+        WHERE email = %s AND password = %s
+        """
+    
+    cur = get_psql_conn().cursor()
+    cur.execute(cmd, [accountInput, password])
+    get_psql_conn().commit()
+    rows = cur.fetchall()
     
     # get no user
-    if len(rows) == 0:
-        return jsonify(0)
+    if len(rows):
+        session["login"] = True
+        session["user_id"] = rows[0][0]
+        return jsonify({'success': 1})
     else:
-        return jsonify(1)
+        return jsonify({'success': 0, 'error': 'Wrong account or password.'})
     
