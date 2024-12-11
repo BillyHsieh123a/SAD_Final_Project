@@ -1,9 +1,17 @@
 /* Base Styles */
 body {
-    font-family: Times New Roman;
+    font-family: 'Times New Roman', serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff; /* Add a light background color for the page */
+    background-color: #ffffff; /* Light background color */
+    display: flex;
+    flex-direction: column; /* Enable flexible layout for the page structure */
+    min-height: 100vh; /* Ensure body covers at least the full viewport height */
+}
+
+/* Main Content Wrapper */
+main {
+    flex: 1; /* Allow the main content to grow and push the footer to the bottom */
 }
 /* Header fixed at the top */
 header {

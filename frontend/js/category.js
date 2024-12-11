@@ -391,7 +391,7 @@ function displayProducts() {
                 const card = document.createElement("div");
                 card.className = "item-card";
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-image" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
+                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                 `;
@@ -418,7 +418,7 @@ function displayProducts() {
                 const card = document.createElement("div");
                 card.className = "item-card";
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-image" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
+                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                 `;
@@ -433,7 +433,7 @@ function displayProducts() {
     }
 
     // Add event listener to product images for redirection
-    const productImages = document.querySelectorAll(".product-image");
+    const productImages = document.querySelectorAll(".product-img");
     productImages.forEach(image => {
         image.addEventListener("click", function () {
             // Save the current state in sessionStorage
