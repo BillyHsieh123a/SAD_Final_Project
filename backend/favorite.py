@@ -64,3 +64,28 @@ def favorite_delete_item():
 
     psql_conn.commit()
     return jsonify({"message": "successfully deleted!"}), 200
+
+
+@favorite.route('/favorite_add_item_to_bag', methods=['POST'])
+def favorite_add_item_to_bag():
+    psql_conn = get_psql_conn()
+    if psql_conn is not None:
+        cur = psql_conn.cursor()
+    else:
+        print("Failed to connect to the database.")
+
+    data = request.json
+    user_id = data.get('user_id')
+    clothes_id = data.get('clothes_id')
+    color = data.get('color')
+
+    cur.execute(
+        '''
+        DELETE FROM favorite 
+        WHERE user_id = %s AND clothes_id = %s AND color = %s;
+        ''',
+        (user_id, clothes_id, color)
+    )
+
+    psql_conn.commit()
+    return jsonify({"message": "successfully deleted!"}), 200

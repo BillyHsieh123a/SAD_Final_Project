@@ -8,7 +8,7 @@
 //     { id: 7, name: "Button-down Shirt", price: "90 NTD", img: "https://via.placeholder.com/100x150" },
 // ];
 
-let products = []; // Declare the products object outside to ensure it is available globally
+products = []; // Declare the products object outside to ensure it is available globally
 window.onload = async function () {
     try {
         const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${user_id}`, {
@@ -22,7 +22,9 @@ window.onload = async function () {
         if (response.ok) {
             const result = await response.json();
             products = result; // Set the result from the API into the products object
-            console.log(result); // Log the response from Flask
+            console.log(products); // Log the response from Flask
+            // Initialize product display
+            displayProducts(products);
         } else {
             console.error("Failed to fetch data:", response.status, response.statusText);
         }
@@ -42,7 +44,7 @@ function displayProducts(products) {
         card.dataset.id = product.id;
 
         card.innerHTML = `
-            <img src="${product.img}" alt="${product.name}">
+            <img src="${".." + product.img}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.price}</p>
             <div class="trash-icon" onclick="removeProduct(${product.id})">&#128465</div>
@@ -108,6 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   
-  
-// Initialize product display
-displayProducts(products);
+
+
+
