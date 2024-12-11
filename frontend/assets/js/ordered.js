@@ -1,13 +1,4 @@
 const Transaction = [
-    { 
-        orderid: "",
-        firstName: 'John',
-        lastName: 'Doe',     
-        price: "",   
-        mobile: '1234567890', 
-        address: "", 
-        date: "" 
-    },
 ];
 
 // Function to fetch order data from the backend
@@ -49,32 +40,19 @@ window.onload = async function () {
     }
 }
 
-// Create a Date object for today
-const today = new Date();
 
-// Format today's date
-const formattedDate = today.toLocaleDateString("en-US", {
-  weekday: "long",
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
 
-// Insert order number and date into the HTML
 document.getElementById("orderNumber").textContent = Transaction[0].orderid;
-document.getElementById("orderDate").textContent = formattedDate;
+document.getElementById("orderDate").textContent = Transaction[0].date;
 
-// Insert customer details into the HTML
+// 插入顧客詳細資訊
 const customerInfo = document.getElementById("customerInfo");
 customerInfo.innerHTML = `
-  <p>Name: ${Transaction[0].firstName} ${Transaction[0].lastName}</p>
-  <p>Phone: ${Transaction[0].mobile}</p>
+
   <p>Address: ${Transaction[0].address}</p>
   <p>Price: $${Transaction[0].price}</p>
 `;
-
 document.addEventListener("DOMContentLoaded", function () {
-<<<<<<< HEAD
   // 處理 Logo 點擊事件
   const logoLink = document.querySelector(".logo a");
   if (logoLink) {
@@ -94,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (wButton) {
       wButton.addEventListener("click", function() {
           console.log("女性按鈕被點擊");
-          window.location.href = `category?gender=woman`;  
+          window.location.href = `category.html?gender=woman`;  
       });
   } else {
       console.error("找不到女性性別按鈕");
@@ -104,59 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mButton) {
       mButton.addEventListener("click", function() {
           console.log("男性按鈕被點擊");
-          window.location.href = `category?gender=man`;
+          window.location.href = `category.html?gender=man`;
       });
   } else {
       console.error("找不到男性性別按鈕");
   }
-=======
-    // Handle Logo click event
-    const logoLink = document.querySelector(".logo a");
-    if (logoLink) {
-        logoLink.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default action, manually control redirection
-            const targetUrl = logoLink.getAttribute("href");
-            if (targetUrl) {
-                window.location.href = targetUrl; // Manually navigate to target URL
-            } else {
-                console.error("No target URL specified");
-            }
-        });
-    } else {
-        console.error("Logo link not found");
-    }
-
-    // Handle Woman button click event
-    const wButton = document.querySelector(".nav-btn[data-gender='woman']"); 
-    if (wButton) {
-        wButton.addEventListener("click", function() {
-            console.log("Woman button clicked");
-            window.location.href = `category.html?gender=woman`;  
-        });
-    } else {
-        console.error("Woman button not found");
-    }
-
-    // Handle Man button click event
-    const mButton = document.querySelector(".nav-btn[data-gender='man']");
-    if (mButton) {
-        mButton.addEventListener("click", function() {
-            console.log("Man button clicked");
-            window.location.href = `category.html?gender=man`;
-        });
-    } else {
-        console.error("Man button not found");
-    }
->>>>>>> 3bfbafc (order)
 });
 
-// Toggle the visibility of customer info
+
+// 點擊顯示/隱藏詳細訊息
 document.getElementById("detailsButton").addEventListener("click", () => {
-    if (customerInfo.classList.contains("hidden")) {
-        customerInfo.classList.remove("hidden");
-        document.getElementById("detailsButton").textContent = "▲";  // Change button text
-    } else {
-        customerInfo.classList.add("hidden");
-        document.getElementById("detailsButton").textContent = "▼";  // Change button text
-    }
+  if (customerInfo.classList.contains("hidden")) {
+    customerInfo.classList.remove("hidden");
+    document.getElementById("detailsButton").textContent = "▲";
+  } else {
+    customerInfo.classList.add("hidden");
+    document.getElementById("detailsButton").textContent = "▼";
+  }
 });
+// <p>Name: ${Transaction[0].firstName} ${Transaction[0].lastName}</p>-->
+//<p>Phone: ${Transaction[0].mobile}</p>
