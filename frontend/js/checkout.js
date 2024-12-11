@@ -23,7 +23,7 @@ function loadCartItems() {
 
     let subtotal = 0; // 總金額
     let count = 0; // 總商品數量
-
+    
     // 清空目前的內容
     cartContainer.innerHTML = "";
 
@@ -45,7 +45,7 @@ function loadCartItems() {
         subtotal += item.price * item.quantity;
         count += item.quantity;
     });
-
+    
     // 更新商品總數
     itemCount.innerText = count;
 
@@ -207,6 +207,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   
+async function checkout(payment_type, address, order_date, ideal_rcv_date, serverURL) {
+    const url = `${serverURL}/checkout_`;  // Define the server endpoint
+
+    const sub_total = parseInt(document.getElementById("subtotal").innerText, 10);
+    const shipping_fee = document.querySelector('input[name="shipping"]:checked') ? parseInt(document.querySelector('input[name="shipping"]:checked').value, 10) : 0; 
+    const address = document.getElementById('address').value;
+    // Create the data object to send
+    const data = {
+        user_id: user_id,
+        sub_total: sub_total,
+        shipping_fee: shipping_fee,
+        payment_type: payment_type,
+        address: address
+    };
+
+    try {
+        // Send a POST request with the data as JSON
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)  // Convert the data to JSON format
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message);  // Log the success message from the server
+        } else {
+            console.error('Failed to process checkout:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error during checkout:', error);
+    }
+}
 
 // 合併初始化邏輯
 window.onload = async function() {
