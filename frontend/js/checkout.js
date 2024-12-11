@@ -290,5 +290,5 @@ window.onload = async function() {
 
 document.getElementById("buy-now").addEventListener("click", () => {
     checkout();
-    // window.location.href = "ordered.html"; // 這裡將導向結帳頁面
+    window.location.href = "ordered.html"; // 這裡將導向結帳頁面
   });
