@@ -1,17 +1,21 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
-from db import get_psql_conn
+from db import psql_conn
 
 checkout = Blueprint("checkout", __name__)
 
 # return cloth name, price, image url, cloth_id, color
 @checkout.route('/checkout_load_bag', methods=['GET'])
 def checkout_load_bag():
+<<<<<<< HEAD
+    cur = psql_conn.cursor()
+=======
     psql_conn = get_psql_conn()
     if psql_conn is not None:
         cur = psql_conn.cursor()
     else:
         print("Failed to connect to the database.")
 
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
     user_id = request.args.get('user_id')
 
     cur.execute(

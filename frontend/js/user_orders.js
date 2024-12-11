@@ -30,3 +30,63 @@ const detailButtons = document.querySelectorAll('.more-details');
         }
       });
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabs = document.querySelectorAll(".save-change");
+      const orderList = document.getElementById("order-list");
+      const noOrdersMessage = document.getElementById("no-orders-message");
+  
+      // Function to fetch and display orders based on status
+      const fetchOrders = async (status) => {
+          try {
+              // Clear current orders
+              orderList.innerHTML = "";
+  
+              // Fetch orders from the backend
+              const response = await fetch(`/api/orders?status=${status}`);
+              if (!response.ok) throw new Error("Failed to fetch orders");
+  
+              const orders = await response.json();
+  
+              // Display orders or show "no orders" message
+              if (orders.length === 0) {
+                  noOrdersMessage.style.display = "block";
+              } else {
+                  noOrdersMessage.style.display = "none";
+                  orders.forEach(order => {
+                      const orderCard = document.createElement("div");
+                      orderCard.className = "order-card";
+                      orderCard.innerHTML = `
+                          <img src="${order.image}" alt="${order.name}">
+                          <div class="order-details">
+                              <h2>${order.name}</h2>
+                              <p>Size: ${order.size}</p>
+                              <p>Color: ${order.color}</p>
+                              <p>Order Date: ${order.orderDate}</p>
+                              <p>Ideal Received Date: ${order.receivedDate}</p>
+                              <p class="price">$ ${order.price} × ${order.quantity}</p>
+                              <button class="more-details" data-id="${order.id}">More Details</button>
+                          </div>
+                      `;
+                      orderList.appendChild(orderCard);
+                  });
+              }
+          } catch (error) {
+              console.error(error);
+              noOrdersMessage.style.display = "block";
+              noOrdersMessage.textContent = "Error fetching orders. Please try again later.";
+          }
+      };
+  
+      // Add click event listeners to tabs
+      tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+              const status = tab.getAttribute("data-status");
+              fetchOrders(status);
+          });
+      });
+  
+      // Load "In Progress" orders by default
+      fetchOrders("in-progress");
+  });
+  

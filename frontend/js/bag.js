@@ -1,11 +1,13 @@
 // 商品數據
-// const cartItems = [
-//   { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
-//   { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
-//   { id: 3, name: "Blazer", color: "red", size: "M", price: 100, quantity: 2 },
-//   { id: 4, name: "Blazer", color: "pink", size: "M", price: 80, quantity: 1 },
-// ];
+const cartItems = [
+  { id: 1, name: "Blazer", color: "White", size: "M", price: 100, quantity: 2 },
+  { id: 2, name: "Blazer", color: "Black", size: "M", price: 80, quantity: 1 },
+  { id: 3, name: "Blazer", color: "red", size: "M", price: 100, quantity: 2 },
+  { id: 4, name: "Blazer", color: "pink", size: "M", price: 80, quantity: 1 },
+];
 
+<<<<<<< HEAD
+=======
 cartItems = []
 window.onload = async function () {
   try {
@@ -30,6 +32,7 @@ window.onload = async function () {
   }
 };
 
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
 // 初始化購物車
 const cartContainer = document.getElementById("cart-items");
 const subtotalElement = document.getElementById("subtotal");

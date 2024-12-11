@@ -1,18 +1,14 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
-from db import get_psql_conn
+from db import psql_conn
 
 bag = Blueprint("bag", __name__)
 
 # return cloth name, price, image url, cloth_id, color
 @bag.route('/bag_load_bag', methods=['GET'])
 def bag_load_bag():
-    psql_conn = get_psql_conn()
-    if psql_conn is not None:
-        cur = psql_conn.cursor()
-    else:
-        print("Failed to connect to the database.")
+    cur = psql_conn.cursor()
     user_id = request.args.get('user_id')
-    
+
     cur.execute(
         '''
         SELECT cl.clothes_id, cl.name, cl.part, cl.gender, cl.price, cl.description, cc.color, bag.size, i.path, bag.purchase_qty
@@ -29,6 +25,18 @@ def bag_load_bag():
     update_all_clothes_in_bag_data = []
     for cloth in all_clothes_in_bag_data:
         new_cloth = {
+<<<<<<< HEAD
+            "clothes_id": cloth[0], 
+                    "name": cloth[1], 
+                    "part": cloth[2], 
+                    "gender": cloth[3], 
+                    "price": cloth[4], 
+                    "description": cloth[5], 
+                    "color": cloth[6], 
+                    "size": cloth[7], 
+                    "img": cloth[8], 
+                    "purchase_qty": cloth[9]
+=======
             "id": cloth[0], 
             "name": cloth[1], 
             "part": cloth[2], 
@@ -39,6 +47,7 @@ def bag_load_bag():
             "size": cloth[7], 
             "img": url_for("static", filename='images/' + cloth[8]),
             "quantity": cloth[9]
+>>>>>>> 59a943d478219616fd042bef90997088b40df8ad
         }
         update_all_clothes_in_bag_data.append(new_cloth)
     # print(update_all_clothes_in_bag_data)
