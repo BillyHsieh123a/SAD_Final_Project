@@ -1,3 +1,6 @@
+document.getElementById("login-button").addEventListener("click", submitLogin);
+
+
 function submitLogin() {
     const emailOrPhone = document.getElementById('login-email-or-phone').value.trim();
     const userPassword = document.getElementById('login-password').value.trim();
