@@ -289,6 +289,9 @@ window.onload = async function() {
 
 
 document.getElementById("buy-now").addEventListener("click", () => {
-    checkout();
-    window.location.href = "ordered.html"; // 這裡將導向結帳頁面
+    const sub_total = parseInt(document.getElementById("subtotal").innerText, 10);
+    if (sub_total > 0){
+        checkout();
+        window.location.href = "ordered.html"; // 這裡將導向結帳頁面
+    }
   });
