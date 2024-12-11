@@ -22,15 +22,85 @@ productImgElement.style.objectFit = "cover";  // Crop and fill the box
 
 // Handle "Add to Bag" button
 document.getElementById("add-to-bag").addEventListener("click", function () {
-    alert(`${productName} has been added to your bag!`);
+    addItemToBag(productName, productPrice, productImg, productClothID, productColor);
 });
+
+// Handle "Add to Favorite" button
+document.getElementById("add-to-favorite").addEventListener("click", function () {
+    addItemToFavorite(productName, productPrice, productImg, productClothID, productColor);
+});
+
+// Function to handle adding item to the bag
+async function addItemToBag(name, price, img, clothes_id, color) {
+    try {
+        // Prepare the data to be sent in the POST request
+        const productData = {
+            name: name,
+            price: price,
+            img: img,
+            clothes_id: clothes_id,
+            color: color
+        };
+
+        // Send a POST request to the server to add the item to the bag
+        const response = await fetch(`${serverURL}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            alert(`${name} has been added to your bag!`);
+        } else {
+            alert("Failed to add item to your bag. Please try again.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred while adding the item to your bag.");
+    }
+}
+
+// Function to handle adding item to the favorites
+async function addItemToFavorite(name, price, img, clothes_id, color) {
+    try {
+        // Prepare the data to be sent in the POST request
+        const productData = {
+            name: name,
+            price: price,
+            img: img,
+            clothes_id: clothes_id,
+            color: color
+        };
+
+        // Send a POST request to the server to add the item to the favorites
+        const response = await fetch(`${serverURL}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+        });
+
+        // Check if the response is successful
+        if (response.ok) {
+            alert(`${name} has been added to your favorites!`);
+        } else {
+            alert("Failed to add item to your favorites. Please try again.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred while adding the item to your favorites.");
+    }
+}
 
 // Handle "Try On" button
 document.getElementById("try-on").addEventListener("click", function () {
     // Redirect to the try-on page
     window.location.href = "try-on";
 });
-
 
 // Handle "Add to Favorite" button (heart icon)
 document.getElementById("add-to-favorite").addEventListener("click", function () {
@@ -41,6 +111,7 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
         alert(`${productName} has been removed from your favorites.`);
     }
 });
+
 
 // Get the Go Back button
 const goBackButton = document.querySelector(".go-back-btn");

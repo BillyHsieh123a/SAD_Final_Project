@@ -65,7 +65,7 @@ def favorite_delete_item():
     psql_conn.commit()
     return jsonify({"message": "successfully deleted!"}), 200
 
-
+# not finished
 @favorite.route('/favorite_add_item_to_bag', methods=['POST'])
 def favorite_add_item_to_bag():
     psql_conn = get_psql_conn()
@@ -81,7 +81,7 @@ def favorite_add_item_to_bag():
 
     cur.execute(
         '''
-        DELETE FROM favorite 
+        INSERT INTO favorite 
         WHERE user_id = %s AND clothes_id = %s AND color = %s;
         ''',
         (user_id, clothes_id, color)

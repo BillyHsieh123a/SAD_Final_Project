@@ -1,60 +1,71 @@
-
 main {
-    position: fixed; /* 固定位置 */
-    top: 15%; /* 距離頂部 0 */
-    left: 50%; /* 水平居中，基於視窗 */
-    transform: translateX(-50%); /* 修正水平居中偏移 */
-    
-    background-color: #e2e2e2;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 50%; /* 寬度為視窗的 50% */
-    max-width: 1200px; /* 最大寬度為 1200px */
-    margin: 0; /* 移除自動對齊的 margin */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 垂直置中 */
+  width: 100%;
+  min-height: 100vh;
+  margin: 2em auto;
+  background-color: #ffffff;
+  padding: 20px;
+
+ 
 }
 
-  
-  .order-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .order-header h1 {
-    font-size: 1.8rem;
-    color: #333;
-  }
+.container {
+  background-color: #cfcfcf;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  margin: 0;
+}
 
-  #detailsButton {
-    display: block;
-    margin: 10px auto;
-    background: none; /* 移除背景色 */
-    color: #000; /* 預設文字為黑色 */
-    border: none; /* 移除邊框 */
-    padding: 10px; /* 保持按鈕的內邊距 */
-    cursor: pointer; /* 手型光標 */
-    font-size: 16px; /* 調整文字大小 */
-    transition: color 0.3s ease; /* 增加顏色過渡效果 */
+.order-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.order-header h1 {
+  font-size: 1.8rem;
+  color: #000000; /* Improved visibility with white color */
+}
+
+.order-header p {
+  color: #656565; /* Improved visibility with white color */
+}
+
+#detailsButton {
+  display: block;
+  margin: 10px auto;
+  background: none;
+  color: #000000; /* Improved visibility with white color */
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
 
 #detailsButton:hover {
-    color: #555; /* 懸停時文字變為深灰色 */
+  color: #aaa; /* Lighter color on hover */
 }
 
 #detailsButton:active {
-    color: #333; /* 點擊時文字變得更深一些 */
+  color: #ddd; /* Even lighter color when active */
 }
 
-  .hidden {
-    display: none;
-  }
-  
-  #customerInfo {
-    margin-top: 10px;
-    background: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-  }
+.hidden {
+  display: none;
+}
+
+#customerInfo {
+  margin-top: 10px;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
