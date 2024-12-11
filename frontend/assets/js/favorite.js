@@ -55,10 +55,39 @@ function displayProducts(products) {
     });
 }
 
+async function deleteItemFromFavorite(user_id, clothes_id, color) {
+    const data = {
+        user_id: user_id,
+        clothes_id: clothes_id,
+        color: color
+    };
+  
+    try {
+        const response = await fetch(`${serverURL}/favorite_delete_item`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)  // Send the data in the request body as JSON
+        });
+  
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message); // Output: "successfully deleted!"
+        } else {
+            console.error('Failed to delete item from bag:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
+
 // Function to remove product from favorites
 function removeProduct(id) {
     const index = products.findIndex((product) => product.id === id);
     if (index !== -1) {
+        deleteItemFromFavorite(user_id, products[index].id, products[index].color)
         products.splice(index, 1);
         displayProducts(products);
     }
