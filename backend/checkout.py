@@ -65,7 +65,7 @@ def checkout_():
         payment_type = 'M'
     elif payment_type == 'PayPal':
         payment_type = 'P'
-        
+
     address = data.get('address')
 
     # add the order into "order", assume order_id will add by dbms
@@ -100,4 +100,4 @@ def checkout_():
     # print("1234124132")
 
     psql_conn.commit()
-    return jsonify({"message": "successfully bought items!!!"})
+    return jsonify({"order_id": order_id})

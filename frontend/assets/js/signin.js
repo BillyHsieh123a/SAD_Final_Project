@@ -21,4 +21,3 @@ document.getElementById('sign-up-form').addEventListener('submit', function(even
         alert('An error occurred during registration.');
     });
 });
-    

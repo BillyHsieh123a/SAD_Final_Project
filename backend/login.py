@@ -14,14 +14,14 @@ def handle_login():
     # phone num
     if accountInput.isdigit():
         cmd = """
-        SELECT user_id, phone, password
+        SELECT user_id, fname, lname, phone, email, bdate, gender
         FROM "user"
         WHERE phone = %s AND password = %s
         """
 
     else:
         cmd = """
-        SELECT user_id, email, password
+        SELECT user_id, fname, lname, phone, email, bdate, gender
         FROM "user"
         WHERE email = %s AND password = %s
         """
@@ -35,6 +35,12 @@ def handle_login():
     if len(rows):
         session["login"] = True
         session["user_id"] = rows[0][0]
+        session["fname"] = rows[0][1]
+        session["lname"] = rows[0][2]
+        session["phone"] = rows[0][3]
+        session["email"] = rows[0][4]
+        session["bdate"] = rows[0][5]
+        session["gender"] = rows[0][6]
         return jsonify({'success': 1})
     else:
         return jsonify({'success': 0, 'error': 'Wrong account or password.'})

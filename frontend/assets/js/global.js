@@ -31,13 +31,13 @@ const likeIcon = document.getElementById("like-icon");
 const bagIcon = document.getElementById("bag-icon");
 
 const serverURL = "http://127.0.0.1:5000"
-let user_id = 0
-let user_fname = ""
-let user_lname = ""
-let phone = ""
-let email = ""
-let bdate = ""
-let gender = ""
+var user_id = 0
+var user_fname = ""
+var user_lname = ""
+var phone = ""
+var email = ""
+var bdate = ""
+var gender = ""
 
 // Wrap each icon with an <a> tag and set the href attribute
 function wrapIconWithLink(icon, href) {
