@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Account Base</title>
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/user_orders.css"> <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="../css/user_orders.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="user-page">
@@ -58,7 +58,7 @@
                   <p>Order Date: 2024/11/15</p>
                   <p>Ideal Received Date: 2024/11/18 - 2024/11/20</p>
                   <p class="price">$ 799 × 1</p>
-                  <!-- 隱藏的內文 -->
+                  
                   <div id="full-details">
                     <p>Product Code: ABC123</p>
                     <p>Material: 100% Cotton</p>
@@ -82,6 +82,64 @@
               </div>
             </div>
           </div>
+    </div>
+    <script src="../js/global.js"></script>
+    <script src="../js/user_orders.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account Base</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/user_orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="user-page">
+
+    <header class="header">
+        <div class="logo">
+            <h1>Polaritique</h1>
+        </div>
+        <div class="account-title">
+            <h2>MY ACCOUNT</h2>
+        </div>
+    </header>
+
+    <div class="main-container"> 
+        <aside class="sidebar"> 
+            <button class="user-info"> 
+                <div class="abbr">FL</div> 
+                <div><span class="for-40px-space">Hi! (UserName)</span></div>
+                <span class="grey-rectangle1"></span>
+                <span class="grey-rectangle2"></span>
+            </button> 
+            <button class="submit-button" onclick="window.location.href='user_details.html'">USER DETAILS</button>
+            <button class="submit-button" onclick="window.location.href='user_orders.html'">MY ORDERS</button>
+            <button class="submit-button" onclick="window.location.href='category.html'">
+                <i class="fas fa-arrow-left"></i>
+                <span class="sign-out-text">SIGN OUT</span>
+            </button>
+        </aside> 
+        
+        <div class="content">
+            <div class="section">
+                <h3>MY ORDERS</h3>
+                <div class="note">Stay updated on the latest status of your orders.</div>
+            </div>
+            <div class="tabs">
+              <button class="save-change" data-status="in-progress">In Progress</button>
+              <button class="save-change" data-status="completed">Completed</button>
+              <button class="save-change" data-status="canceled">Canceled</button>
+              <button class="save-change" data-status="returned">Returned</button>
+            </div>
+            <div id="no-orders-message" style="display: none;">No orders available for this status.</div>
+            <div class="order-list" id="order-list">
+                <!-- Order cards will be dynamically inserted here -->
+            </div>
+        </div>
     </div>
     <script src="../js/global.js"></script>
     <script src="../js/user_orders.js"></script>
