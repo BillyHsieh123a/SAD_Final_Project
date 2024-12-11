@@ -32,6 +32,8 @@ const bagIcon = document.getElementById("bag-icon");
 
 const serverURL = "http://127.0.0.1:5000"
 let user_id = 0
+let user_fname = ""
+let user_lname = ""
 
 // Wrap each icon with an <a> tag and set the href attribute
 function wrapIconWithLink(icon, href) {
