@@ -15,6 +15,18 @@
 //   });
 // });
 
+
+
+
+
+
+
+// 用 get_user_id() 拿 user_id
+
+
+
+
+
 const detailButtons = document.querySelectorAll('.more-details');
     detailButtons.forEach((button) => {
       button.addEventListener('click', () => {

@@ -29,14 +29,21 @@ function submitLogin() {
     .then(data => {
         if (data.success === 1) {
             // user_id = data.session.user_id;
+            localStorage.setItem('user_id', data.session.user_id);
+            localStorage.setItem('user_fname', data.session.user_fname);
+            localStorage.setItem('user_lname', data.session.user_lname);
+            localStorage.setItem('phone', data.session.phone);
+            localStorage.setItem('email', data.session.email);
+            localStorage.setItem('bdate', data.session.bdate);
+            localStorage.setItem('gender', data.session.gender);
             // user_fname = data.session.fname;
             // user_lname = data.session.lname;
             // phone = data.session.phone;
             // email = data.session.email;
             // bdate = data.session.bdate;
             // gender = data.session.gender;
-            changeUserData(data.session.user_id, data.session.user_fname, data.session.user_lname, data.session.phone, data.session.email, data.session.bdate, data.session.gender);
-            console.log(get_user_id());
+            // changeUserData(data.session.user_id, data.session.user_fname, data.session.user_lname, data.session.phone, data.session.email, data.session.bdate, data.session.gender);
+            // console.log(get_user_id());
             document.getElementById('login-result').innerText = "Login Successful!";
             window.location.href = "/";
         } else {

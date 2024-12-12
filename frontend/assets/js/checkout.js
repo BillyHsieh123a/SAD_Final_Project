@@ -231,7 +231,7 @@ async function checkout() {
     console.log(payment_type)
     // Create the data object to send
     const data = {
-        user_id: user_id,
+        user_id: get_user_id(),
         sub_total: sub_total,
         shipping_fee: shipping_fee,
         payment_type: payment_type,
@@ -263,7 +263,7 @@ async function checkout() {
 // 合併初始化邏輯
 window.onload = async function() {
     try {
-        const response = await fetch(`${serverURL}/checkout_load_bag?user_id=${user_id}`, {
+        const response = await fetch(`${serverURL}/checkout_load_bag?user_id=${get_user_id()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ products = []; // Declare the products object outside to ensure it is available 
 window.onload = async function () {
     console.log(get_user_id());
     try {
-        const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${user_id}`, {
+        const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${get_user_id()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,9 +56,9 @@ function displayProducts(products) {
     });
 }
 
-async function deleteItemFromFavorite(user_id, clothes_id, color) {
+async function deleteItemFromFavorite(user_id_d, clothes_id, color) {
     const data = {
-        user_id: user_id,
+        user_id: user_id_d,
         clothes_id: clothes_id,
         color: color
     };
@@ -88,7 +88,7 @@ async function deleteItemFromFavorite(user_id, clothes_id, color) {
 function removeProduct(id) {
     const index = products.findIndex((product) => product.id === id);
     if (index !== -1) {
-        deleteItemFromFavorite(user_id, products[index].id, products[index].color)
+        deleteItemFromFavorite(get_user_id(), products[index].id, products[index].color)
         products.splice(index, 1);
         displayProducts(products);
     }

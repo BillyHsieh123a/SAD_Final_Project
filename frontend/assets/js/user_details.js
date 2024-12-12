@@ -1,3 +1,8 @@
+// 用 get_user_id() 拿 user_id
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     // 1. 加載用戶資料
     fetch('/api/user-details', {
