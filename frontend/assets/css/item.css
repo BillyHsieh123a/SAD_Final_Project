@@ -54,11 +54,11 @@
     width: 100%; /* Makes sure the label spans the width of its container */
 }
 
-.product-color, .product-size {
+.product-color, .product-size, .product-num {
     width: 45vw;  /* Adjust the width as needed */
 }
 
-.product-color select, .product-size select {
+.product-color select, .product-size, .product-num select {
     width: 100%;  /* Make the dropdown take the full width of the container */
     padding: 8px;  /* Optional: Add padding for better spacing */
 }
