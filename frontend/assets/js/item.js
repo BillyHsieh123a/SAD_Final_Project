@@ -3,8 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const productName = urlParams.get('name');
 const productPrice = urlParams.get('price');
 const productImg = urlParams.get('img');
-const productClothID = urlParams.get('clothes_id');
-
+const productClothID = urlParams.get('cloth_id');
 
 // Update HTML elements with product details
 document.getElementById("product-name").textContent = productName;
@@ -20,48 +19,36 @@ productImgElement.style.width = "500px";  // Set the width to 400px
 productImgElement.style.height = "600px";  // Set the height to 600px
 productImgElement.style.objectFit = "cover";  // Crop and fill the box
 
-// Get the selected color and size
-const selectedColor = document.getElementById("color").value;
-const selectedSize = document.getElementById("size").value;
-
-function getSelectedOptions() {
-    const selectedColor = colorDropdown.value; // Get the selected color
-    const selectedSize = sizeDropdown.value;   // Get the selected size
-    return { selectedColor, selectedSize };
-}
-
 document.getElementById("add-to-bag").addEventListener("click", function () {
-    // Get selected color and size
+    // Get the selected color and size
     const selectedColor = document.getElementById("color").value;
     const selectedSize = document.getElementById("size").value;
+    const selectedNum = document.getElementById("num").value;
 
     // Pass the selected options to the function
-    addItemToBag(productName, productPrice, productImg, productClothID, selectedColor, selectedSize);
+    addItemToBag(get_user_id(), productClothID, selectedColor, selectedSize, selectedNum);
 });
 
 document.getElementById("add-to-favorite").addEventListener("click", function () {
-    // Get selected color and size
+    // Get the selected color and size
     const selectedColor = document.getElementById("color").value;
-    const selectedSize = document.getElementById("size").value;
 
     // Pass the selected options to the function
-    addItemToFavorite(productName, productPrice, productImg, productClothID, selectedColor, selectedSize);
+    addItemToFavorite(get_user_id(), productClothID, selectedColor);
 });
 
 
-
-async function addItemToBag(name, price, img, clothes_id, color, size) {
+async function addItemToBag(user_id, clothes_id, color, size, quantity) {
     try {
         const productData = {
-            name: name,
-            price: price,
-            img: img,
+            user_id: user_id,
             clothes_id: clothes_id,
-            color: color,
-            size: size
+            color: color[0].toUpperCase(),
+            size: size,
+            quantity: quantity
         };
 
-        const response = await fetch(`${serverURL}/add-to-bag`, {
+        const response = await fetch(`${serverURL}/favorite_add_item_to_bag`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,43 +57,13 @@ async function addItemToBag(name, price, img, clothes_id, color, size) {
         });
 
         if (response.ok) {
-            alert(`${name} (${color}, ${size}) has been added to your bag!`);
+            // alert(`${name} (${color}, ${size}) has been added to your bag!`);
         } else {
             alert("Failed to add item to your bag. Please try again.");
         }
     } catch (error) {
         console.error('Error:', error);
         alert("An error occurred while adding the item to your bag.");
-    }
-}
-
-async function addItemToFavorite(name, price, img, clothes_id, color, size) {
-    try {
-        const productData = {
-            name: name,
-            price: price,
-            img: img,
-            clothes_id: clothes_id,
-            color: color,
-            size: size
-        };
-
-        const response = await fetch(`${serverURL}/add-to-favorite`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData),
-        });
-
-        if (response.ok) {
-            alert(`${name} (${color}, ${size}) has been added to your favorites!`);
-        } else {
-            alert("Failed to add item to your favorites. Please try again.");
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert("An error occurred while adding the item to your favorites.");
     }
 }
 

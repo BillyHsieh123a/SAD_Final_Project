@@ -24,10 +24,8 @@ function convertToCategoryFormat(data) {
     };
 
     data.forEach(item => {
-        // Determine the gender
-        const gender = item.gender === "M" ? "man" : "woman"; // Adjust if there are more genders
+        const gender = item.gender === "M" ? "man" : "woman";
 
-        // Determine the category by the 'part' field
         let category = "";
         switch (item.part) {
             case "T":
@@ -46,12 +44,13 @@ function convertToCategoryFormat(data) {
                 break;
         }
 
-        // Add the item to the correct gender and category
         if (category) {
             result[gender][category].push({
+                clothes_id: item.clothes_id,
                 name: item.name,
                 price: `${item.price} NTD`,
                 img: ".." + item.img,
+                color: item.color || "NA", // Default color
             });
         }
     });
@@ -178,7 +177,7 @@ function displayProducts() {
                 const card = document.createElement("div");
                 card.className = "item-card";
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}" data-product-clothes_id="${product.clothes_id}" data-product-color="${product.color}">
+                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}" data-product-clothes-id="${product.clothes_id}" data-product-color="${product.color}">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                 `;
@@ -205,7 +204,7 @@ function displayProducts() {
                 const card = document.createElement("div");
                 card.className = "item-card";
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}, data-product-clothes_id="${product.clothes_id}, data-product-color="${product.color}">
+                    <img src="${product.img}" alt="${product.name}" class="product-img" data-product-name="${product.name}" data-product-price="${product.price}" data-product-img="${product.img}" data-product-clothes-id="${product.clothes_id}" data-product-color="${product.color}">
                     <h3>${product.name}</h3>
                     <p class="price">${product.price}</p>
                 `;
@@ -235,11 +234,11 @@ function displayProducts() {
             const productName = image.dataset.productName;
             const productPrice = image.dataset.productPrice;
             const productImg = image.dataset.productImg;
-            const productClothID = image.dataset.productClothID;
+            const productClothesId = image.dataset.productClothesId;
             const productColor = image.dataset.productColor;
 
             // Redirect to item.html with product details (query parameters)
-            window.location.href = `item?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}&cloth_id=${encodeURIComponent(productClothID)}&color=${encodeURIComponent(productColor)}`;
+            window.location.href = `item?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}&cloth_id=${encodeURIComponent(productClothesId)}&color=${encodeURIComponent(productColor)}`;
         });
     });
 }
