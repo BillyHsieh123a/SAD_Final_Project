@@ -25,7 +25,7 @@ app.register_blueprint(bag)
 app.register_blueprint(checkout)
 app.register_blueprint(favorite)
 app.register_blueprint(ordered)
-# app.register_blueprint(item)
+app.register_blueprint(item)
 # app.register_blueprint(try_on)
 
 
