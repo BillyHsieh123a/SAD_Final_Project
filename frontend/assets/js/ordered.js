@@ -12,42 +12,22 @@ window.onload = async function () {
         });
 
         // Log the response status
-        const result = response.json();
-        console.log("Response Status: ", result.status);
-
-        // Log the raw response text for debugging
-       // const textResponse = await response.text();
-       // console.log("Raw Response: ", textResponse);
+        console.log("Response Status: ", response.status);
 
         // Check if the response is successful (status code 200)
         if (response.ok) {
-            console.log("Response successful, processing data...");
-            // const data = JSON.parse(textResponse);  // Manually parse JSON
-            // console.log("Fetched Data: ", data);
+            const result = await response.json();  // Wait for the JSON response
+            console.log("Fetched Data: ", result);
 
-            // Update the Transaction array with the data from the response
             Transaction = {
-                orderid: result.order_id,      // Order ID
-                price: result.sub_total + result.shipping_fee,       // Price (sub_total + shipping_fee)
-                address: result.address,       // Address
-                //date: result.order_date        // Date
+                orderid: result.order_id,
+                price: result.sub_total + result.shipping_fee,
+                address: result.address,
             };
 
-            // Log the updated Transaction data
             console.log("Updated Transaction: ", Transaction);
-        } else {
-            // Handle error if the order is not found or there's a server error
-            console.error("Error fetching order data:", result);
-        }
-    } catch (error) {
-        // Handle any network errors
-        //console.error("Network error:", error);
-    }
-};
 
-
-
-document.getElementById("orderNumber").textContent = Transaction.order_id;
+document.getElementById("orderNumber").textContent = Transaction.orderid;
 const today = new Date();
 
 // Format the date as YYYY-MM-DD (ISO format)
@@ -62,6 +42,18 @@ customerInfo.innerHTML = `
   <p>Address: ${Transaction.address}</p>
   <p>Price: $${Transaction.price}</p>
 `;
+
+        } else {
+            const result = await response.json();  // Ensure you handle the error response
+            console.error("Error fetching order data:", result);
+        }
+    } catch (error) {
+        // Handle any network errors or JSON parsing errors
+        console.error("Network error or JSON parsing error:", error);
+    }
+};
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // 處理 Logo 點擊事件
   const logoLink = document.querySelector(".logo a");
