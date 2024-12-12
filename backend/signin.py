@@ -23,7 +23,7 @@ def signin():
 
     cur.execute(
         '''
-        INSERT INTO public."user" (fname, lname, phone, email, bdate, gender, role)
+        INSERT INTO public."user" (fname, lname, password, phone, email, bdate, gender, role)
         VALUES(%s, %s, %s, %s, %s, %s, %s, U)
         ''',
         (fname, lname, password, phone, email, bdate, gender)
