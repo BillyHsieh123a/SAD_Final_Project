@@ -251,7 +251,8 @@ async function checkout() {
         // Check if the response is successful
         if (response.ok) {
             const result = await response.json();
-            console.log(result.message);  // Log the success message from the server
+            console.log(result.order_id);  // Log the success message from the server
+            window.location.href = `ordered?order_id=${encodeURIComponent(result.order_id)}`;
         } else {
             console.error('Failed to process checkout:', response.status, response.statusText);
         }
@@ -292,6 +293,6 @@ document.getElementById("buy-now").addEventListener("click", () => {
     const subtotal = parseInt(document.getElementById("subtotal").innerText, 10);
     if (subtotal != 0){
         checkout();
-    window.location.href = "ordered"; // 這裡將導向結帳頁面
+    //window.location.href = "ordered"; // 這裡將導向結帳頁面
     }
   });

@@ -25,8 +25,9 @@ document.getElementById("add-to-bag").addEventListener("click", function () {
     const selectedSize = document.getElementById("size").value;
     const selectedNum = document.getElementById("num").value;
 
+    
     // Pass the selected options to the function
-    addItemToBag(get_user_id(), productClothID, selectedColor, selectedSize, selectedNum);
+    addItemToBag(productName, productClothID, selectedColor, selectedSize);
 });
 
 document.getElementById("add-to-favorite").addEventListener("click", function () {
@@ -34,14 +35,15 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
     const selectedColor = document.getElementById("color").value;
 
     // Pass the selected options to the function
-    addItemToFavorite(get_user_id(), productClothID, selectedColor);
+    addItemToFavorite(productName, productClothID, selectedColor);
 });
 
 
-async function addItemToBag(user_id, clothes_id, color, size, quantity) {
+
+
+async function addItemToBag(name, clothes_id, color, size) {
     try {
         const productData = {
-            user_id: user_id,
             clothes_id: clothes_id,
             color: color[0].toUpperCase(),
             size: size,
@@ -64,6 +66,32 @@ async function addItemToBag(user_id, clothes_id, color, size, quantity) {
     } catch (error) {
         console.error('Error:', error);
         alert("An error occurred while adding the item to your bag.");
+    }
+}
+
+async function addItemToFavorite(name, clothes_id, color) {
+    try {
+        const productData = {
+            clothes_id: clothes_id,
+            color: color
+        };
+
+        const response = await fetch(`${serverURL}/add-to-favorite`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+        });
+
+        if (response.ok) {
+            alert(`${name} (${color}) has been added to your favorites!`);
+        } else {
+            alert("Failed to add item to your favorites. Please try again.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred while adding the item to your favorites.");
     }
 }
 
@@ -92,3 +120,33 @@ goBackButton.addEventListener("click", function () {
     // Navigate back to category
     window.location.href = "category";
 });
+
+
+
+// when clothes color change, change image 
+selectedColor.addEventListener("change", changeClothesImage);
+async function changeClothesImage(){
+    try {
+        const productData = {
+            clothes_id: clothes_id,
+            color: selectedColor.value
+        };
+
+        const response = await fetch(`${serverURL}/change-clothes-image`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+        });
+        
+        if(response.ok) {
+            const result = await response.json();
+            const productImg = document.getElementById("product-img");
+            productImg.src = result["image_src"];
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred while loading clothes image.");
+    }
+}
