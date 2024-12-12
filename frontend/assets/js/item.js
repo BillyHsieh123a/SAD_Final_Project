@@ -24,10 +24,9 @@ document.getElementById("add-to-bag").addEventListener("click", function () {
     const selectedColor = document.getElementById("color").value;
     const selectedSize = document.getElementById("size").value;
     const selectedNum = document.getElementById("num").value;
-
     
     // Pass the selected options to the function
-    addItemToBag(productName, productClothID, selectedColor, selectedSize);
+    addItemToBag(productName, productClothID, selectedColor, selectedSize, selectedNum);
 });
 
 document.getElementById("add-to-favorite").addEventListener("click", function () {
@@ -41,58 +40,66 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
 
 
 
-async function addItemToBag(name, clothes_id, color, size) {
-    try {
-        const productData = {
+function addItemToBag(name, clothes_id, color, size, quantity) {
+    fetch(`/add-to-bag`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
             clothes_id: clothes_id,
             color: color[0].toUpperCase(),
             size: size,
             quantity: quantity
-        };
-
-        const response = await fetch(`${serverURL}/favorite_add_item_to_bag`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData),
-        });
-
-        if (response.ok) {
-            // alert(`${name} (${color}, ${size}) has been added to your bag!`);
-        } else {
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
             alert("Failed to add item to your bag. Please try again.");
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    } catch (error) {
+        return response.json();
+    })
+    .then(data => {
+        if(data.success == -1)
+            alert(`You already added ${name} (${color}, ${size}) into your bag!`);
+        else if(data.success == 0)
+            alert(`${name} (${color}, ${size}) has been added to your bag!`);
+    })
+    .catch(error => {
         console.error('Error:', error);
         alert("An error occurred while adding the item to your bag.");
-    }
+    });
 }
 
-async function addItemToFavorite(name, clothes_id, color) {
-    try {
-        const productData = {
+function addItemToFavorite(name, clothes_id, color) {
+    fetch(`/add-to-favorite`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
             clothes_id: clothes_id,
             color: color
-        };
-
-        const response = await fetch(`${serverURL}/add-to-favorite`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData),
-        });
-
-        if (response.ok) {
-            alert(`${name} (${color}) has been added to your favorites!`);
-        } else {
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
             alert("Failed to add item to your favorites. Please try again.");
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    } catch (error) {
+        return response.json();
+    })
+    .then(data => {
+        if(data.success == -1)
+            alert(`You already added ${name} (${color}) into your favorites!`);
+        else if(data.success == 0)
+            alert(`${name} (${color}) has been added to your favorites!`);
+    })
+    .catch(error => {
         console.error('Error:', error);
         alert("An error occurred while adding the item to your favorites.");
-    }
+    });
 }
 
 // Handle "Try On" button
@@ -105,7 +112,7 @@ document.getElementById("try-on").addEventListener("click", function () {
 document.getElementById("add-to-favorite").addEventListener("click", function () {
     this.classList.toggle("active");  // Toggle the heart icon (favorite or not)
     if (this.classList.contains("active")) {
-        alert(`${productName} has been added to your favorites.`);
+        // alert(`${productName} has been added to your favorites.`);
     } else {
         alert(`${productName} has been removed from your favorites.`);
     }
@@ -125,28 +132,29 @@ goBackButton.addEventListener("click", function () {
 
 // when clothes color change, change image 
 selectedColor.addEventListener("change", changeClothesImage);
-async function changeClothesImage(){
-    try {
-        const productData = {
+function changeClothesImage(){
+    fetch(`/change-clothes-image`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
             clothes_id: clothes_id,
             color: selectedColor.value
-        };
-
-        const response = await fetch(`${serverURL}/change-clothes-image`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData),
-        });
-        
-        if(response.ok) {
-            const result = await response.json();
-            const productImg = document.getElementById("product-img");
-            productImg.src = result["image_src"];
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    } catch (error) {
+        return response.json();
+    })
+    .then(data => {;
+        const productImg = document.getElementById("product-img");
+        productImg.src = data["image_src"];
+    })
+    .catch(error => {
         console.error('Error:', error);
-        alert("An error occurred while loading clothes image.");
-    }
+        // alert("An error occurred while loading clothes image.");
+    });
 }
