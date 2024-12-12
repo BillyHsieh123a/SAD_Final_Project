@@ -12,15 +12,28 @@ def user_orders_load_orders():
     else:
         print("Failed to connect to the database.")
     user_id = request.args.get('user_id')
+    status = request.args.get('status')
     
     cur.execute(
         '''
+        WITH LatestStatus AS (
+            SELECT order_id, MAX(status_date) AS latest_status_date
+            FROM public."order_status_record"
+            WHERE status = %s
+            GROUP BY order_id
+        )
         SELECT o.order_id, o.sub_total, o.shipping_fee, o.payment_type, o.address, o.order_date, o.ideal_rcv_date, oc.color, oc.size, oc.purchase_qty
         FROM public."order" AS o
         JOIN public."order_contains" AS oc ON o.order_id = oc.order_id
-        WHERE o.user_id = %s
+        JOIN public."order_status_record" AS osr ON o.order_id = osr.order_id 
+            AND osr.status_date = (
+                SELECT latest_status_date 
+                FROM LatestStatus 
+                WHERE LatestStatus.order_id = o.order_id
+            )
+        WHERE o.user_id = %s AND osr.status = %s;
         ''',
-        (user_id,)
+        (status, user_id, status)
     )
 
     all_order_data = cur.fetchall()
