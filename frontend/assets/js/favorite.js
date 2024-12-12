@@ -10,6 +10,7 @@
 
 products = []; // Declare the products object outside to ensure it is available globally
 window.onload = async function () {
+    console.log(get_user_id());
     try {
         const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${user_id}`, {
             method: 'GET',

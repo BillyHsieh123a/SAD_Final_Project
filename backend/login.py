@@ -41,7 +41,7 @@ def handle_login():
         session["email"] = rows[0][4]
         session["bdate"] = rows[0][5]
         session["gender"] = rows[0][6]
-        return jsonify({'success': 1})
+        return jsonify({'success': 1, 'session': dict(session)})
     else:
         return jsonify({'success': 0, 'error': 'Wrong account or password.'})
     

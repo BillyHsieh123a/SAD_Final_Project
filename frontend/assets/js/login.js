@@ -28,6 +28,15 @@ function submitLogin() {
     })
     .then(data => {
         if (data.success === 1) {
+            // user_id = data.session.user_id;
+            // user_fname = data.session.fname;
+            // user_lname = data.session.lname;
+            // phone = data.session.phone;
+            // email = data.session.email;
+            // bdate = data.session.bdate;
+            // gender = data.session.gender;
+            changeUserData(data.session.user_id, data.session.user_fname, data.session.user_lname, data.session.phone, data.session.email, data.session.bdate, data.session.gender);
+            console.log(get_user_id());
             document.getElementById('login-result').innerText = "Login Successful!";
             window.location.href = "/";
         } else {

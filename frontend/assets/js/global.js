@@ -30,14 +30,52 @@ const profileIcon = document.getElementById("profile-icon");
 const likeIcon = document.getElementById("like-icon");
 const bagIcon = document.getElementById("bag-icon");
 
-const serverURL = "http://127.0.0.1:5000"
-var user_id = 0
-var user_fname = ""
-var user_lname = ""
-var phone = ""
-var email = ""
-var bdate = ""
-var gender = ""
+const serverURL = "http://127.0.0.1:5000";
+var user_id = 0;
+var user_fname = "";
+var user_lname = "";
+var phone = "";
+var email = "";
+var bdate = "";
+var gender = "";
+
+function get_user_id(){
+    return user_id;
+}
+
+function get_user_fname(){
+    return user_fname;
+}
+
+function get_user_lname(){
+    return user_lname;
+}
+
+function get_phone(){
+    return phone;
+}
+
+function get_email(){
+    return email;
+}
+
+function get_bdate(){
+    return bdate;
+}
+
+function get_gender(){
+    return gender;
+}
+
+function changeUserData(new_user_id, new_user_fname, new_user_lname, new_phone, new_email, new_bdate, new_gender) {
+    user_id = new_user_id;
+    user_fname = new_user_fname;
+    user_lname = new_user_lname;
+    phone = new_phone;
+    email = new_email;
+    bdate = new_bdate;
+    gender = new_gender;
+}
 
 // Wrap each icon with an <a> tag and set the href attribute
 function wrapIconWithLink(icon, href) {
