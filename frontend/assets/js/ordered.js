@@ -1,7 +1,5 @@
-const Transaction = [
-];
-const serverURL = "http://127.0.0.1:5000";
-// Function to fetch order data from the backend
+Transaction = [];
+const ordered_id = "some_order_id";
 window.onload = async function () {
     try {
         const response = await fetch(`${serverURL}/ordered?ordered_id=${ordered_id}`, {
@@ -14,14 +12,18 @@ window.onload = async function () {
         // Log the response status
         console.log("Response Status: ", response.status);
 
+        // Log the raw response text for debugging
+        const textResponse = await response.text();
+        console.log("Raw Response: ", textResponse);
+
         // Check if the response is successful (status code 200)
         if (response.ok) {
             console.log("Response successful, processing data...");
-            const data = await response.json();
+            const data = JSON.parse(textResponse);  // Manually parse JSON
             console.log("Fetched Data: ", data);
 
             // Update the Transaction array with the data from the response
-            Transaction[0] = {
+            Transaction = {
                 orderid: data.order_id,      // Order ID
                 price: data.sub_total + data.shipping_fee,       // Price (sub_total + shipping_fee)
                 address: data.address,       // Address
@@ -32,25 +34,25 @@ window.onload = async function () {
             console.log("Updated Transaction: ", Transaction);
         } else {
             // Handle error if the order is not found or there's a server error
-            console.error("Error fetching order data:", await response.text());
+            console.error("Error fetching order data:", textResponse);
         }
     } catch (error) {
         // Handle any network errors
-        console.error("Network error:", error);
+        //console.error("Network error:", error);
     }
-}
-fetchOrderData();
+};
 
 
-document.getElementById("orderNumber").textContent = Transaction[0].orderid;
-document.getElementById("orderDate").textContent = Transaction[0].date;
+
+document.getElementById("orderNumber").textContent = Transaction.order_id;
+document.getElementById("orderDate").textContent = Transaction.date;
 
 // 插入顧客詳細資訊
 const customerInfo = document.getElementById("customerInfo");
 customerInfo.innerHTML = `
 
-  <p>Address: ${Transaction[0].address}</p>
-  <p>Price: $${Transaction[0].price}</p>
+  <p>Address: ${Transaction.address}</p>
+  <p>Price: $${Transaction.price}</p>
 `;
 document.addEventListener("DOMContentLoaded", function () {
   // 處理 Logo 點擊事件
