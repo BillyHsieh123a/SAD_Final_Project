@@ -292,6 +292,6 @@ document.getElementById("buy-now").addEventListener("click", () => {
     const subtotal = parseInt(document.getElementById("subtotal").innerText, 10);
     if (subtotal != 0){
         checkout();
-    window.location.href = "ordered"; // 這裡將導向結帳頁面
+        window.location.href = "ordered"; // 這裡將導向結帳頁面
     }
   });
