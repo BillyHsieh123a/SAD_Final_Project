@@ -4,7 +4,7 @@ from db import get_psql_conn
 user_orders = Blueprint("user_orders", __name__)
 
 # return cloth name, price, image url, cloth_id, color
-@bag.route('/user_orders_load_orders', methods=['GET'])
+@user_orders.route('/user_orders_load_orders', methods=['GET'])
 def user_orders_load_orders():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
