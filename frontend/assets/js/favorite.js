@@ -56,6 +56,20 @@ function displayProducts(products) {
     });
 }
 
+function addToBag(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        const productName = product.name;
+        const productPrice = product.price;
+        const productImg = product.img;
+        const productClothID = product.id; // Assuming ID represents cloth_id
+        const productColor = product.color || "default"; // Replace with actual color if available
+
+        // Redirect to the URL
+        window.location.href = `item?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}&img=${encodeURIComponent(productImg)}&cloth_id=${encodeURIComponent(productClothID)}&color=${encodeURIComponent(productColor)}`;
+    }
+}
+
 async function deleteItemFromFavorite(user_id_d, clothes_id, color) {
     const data = {
         user_id: user_id_d,
@@ -91,15 +105,6 @@ function removeProduct(id) {
         deleteItemFromFavorite(get_user_id(), products[index].id, products[index].color)
         products.splice(index, 1);
         displayProducts(products);
-    }
-}
-
-// Function to add product to shopping bag
-function addToBag(id) {
-    const product = products.find((product) => product.id === id);
-    if (product) {
-        console.log(`${product.name} added to bag`);
-        // You can implement the actual functionality to add the product to the bag here
     }
 }
 
