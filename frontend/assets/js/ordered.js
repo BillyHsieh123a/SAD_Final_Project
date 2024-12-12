@@ -1,8 +1,10 @@
 Transaction = [];
-const ordered_id = "some_order_id";
+const urlParams = new URLSearchParams(window.location.search);
+const ordered_id = urlParams.get('order_id');
+console.log(ordered_id);
 window.onload = async function () {
     try {
-        const response = await fetch(`${serverURL}/ordered?ordered_id=${ordered_id}`, {
+        const response = await fetch(`${serverURL}/ordered_?ordered_id=${ordered_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -10,31 +12,32 @@ window.onload = async function () {
         });
 
         // Log the response status
-        console.log("Response Status: ", response.status);
+        const result = response.json();
+        console.log("Response Status: ", result.status);
 
         // Log the raw response text for debugging
-        const textResponse = await response.text();
-        console.log("Raw Response: ", textResponse);
+       // const textResponse = await response.text();
+       // console.log("Raw Response: ", textResponse);
 
         // Check if the response is successful (status code 200)
         if (response.ok) {
             console.log("Response successful, processing data...");
-            const data = JSON.parse(textResponse);  // Manually parse JSON
-            console.log("Fetched Data: ", data);
+            // const data = JSON.parse(textResponse);  // Manually parse JSON
+            // console.log("Fetched Data: ", data);
 
             // Update the Transaction array with the data from the response
             Transaction = {
-                orderid: data.order_id,      // Order ID
-                price: data.sub_total + data.shipping_fee,       // Price (sub_total + shipping_fee)
-                address: data.address,       // Address
-                date: data.order_date        // Date
+                orderid: result.order_id,      // Order ID
+                price: result.sub_total + result.shipping_fee,       // Price (sub_total + shipping_fee)
+                address: result.address,       // Address
+                //date: result.order_date        // Date
             };
 
             // Log the updated Transaction data
             console.log("Updated Transaction: ", Transaction);
         } else {
             // Handle error if the order is not found or there's a server error
-            console.error("Error fetching order data:", textResponse);
+            console.error("Error fetching order data:", result);
         }
     } catch (error) {
         // Handle any network errors
@@ -45,8 +48,13 @@ window.onload = async function () {
 
 
 document.getElementById("orderNumber").textContent = Transaction.order_id;
-document.getElementById("orderDate").textContent = Transaction.date;
+const today = new Date();
 
+// Format the date as YYYY-MM-DD (ISO format)
+const formattedDate = today.toISOString().split('T')[0];
+
+// Set the textContent of the element with ID 'orderDate' to today's date
+document.getElementById("orderDate").textContent = formattedDate;
 // 插入顧客詳細資訊
 const customerInfo = document.getElementById("customerInfo");
 customerInfo.innerHTML = `
