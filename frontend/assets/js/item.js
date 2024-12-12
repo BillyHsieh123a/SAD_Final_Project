@@ -3,8 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const productName = urlParams.get('name');
 const productPrice = urlParams.get('price');
 const productImg = urlParams.get('img');
-const productClothID = urlParams.get('clothes_id');
-
+const productClothID = urlParams.get('cloth_id');
 
 // Update HTML elements with product details
 document.getElementById("product-name").textContent = productName;
@@ -20,27 +19,19 @@ productImgElement.style.width = "500px";  // Set the width to 400px
 productImgElement.style.height = "600px";  // Set the height to 600px
 productImgElement.style.objectFit = "cover";  // Crop and fill the box
 
-// Get the selected color and size
-const selectedColor = document.getElementById("color").value;
-const selectedSize = document.getElementById("size").value;
-
-function getSelectedOptions() {
-    const selectedColor = colorDropdown.value; // Get the selected color
-    const selectedSize = sizeDropdown.value;   // Get the selected size
-    return { selectedColor, selectedSize };
-}
-
 document.getElementById("add-to-bag").addEventListener("click", function () {
-    // Get selected color and size
+    // Get the selected color and size
     const selectedColor = document.getElementById("color").value;
     const selectedSize = document.getElementById("size").value;
+    const selectedNum = document.getElementById("num").value;
+
     
     // Pass the selected options to the function
     addItemToBag(productName, productClothID, selectedColor, selectedSize);
 });
 
 document.getElementById("add-to-favorite").addEventListener("click", function () {
-    // Get selected color and size
+    // Get the selected color and size
     const selectedColor = document.getElementById("color").value;
 
     // Pass the selected options to the function
@@ -54,11 +45,12 @@ async function addItemToBag(name, clothes_id, color, size) {
     try {
         const productData = {
             clothes_id: clothes_id,
-            color: color,
-            size: size
+            color: color[0].toUpperCase(),
+            size: size,
+            quantity: quantity
         };
 
-        const response = await fetch(`${serverURL}/add-to-bag`, {
+        const response = await fetch(`${serverURL}/favorite_add_item_to_bag`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +59,7 @@ async function addItemToBag(name, clothes_id, color, size) {
         });
 
         if (response.ok) {
-            alert(`${name} (${color}, ${size}) has been added to your bag!`);
+            // alert(`${name} (${color}, ${size}) has been added to your bag!`);
         } else {
             alert("Failed to add item to your bag. Please try again.");
         }
