@@ -120,20 +120,17 @@
     gap: 30px; /* Adjust the gap to your desired space between items */
 }
 
-.product-description-section{
+.product-description-section {
     width: 100%;
-    display: flex; /* Enable flexbox */
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    text-align: center; /* Align text inside */
+    text-align: left; /* Align text inside */
 }
 
 .product-description {
     width: 45vw;
-    display: flex; /* Enable flexbox */
-    align-items: center; /* Center horizontally */
+    align-items: left; /* Center horizontally */
     justify-content: left; /* Center vertically */
-    text-align: center; /* Align text inside */
+    text-align: left; /* Align text inside */
+    margin-left: 10px;
 }
 
 select {
