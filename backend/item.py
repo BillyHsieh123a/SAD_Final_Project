@@ -11,7 +11,7 @@ def add_item_to_bag():
     clothes_id = request.json['clothes_id']
     color = request.json['color']
     size = request.json['size']
-    quantity = request.json['quantity']
+    quantity = int(request.json['quantity'])
     
     try:
         cur = get_psql_conn().cursor()
@@ -26,12 +26,28 @@ def add_item_to_bag():
             return jsonify({"success": -1}), 200
         
         cur.execute("""
+            SELECT stock_qty
+            FROM CLOTHES_COLOR_SIZE
+            WHERE clothes_id = %s AND color = %s AND size = %s
+            FOR UPDATE
+        """, [clothes_id, color, size])
+        remaining_qty = cur.fetchone()[0]
+        if remaining_qty < quantity:  # duplicate BAG entry
+            get_psql_conn().rollback()
+            return jsonify({"success": -2, "quantity": remaining_qty}), 200
+        
+        cur.execute("""
             INSERT INTO BAG
             VALUES(%s, %s, %s, %s, %s)
         """, [user_id, clothes_id, color, size, quantity])
+        cur.execute("""
+            UPDATE CLOTHES_COLOR_SIZE
+            SET stock_qty = stock_qty - %s
+            WHERE clothes_id = %s AND color = %s AND size = %s
+        """, [quantity, clothes_id, color, size])
         get_psql_conn().commit()
-    
-        return jsonify({"success": -1}), 200
+        
+        return jsonify({"success": 0}), 200
     except Exception as e:
         get_psql_conn().rollback()
         return jsonify({"error": str(e)}), 500
@@ -111,4 +127,27 @@ def get_clothes_color_image():
     except Exception as e:
         get_psql_conn().rollback()
         return jsonify({"error": str(e)}), 500
+
+
+@item.post('/get-clothes-sizes')
+def get_clothes_sizes():
+    clothes_id = request.json['clothes_id']
+    color = request.json['color']
     
+    try:
+        cur = get_psql_conn().cursor()
+        cur.execute("""
+            SELECT size
+            FROM CLOTHES_COLOR_SIZE
+            WHERE clothes_id = %s AND color = %s
+        """, [clothes_id, color])
+        get_psql_conn().commit()
+        
+        size_order = dict(zip(["XS", "S", "M", "L", "XL"],
+                              [1, 2, 3, 4, 5]))
+        sizes = [s[0] for s in cur.fetchall()]
+        sizes = sorted(sizes, key=lambda s: size_order[s])
+        return jsonify({"sizes": sizes}), 200
+    except Exception as e:
+        get_psql_conn().rollback()
+        return jsonify({"error": str(e)}), 500

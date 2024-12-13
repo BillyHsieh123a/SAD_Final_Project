@@ -58,14 +58,24 @@ def bag_delete_item():
     clothes_id = data.get('clothes_id')
     color = data.get('color')
     size = data.get('size')
+    quantity = data.get('quantity')
+    
+    try:
+        cur.execute(
+            '''
+            DELETE FROM bag 
+            WHERE user_id = %s AND clothes_id = %s AND color = %s AND "size" = %s;
+            ''',
+            (user_id, clothes_id, color, size)
+        )
+        cur.execute("""
+            UPDATE CLOTHES_COLOR_SIZE
+            SET stock_qty = stock_qty + %s
+            WHERE clothes_id = %s AND color = %s AND size = %s
+        """, [quantity, clothes_id, color, size])
 
-    cur.execute(
-        '''
-        DELETE FROM bag 
-        WHERE user_id = %s AND clothes_id = %s AND color = %s AND "size" = %s;
-        ''',
-        (user_id, clothes_id, color, size)
-    )
-
-    psql_conn.commit()
-    return jsonify({"message": "successfully deleted!"}), 200
+        psql_conn.commit()
+        return jsonify({"message": "successfully deleted!"}), 200
+    except Exception as e:
+        get_psql_conn().rollback()
+        return jsonify({"error": str(e)}), 500

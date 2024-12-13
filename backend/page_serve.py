@@ -35,7 +35,10 @@ def serve_favorite_page():
 
 @page_serve.get('/item')
 def serve_item_page():
-    return render_template("item.html")
+    if session.get("login"):
+        return render_template("item.html")
+    else:
+        return redirect("/login")  # redirect to login page if not logged in
 
 
 @page_serve.get('/login')
