@@ -1,14 +1,15 @@
 document.getElementById("submit-button").addEventListener("click", SignIn);
 
-const fname = document.getElementById('first-name').value.trim();
-const lname = document.getElementById('last-name').value.trim();
-const phone = document.getElementById('phone').value.trim();
-const email = document.getElementById('email').value.trim();
-const bdate = document.getElementById('birthday').value.trim();
-const gender = document.getElementById('gender').value.trim();
-const password = document.getElementById('password').value.trim();
+
 
 async function SignIn() {
+    const fname = document.getElementById('first-name').value.trim();
+    const lname = document.getElementById('last-name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const bdate = document.getElementById('birthday').value.trim();
+    const gender = document.getElementById('gender').value.trim();
+    const password = document.getElementById('password').value.trim();
     const data = {
         fname: fname,
         lname: lname,
@@ -18,7 +19,7 @@ async function SignIn() {
         gender: gender,
         password: password
     };
-  
+    console.log(data);
     try {
         const response = await fetch(`${serverURL}/signin_`, {
             method: 'POST',
@@ -32,6 +33,7 @@ async function SignIn() {
         if (response.ok) {
             const result = await response.json();
             console.log(result.message); // Output: "successfully deleted!"
+            window.location.href = 'login';
         } 
     //     else {
     //         console.error('Failed to sign up:', response.status, response.statusText);

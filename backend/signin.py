@@ -19,12 +19,12 @@ def signin_signin():
     phone = data.get('phone')
     email = data.get('email')
     bdate = data.get('bdate')
-    gender = data.get('gender')
+    gender = data.get('gender')[0]
     print(bdate)
     cur.execute(
         '''
         INSERT INTO public."user" (fname, lname, password, phone, email, bdate, gender, role)
-        VALUES(%s, %s, %s, %s, %s, %s, %s, U)
+        VALUES(%s, %s, %s, %s, %s, %s, %s, 'U')
         ''',
         (fname, lname, password, phone, email, bdate, gender)
     )
