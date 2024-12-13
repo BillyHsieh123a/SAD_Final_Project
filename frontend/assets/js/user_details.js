@@ -1,4 +1,4 @@
-document.getElementById("submit-button").addEventListener("click", ChangeUserDetails);
+document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
 
 windows.onload = async function LoadUserDetails() {
     try {
