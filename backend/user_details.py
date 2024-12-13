@@ -57,7 +57,7 @@ def user_details_change_user_data():
     phone = data.get('phone')
     email = data.get('email')
     bir = data.get('bir')
-    gender = data.get('gender')
+    gender = data.get('gender').upper()[0]
 
     cur.execute(
         """

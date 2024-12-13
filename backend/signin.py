@@ -19,7 +19,7 @@ def signin_signin():
     phone = data.get('phone')
     email = data.get('email')
     bdate = data.get('bdate')
-    gender = data.get('gender')[0]
+    gender = data.get('gender').upper()[0]
     print(bdate)
     cur.execute(
         '''
