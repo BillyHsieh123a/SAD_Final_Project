@@ -5,8 +5,11 @@ document.querySelectorAll(".save-change").forEach((button) => {
     });
 });
 
+window.onload = () => {
+    LoadUserName();
+    LoadOrders("p");
+};
 
-window.onload = LoadOrders("p");
  
 //     try {
         
@@ -51,32 +54,32 @@ async function LoadOrders(status) {
 }
 
 function RenderOrders(orders) {
-    const ordersContainer = document.getElementById("order-list"); // 假設你有一個容器來顯示訂單
+    const ordersContainer = document.getElementById("order-list"); // 容器來顯示訂單
     ordersContainer.innerHTML = ""; // 清空舊內容
 
     orders.forEach(order => {
         const orderElement = document.createElement("div");
         orderElement.classList.add("order-card");
         orderElement.innerHTML = `
-            <img src="{{url_for('static', filename='${order.path}')}}" alt="${order.name}">
+            <img src="/static/${order.path}" alt="${order.name}">
             <div class="order-details">
-                <p>${order.order_id}</p>
+                <p>Order ID: ${order.order_id}</p>
                 <h2>${order.name}</h2>
-                <p>size: ${order.size}</p>
-                <p>color: ${order.color}</p>
-                <p>order date: ${order.order_date}</p>
-                <p>ideal received date: ${order.ideal_rcv_date}</p>
-                <p>price: ${order.price}</p>
-                <p>purchase quantity: ${order.purchase_qty}</p>
+                <p>Size: ${order.size}</p>
+                <p>Color: ${order.color}</p>
+                <p>Order Date: ${order.order_date}</p>
+                <p>Ideal Received Date: ${order.ideal_rcv_date}</p>
+                <p>Price: ${order.price}</p>
+                <p>Purchase Quantity: ${order.purchase_qty}</p>
                 <p class="price">${order.sub_total}</p>
-                <!-- 隱藏的內文 -->
-                <div id="full-details">
-                <p>payment type: ${order.payment_type}</p>
-                <p>shipping fee: ${order.shipping_fee}</p>
-                <p>description: ${order.description}</p>
+                <div id="full-details" style="display: none;">
+                    <p>Payment Type: ${order.payment_type}</p>
+                    <p>Shipping Fee: ${order.shipping_fee}</p>
+                    <p>Description: ${order.description}</p>
                 </div>
                 <button class="more-details">More Details</button>
             </div>
         `;
+        ordersContainer.appendChild(orderElement);
     });
 }

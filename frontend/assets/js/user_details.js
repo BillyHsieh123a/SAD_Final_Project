@@ -1,6 +1,8 @@
+window.addEventListener("load", LoadUserName);
+window.addEventListener("load", LoadUserDetails);
 document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
 
-windows.onload = async function LoadUserDetails() {
+async function LoadUserDetails() {
     try {
         const response = await fetch(`${serverURL}/user_details_load_user_data?user_id=${get_user_id()}`, {
             method: 'GET',
