@@ -248,13 +248,14 @@ async function checkout() {
             body: JSON.stringify(data)  // Convert the data to JSON format
         });
 
+        const result = await response.json();
         // Check if the response is successful
         if (response.ok) {
-            const result = await response.json();
             console.log(result.order_id);  // Log the success message from the server
             window.location.href = `ordered?order_id=${encodeURIComponent(result.order_id)}`;
         } else {
             console.error('Failed to process checkout:', response.status, response.statusText);
+            alert(`Failed to process checkout: ${result.error}`);
         }
     } catch (error) {
         console.error('Error during checkout:', error);

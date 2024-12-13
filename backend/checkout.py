@@ -68,36 +68,101 @@ def checkout_():
 
     address = data.get('address')
 
-    # add the order into "order", assume order_id will add by dbms
-    cur.execute(
-        """
-        INSERT INTO public."order" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
-        VALUES (%s, %s, %s, %s, %s, NOW(), NOW() + INTERVAL '3 days')
-        RETURNING order_id
-        """,
-        (user_id, sub_total, shipping_fee, payment_type, address)
-    )
-    order_id = cur.fetchone()[0]
-    # print("090909")
+    
+    try:
+        # get items in "bag" and add them into "order_contains", then delete them from "bag"
+        cur.execute(
+            """
+            WITH moved_data AS (
+                SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
+                FROM bag
+                WHERE bag.user_id = %s
+            ),
+            insufficient_stock AS (
+                SELECT ccs.clothes_id, ccs.color, ccs.size
+                FROM public."clothes_color_size" ccs
+                JOIN moved_data ON ccs.clothes_id = moved_data.clothes_id 
+                    AND ccs.color = moved_data.color 
+                    AND ccs.size = moved_data.size
+                WHERE ccs.stock_qty < moved_data.purchase_qty
+            )
 
-    # get items in "bag" and add them into "order_contains", then delete them from "bag"
-    cur.execute(
-        """
-        WITH moved_data AS (
-            SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
-            FROM bag
-            WHERE bag.user_id = %s
+            SELECT 1
+            FROM insufficient_stock
+            LIMIT 1;
+            """,
+            (user_id,)
         )
-        INSERT INTO public."order_contains" (order_id, clothes_id, color, size, purchase_qty)
-        SELECT %s, clothes_id, color, size, purchase_qty
-        FROM moved_data;
 
-        DELETE FROM bag
-        WHERE user_id = %s;
-        """,
-        (user_id, order_id, user_id)
-    )
-    # print("1234124132")
+        if cur.fetchone() is not None:
+            # If there are rows in `insufficient_stock`, rollback the transaction
+            raise Exception("Insufficient stock for one or more items.")
+        
+        # add the order into "order", assume order_id will add by dbms
+        cur.execute(
+            """
+            INSERT INTO public."order" (user_id, sub_total, shipping_fee, payment_type, address, order_date, ideal_rcv_date)
+            VALUES (%s, %s, %s, %s, %s, NOW(), NOW() + INTERVAL '3 days')
+            RETURNING order_id
+            """,
+            (user_id, sub_total, shipping_fee, payment_type, address)
+        )
+        order_id = cur.fetchone()[0]
 
-    psql_conn.commit()
-    return jsonify({"order_id": order_id})
+        cur.execute(
+            """
+            INSERT INTO public."order_status_record" (order_id, status, status_date, status_description)
+            VALUES (%s, %s, NOW(), %s)
+            RETURNING order_id
+            """,
+            (order_id, 'I', "In Progress")
+        )
+
+        cur.execute(
+            """
+            WITH moved_data AS (
+                SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
+                FROM bag
+                WHERE bag.user_id = %s
+            )
+            UPDATE public."clothes_color_size"
+            SET stock_qty = stock_qty - moved_data.purchase_qty
+            FROM moved_data
+            WHERE public."clothes_color_size".clothes_id = moved_data.clothes_id
+            AND public."clothes_color_size".color = moved_data.color
+            AND public."clothes_color_size".size = moved_data.size
+            """,
+            (user_id,)
+        )
+
+        cur.execute(
+            """
+            WITH moved_data AS (
+                SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
+                FROM bag
+                WHERE bag.user_id = %s
+            )
+            INSERT INTO public."order_contains" (order_id, clothes_id, color, "size", purchase_qty)
+            SELECT %s, clothes_id, color, "size", purchase_qty
+            FROM moved_data;
+            """,
+            (user_id, order_id)
+        )
+
+        cur.execute(
+            """
+            DELETE FROM bag
+            WHERE user_id = %s;
+            """,
+            (user_id,)
+        )
+
+        psql_conn.commit()
+        return jsonify({"order_id": order_id}), 200
+    
+    except Exception as e:
+        # Rollback the transaction in case of errors
+        psql_conn.rollback()
+        return jsonify({"error": f"{e}"}), 500
+    
+    

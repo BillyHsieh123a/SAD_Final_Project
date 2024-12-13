@@ -147,5 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 初始化購物車畫面
 renderCart();
 document.getElementById("checkout-btn").addEventListener("click", () => {
-  window.location.href = "checkout"; // 這裡將導向結帳頁面
+    if(cartItems.length != 0){
+        window.location.href = "checkout"; // 這裡將導向結帳頁面
+    }
 });

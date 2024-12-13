@@ -16,24 +16,16 @@ def user_orders_load_orders():
     
     cur.execute(
         '''
-        WITH LatestStatus AS (
-            SELECT order_id, MAX(status_date) AS latest_status_date
-            FROM public."order_status_record"
-            WHERE status = %s
-            GROUP BY order_id
-        )
-        SELECT o.order_id, o.sub_total, o.shipping_fee, o.payment_type, o.address, o.order_date, o.ideal_rcv_date, oc.color, oc.size, oc.purchase_qty
+        SELECT o.order_id, o.sub_total, o.shipping_fee, o.payment_type, o.address, o.order_date, o.ideal_rcv_date, oc.color, oc.size, oc.purchase_qty, c.name, c.price, c.description, i.path
         FROM public."order" AS o
         JOIN public."order_contains" AS oc ON o.order_id = oc.order_id
-        JOIN public."order_status_record" AS osr ON o.order_id = osr.order_id 
-            AND osr.status_date = (
-                SELECT latest_status_date 
-                FROM LatestStatus 
-                WHERE LatestStatus.order_id = o.order_id
-            )
+        JOIN public."order_status_record" AS osr ON o.order_id = osr.order_id
+        JOIN public."clothes" AS c ON oc.clothes_id = c.clothes_id
+        JOIN public."clothes_color" AS cc ON oc.clothes_id = cc.clothes_id AND oc.color = cc.color
+        JOIN public."image" AS i ON cc.image_filename = i.filename
         WHERE o.user_id = %s AND osr.status = %s;
         ''',
-        (status, user_id, status)
+        (user_id, status)
     )
 
     all_order_data = cur.fetchall()
@@ -49,7 +41,11 @@ def user_orders_load_orders():
             "ideal_rcv_date": order[6], 
             "color": order[7], 
             "size": order[8],
-            "purchase_qty": order[9]
+            "purchase_qty": order[9],
+            "name": order[10],
+            "price": order[11], 
+            "description": order[12], 
+            "path": url_for("static", filename='images/' + order[13])
         }
         update_all_order_data.append(new_cloth)
     # print(update_all_clothes_in_bag_data)
