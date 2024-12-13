@@ -5,7 +5,7 @@ signin = Blueprint("signin", __name__)
 
 # return cloth name, price, image url, cloth_id, color
 @signin.route('/signin_', methods=['POST'])
-def signin():
+def signin_signin():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
         cur = psql_conn.cursor()
@@ -20,7 +20,7 @@ def signin():
     email = data.get('email')
     bdate = data.get('bdate')
     gender = data.get('gender')
-
+    print(bdate)
     cur.execute(
         '''
         INSERT INTO public."user" (fname, lname, password, phone, email, bdate, gender, role)

@@ -11,6 +11,8 @@ from bag import bag
 from checkout import checkout
 from favorite import favorite
 from ordered import ordered
+from signin import signin
+
 from page_serve import page_serve
 
 serverURL = "http://127.0.0.1:5000"
@@ -26,6 +28,7 @@ app.register_blueprint(checkout)
 app.register_blueprint(favorite)
 app.register_blueprint(ordered)
 app.register_blueprint(item)
+app.register_blueprint(signin)
 # app.register_blueprint(try_on)
 
 

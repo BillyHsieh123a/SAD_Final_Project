@@ -1,3 +1,6 @@
+document.getElementById("submit-button").addEventListener("click", SignIn);
+
+
 async function SignIn(fname, lname, phone, email, bdate, gender, password) {
     const data = {
         fname: fname,
