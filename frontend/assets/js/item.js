@@ -27,7 +27,7 @@ document.getElementById("add-to-bag").addEventListener("click", function () {
     const selectedNum = document.getElementById("num").value;
     
     // Pass the selected options to the function
-    addItemToBag(productName, productClothID, selectedColor, selectedSize, selectedNum);
+    addItemToBag(productClothID, selectedColor, selectedSize, selectedNum);
 });
 
 document.getElementById("add-to-favorite").addEventListener("click", function () {
@@ -35,16 +35,17 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
     const selectedColor = document.getElementById("color").value;
 
     // Pass the selected options to the function
-    addItemToFavorite(productName, productClothID, selectedColor);
+    addItemToFavorite(productClothID, selectedColor);
 });
 
-function addItemToBag(name, clothes_id, color, size, quantity) {
+function addItemToBag(clothes_id, color, size, quantity) {
     fetch(`/add-to-bag`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            user_id: get_user_id(),
             clothes_id: clothes_id,
             color: color[0].toUpperCase(),
             size: size,
@@ -70,15 +71,16 @@ function addItemToBag(name, clothes_id, color, size, quantity) {
     });
 }
 
-function addItemToFavorite(name, clothes_id, color) {
+function addItemToFavorite(clothes_id, color) {
     fetch(`/add-to-favorite`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            user_id: get_user_id(),
             clothes_id: clothes_id,
-            color: color
+            color: color[0].toUpperCase()
         })
     })
     .then(response => {
@@ -90,9 +92,9 @@ function addItemToFavorite(name, clothes_id, color) {
     })
     .then(data => {
         if(data.success == -1)
-            alert(`You already added ${name} (${color}) into your favorites!`);
+            alert(`You already added (${color}) into your favorites!`);
         else if(data.success == 0)
-            alert(`${name} (${color}) has been added to your favorites!`);
+            alert(`$ (${color}) has been added to your favorites!`);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -105,17 +107,6 @@ document.getElementById("try-on").addEventListener("click", function () {
     // Redirect to the try-on page
     window.location.href = "try-on";
 });
-
-// Handle "Add to Favorite" button (heart icon)
-document.getElementById("add-to-favorite").addEventListener("click", function () {
-    this.classList.toggle("active");  // Toggle the heart icon (favorite or not)
-    if (this.classList.contains("active")) {
-        // alert(`${productName} has been added to your favorites.`);
-    } else {
-        alert(`${productName} has been removed from your favorites.`);
-    }
-});
-
 
 // Get the Go Back button
 const goBackButton = document.querySelector(".go-back-btn");
