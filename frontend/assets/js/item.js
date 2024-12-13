@@ -38,9 +38,6 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
     addItemToFavorite(productName, productClothID, selectedColor);
 });
 
-
-
-
 function addItemToBag(name, clothes_id, color, size, quantity) {
     fetch(`/add-to-bag`, {
         method: 'POST',
