@@ -115,7 +115,7 @@ def checkout_():
             VALUES (%s, %s, NOW(), %s)
             RETURNING order_id
             """,
-            (order_id, 'I', "In Progress")
+            (order_id, 'p', "In Progress")
         )
 
         cur.execute(
