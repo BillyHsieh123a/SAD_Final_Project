@@ -24,7 +24,16 @@ async function UserDetails() {
     }
 };
 
-async function UserDetails(fname, lname, phone, email, bdate, gender) {
+async function UserDetails() {
+
+    const fname = document.getElementById('first-name').value.trim();
+    const lname = document.getElementById('last-name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const bdate = document.getElementById('birthday').value.trim();
+    const gender = document.getElementById('gender').value.trim();
+    // const password = document.getElementById('password').value.trim();
+
     const data = {
         fname: fname,
         lname: lname,
