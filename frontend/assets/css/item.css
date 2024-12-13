@@ -47,6 +47,7 @@
     justify-content: center; /* Center vertically */
     text-align: center; /* Align text inside */
     padding: 10px;
+    padding-bottom: 50px;
 }
 
 .product-options label {
