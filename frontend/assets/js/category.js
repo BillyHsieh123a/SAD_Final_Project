@@ -109,7 +109,7 @@ function updateCategoryButtons() {
     categoryButtons.forEach(button => button.classList.add("hidden"));
 
     // Get category buttons for the selected gender
-    const genderCategories = selectedGender === 'woman' ? ['tops', 'bottoms', 'outerwear', 'dresses'] : ['tops', 'bottoms', 'outerwear', 'activewear'];
+    const genderCategories = selectedGender === 'woman' ? ['all', 'tops', 'bottoms', 'outerwear', 'dresses'] : ['all', 'tops', 'bottoms', 'outerwear', 'activewear'];
 
     // Show only the categories relevant to the selected gender
     genderCategories.forEach(category => {
@@ -165,8 +165,7 @@ function displayProducts() {
     if (selectedGender) {
         const genderProducts = products[selectedGender];
 
-        // If category is selected, filter by category
-        if (selectedCategory && genderProducts[selectedCategory]) {
+        if (selectedCategory != 'all' && selectedCategory && genderProducts[selectedCategory]) {
             const filteredProducts = genderProducts[selectedCategory].filter(product => {
                 const searchText = searchInput.value.toLowerCase();
                 return product.name.toLowerCase().includes(searchText);

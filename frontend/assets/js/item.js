@@ -47,7 +47,7 @@ function addItemToBag(clothes_id, color, size, quantity) {
         body: JSON.stringify({
             user_id: get_user_id(),
             clothes_id: clothes_id,
-            color: color[0].toUpperCase(),
+            color: color.toUpperCase(),
             size: size,
             quantity: quantity
         })
@@ -80,7 +80,7 @@ function addItemToFavorite(clothes_id, color) {
         body: JSON.stringify({
             user_id: get_user_id(),
             clothes_id: clothes_id,
-            color: color[0].toUpperCase()
+            color: color.toUpperCase()
         })
     })
     .then(response => {
