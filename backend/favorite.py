@@ -17,7 +17,7 @@ def favorite_load_favorite_clothes():
         '''
         SELECT f.clothes_id, cl.name, cl.price, i.path, f.color
         FROM favorite AS f
-        JOIN clothes_color AS cc ON f.clothes_id = cc.clothes_id
+        JOIN clothes_color AS cc ON f.clothes_id = cc.clothes_id AND f.color = cc.color
         JOIN image AS i ON cc.image_filename = i.filename
         JOIN clothes AS cl ON f.clothes_id = cl.clothes_id
         WHERE f.user_id = %s

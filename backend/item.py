@@ -42,7 +42,10 @@ def add_item_to_favorite():
     user_id = session.get("user_id")
     clothes_id = request.json['clothes_id']
     color = request.json['color']
+    print(user_id)
+    print(clothes_id)
     print(color)
+    
     
     try:
         cur = get_psql_conn().cursor()
