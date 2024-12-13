@@ -1,23 +1,32 @@
-document.getElementById('sign-up-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // 防止表單默認提交
-
-    let formData = new FormData(this);
-
-    fetch('your-action-url', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.success) {
-            alert('Registration successful!');
-        } else {
-            alert('Registration failed: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred during registration.');
-    });
-});
+async function SignIn(fname, lname, phone, email, bdate, gender, password) {
+    const data = {
+        fname: fname,
+        lname: lname,
+        phone: phone,
+        email: email,
+        bdate: bdate,
+        gender: gender,
+        password: password
+    };
+  
+    try {
+        const response = await fetch(`${serverURL}/signin_`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)  // Send the data in the request body as JSON
+        });
+  
+        // Check if the response is successful
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message); // Output: "successfully deleted!"
+        } 
+    //     else {
+    //         console.error('Failed to sign up:', response.status, response.statusText);
+    //     }
+    } catch (error) {
+        // console.error('Error:', error);
+    }
+  }
