@@ -1,7 +1,14 @@
 document.getElementById("submit-button").addEventListener("click", SignIn);
 
+const fname = document.getElementById('first-name').value.trim();
+const lname = document.getElementById('last-name').value.trim();
+const phone = document.getElementById('phone').value.trim();
+const email = document.getElementById('email').value.trim();
+const bdate = document.getElementById('birthday').value.trim();
+const gender = document.getElementById('gender').value.trim();
+const password = document.getElementById('password').value.trim();
 
-async function SignIn(fname, lname, phone, email, bdate, gender, password) {
+async function SignIn() {
     const data = {
         fname: fname,
         lname: lname,
