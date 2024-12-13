@@ -29,7 +29,6 @@ def add_item_to_bag():
             SELECT stock_qty
             FROM CLOTHES_COLOR_SIZE
             WHERE clothes_id = %s AND color = %s AND size = %s
-            FOR UPDATE
         """, [clothes_id, color, size])
         remaining_qty = cur.fetchone()[0]
         if remaining_qty < quantity:  # duplicate BAG entry
@@ -40,11 +39,6 @@ def add_item_to_bag():
             INSERT INTO BAG
             VALUES(%s, %s, %s, %s, %s)
         """, [user_id, clothes_id, color, size, quantity])
-        cur.execute("""
-            UPDATE CLOTHES_COLOR_SIZE
-            SET stock_qty = stock_qty - %s
-            WHERE clothes_id = %s AND color = %s AND size = %s
-        """, [quantity, clothes_id, color, size])
         get_psql_conn().commit()
         
         return jsonify({"success": 0}), 200

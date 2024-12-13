@@ -65,13 +65,12 @@ cartItems.forEach((item) => {
 subtotalElement.textContent = subtotal;
 }
 
-async function deleteItemFromBag(user_id_d, clothes_id, color, size, quantity) {
+async function deleteItemFromBag(user_id_d, clothes_id, color, size) {
   const data = {
       user_id: user_id_d,
       clothes_id: clothes_id,
       color: color,
-      size: size,
-      quantity: quantity
+      size: size
   };
 
   try {
@@ -101,8 +100,7 @@ if (e.target.classList.contains("remove-btn")) {
   const id = parseInt(e.target.dataset.id);
   const index = cartItems.findIndex((item) => item.id === id);
   if (index !== -1) {
-    deleteItemFromBag(get_user_id(), cartItems[index].id, cartItems[index].color,
-        cartItems[index].size, cartItems[index].quantity);
+    deleteItemFromBag(get_user_id(), cartItems[index].id, cartItems[index].color, cartItems[index].size);
     cartItems.splice(index, 1); // 移除商品
     renderCart();
   }

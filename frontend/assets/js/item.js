@@ -54,11 +54,11 @@ function addItemToBag() {
         return response.json();
     })
     .then(data => {
-        if(data.success == -2)  // insufficient stock
+        if(data.success === -2)  // insufficient stock
             alert(`${productName} (${color}, ${size}) has only ${data.quantity} stocks remaining. Sorry :(`);
-        else if(data.success == -1)  // duplicate bag add
+        else if(data.success === -1)  // duplicate bag add
             alert(`You already added ${productName} (${color}, ${size}) into your bag!`);
-        else if(data.success == 0)
+        else if(data.success === 0)
             alert(`${productName} (${color}, ${size}) has been added to your bag!`);
     })
     .catch(error => {
@@ -87,9 +87,9 @@ function addItemToFavorite(clothes_id, color) {
         return response.json();
     })
     .then(data => {
-        if(data.success == -1)
+        if(data.success === -1)
             alert(`You already added ${productName} (${color}) into your favorites!`);
-        else if(data.success == 0)
+        else if(data.success === 0)
             alert(`${productName} (${color}) has been added to your favorites!`);
     })
     .catch(error => {
