@@ -58,7 +58,7 @@
     width: 45vw;  /* Adjust the width as needed */
 }
 
-.product-color select, .product-size, .product-num select {
+.product-color select, .product-size select, .product-num select {
     width: 100%;  /* Make the dropdown take the full width of the container */
     padding: 8px;  /* Optional: Add padding for better spacing */
 }
