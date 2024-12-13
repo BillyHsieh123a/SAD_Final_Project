@@ -87,7 +87,7 @@ def add_item_to_favorite():
         return jsonify({"error": str(e)}), 500
 
 
-@item.post('/get-clothes-colors')
+@item.post('/get-clothes-colors-descr')
 def get_clothes_colors():
     clothes_id = request.json['clothes_id']
     
@@ -99,8 +99,18 @@ def get_clothes_colors():
             WHERE clothes_id = %s
         """, [clothes_id])
         get_psql_conn().commit()
+        colors = cur.fetchall()
         
-        return jsonify({"colors": cur.fetchall()}), 200
+        cur.execute("""
+            SELECT description
+            FROM CLOTHES
+            WHERE clothes_id = %s
+        """, [clothes_id])
+        get_psql_conn().commit()
+        descr = cur.fetchone()[0]
+        
+        return jsonify({"colors": cur.fetchall(),
+                            "descr": descr}), 200
     except Exception as e:
         get_psql_conn().rollback()
         return jsonify({"error": str(e)}), 500

@@ -122,11 +122,11 @@ const colorvalColornameMap = {
     "R": "Red"
 };
 
-document.addEventListener('DOMContentLoaded', getClothesColors);
-function getClothesColors(){
+document.addEventListener('DOMContentLoaded', getClothesColorsAndDescription);
+function getClothesColorsAndDescription(){
     colorSelect.innerText = '';
 
-    fetch(`/get-clothes-colors`, {
+    fetch(`/get-clothes-colors-descr`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -151,6 +151,7 @@ function getClothesColors(){
                 option.selected = true;
             colorSelect.appendChild(option);
         }
+        document.getElementById("product-description").innerText = data.descr;
 
         getClothesSizes();  // after getting colors, sizes needed to be fetched once
     })
