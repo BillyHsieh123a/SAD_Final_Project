@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (wButton) {
       wButton.addEventListener("click", function() {
           console.log("女性按鈕被點擊");
-          window.location.href = `category.html?gender=woman`;  
+          window.location.href = `category`;  
       });
   } else {
       console.error("找不到女性性別按鈕");
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mButton) {
       mButton.addEventListener("click", function() {
           console.log("男性按鈕被點擊");
-          window.location.href = `category.html?gender=man`;
+          window.location.href = `category`;
       });
   } else {
       console.error("找不到男性性別按鈕");

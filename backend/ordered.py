@@ -5,7 +5,7 @@ ordered = Blueprint("ordered", __name__)
 
 @ordered.route('/ordered_', methods=['GET'])
 def get_order():
-    print("LLLLLL")
+    # print("LLLLLL")
     ordered_id = request.args.get('ordered_id')
 
     if not ordered_id:
@@ -23,7 +23,7 @@ def get_order():
         cursor.execute(query, (ordered_id,))
         result = cursor.fetchone()
 
-        print(f"Query result: {result}")  # Print the result
+        # print(f"Query result: {result}")  # Print the result
 
         if not result:
             return jsonify({"error": "Order not found"}), 404
@@ -35,7 +35,7 @@ def get_order():
             "address": result[1] if result[1] else "No address provided",  # Handle empty address,
         }
 
-        print(f"Order data: {order_data}")  # Print the order data
+        # print(f"Order data: {order_data}")  # Print the order data
 
         return jsonify(order_data), 200
 
