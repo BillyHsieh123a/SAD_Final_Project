@@ -46,6 +46,7 @@
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     text-align: center; /* Align text inside */
+    padding: 10px;
 }
 
 .product-options label {
@@ -54,15 +55,29 @@
     width: 100%; /* Makes sure the label spans the width of its container */
 }
 
-.product-color, .product-size, .product-num {
-    width: 45vw;  /* Adjust the width as needed */
+.product-color select, 
+.product-size select, 
+.product-num input {
+    width: 45vw;         /* Take full width of the container */
+    padding: 8px;        /* Ensure consistent padding */
+    border: 1px solid #ccc; /* Standardize border */
+    box-sizing: border-box; /* Include padding and border in the width/height calculation */
+    font-size: 16px;     /* Ensure the text size matches */
+    height: 40px;        /* Explicitly set height for consistency */
+    appearance: none;    /* Remove browser-specific styles */
 }
 
-.product-color select, .product-size select, .product-num select {
-    width: 100%;  /* Make the dropdown take the full width of the container */
-    padding: 8px;  /* Optional: Add padding for better spacing */
+/* Remove spinner buttons from number input */
+.product-num input::-webkit-outer-spin-button,
+.product-num input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
+/* Reset spinner styles for Firefox */
+.product-num input[type="number"] {
+    -moz-appearance: textfield;
+}
 
 .product-info {
     flex: 2;
