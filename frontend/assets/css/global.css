@@ -167,14 +167,14 @@ nav {
 
 .categories .category {
     font-family: Times New Roman;
-    background-color: #424242;
+    background-color: #555;
     color: #fff;
     border: none;
-    padding: 8px 15px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s;
     width: 100px;
+    height: 100%;
 }
 
 .categories .category:hover {
