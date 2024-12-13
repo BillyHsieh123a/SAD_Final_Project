@@ -4,6 +4,7 @@ const productName = urlParams.get('name');
 const productPrice = urlParams.get('price');
 const productImg = urlParams.get('img');
 const productClothID = urlParams.get('cloth_id');
+const productInitColor = urlParams.get('color');
 
 // Update HTML elements with product details
 document.getElementById("product-name").textContent = productName;
@@ -129,18 +130,53 @@ goBackButton.addEventListener("click", function () {
 });
 
 
+// when page is loaded, fetch colors from db
+var colorSelect = document.getElementById("color");
+document.addEventListener('DOMContentLoaded', getClothesColors);
+function getClothesColors(){
+    colorSelect.innerText = '';
 
-// when clothes color change, change image 
-selectedColor.addEventListener("change", changeClothesImage);
-function changeClothesImage(){
-    fetch(`/change-clothes-image`, {
-        method: 'GET',
+    fetch(`/get-clothes-colors`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            clothes_id: clothes_id,
-            color: selectedColor.value
+            clothes_id: productClothID
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {;
+        const colors = data.colors
+        for(var i = 0; i < colors.length; i++){
+            var option = document.createElement("option");
+            option.value = colors[i][0];
+            option.text = colors[i][0];
+            colorSelect.appendChild(option)
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+// when clothes color change, change image 
+colorSelect.addEventListener("change", changeClothesImage);
+function changeClothesImage(){
+    fetch(`/change-clothes-image`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            clothes_id: productClothID,
+            color: colorSelect.value
         })
     })
     .then(response => {
