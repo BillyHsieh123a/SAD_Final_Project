@@ -109,7 +109,7 @@ def get_clothes_colors():
         get_psql_conn().commit()
         descr = cur.fetchone()[0]
         
-        return jsonify({"colors": cur.fetchall(),
+        return jsonify({"colors": colors,
                             "descr": descr}), 200
     except Exception as e:
         get_psql_conn().rollback()
