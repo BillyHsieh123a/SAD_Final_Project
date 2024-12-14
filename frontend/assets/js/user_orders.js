@@ -61,7 +61,7 @@ function RenderOrders(orders) {
         const orderElement = document.createElement("div");
         orderElement.classList.add("order-card");
         orderElement.innerHTML = `
-            <img src="/static/${order.path}" alt="${order.name}">
+            <img src="..${order.path}" alt="${order.name}">
             <div class="order-details">
                 <p>Order ID: ${order.order_id}</p>
                 <h2>${order.name}</h2>
@@ -71,7 +71,7 @@ function RenderOrders(orders) {
                 <p>Ideal Received Date: ${order.ideal_rcv_date}</p>
                 <p>Price: ${order.price}</p>
                 <p>Purchase Quantity: ${order.purchase_qty}</p>
-                <p class="price">${order.sub_total}</p>
+                <p class="price">${order.sub_total} NTD</p>
                 <div id="full-details" style="display: none;">
                     <p>Payment Type: ${order.payment_type}</p>
                     <p>Shipping Fee: ${order.shipping_fee}</p>

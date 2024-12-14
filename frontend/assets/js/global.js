@@ -8,7 +8,10 @@ logoLink.addEventListener("click", function (event) {
     // Reset the selected gender, category, and search input
     selectedGender = null;
     selectedCategory = null;
-    searchInput.value = "";
+    // searchInput.value = "";
+    if (searchInput && typeof searchInput.value !== "undefined") {
+        searchInput.value = "";
+    }
 
     // Clear sessionStorage to reset filters
     sessionStorage.removeItem("filtersState");

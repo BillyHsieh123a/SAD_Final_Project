@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
-
+import datetime
 user_orders = Blueprint("user_orders", __name__)
 
 # return cloth name, price, image url, cloth_id, color
@@ -37,8 +37,8 @@ def user_orders_load_orders():
             "shipping_fee": order[2], 
             "payment_type": order[3], 
             "address": order[4], 
-            "order_date": order[5], 
-            "ideal_rcv_date": order[6], 
+            "order_date": order[5].strftime('%Y-%m-%d'), 
+            "ideal_rcv_date": order[6].strftime('%Y-%m-%d'), 
             "color": order[7], 
             "size": order[8],
             "purchase_qty": order[9],

@@ -145,22 +145,6 @@ body {
     background: #d9d9d9;
 }
 
-.user-info .for-40px-space { 
-    margin-left: 40px; 
-    font-size: 20px; 
-}
-
-.for-40px-space {
-    display: flex; /* Use Flexbox for horizontal alignment */
-    gap: 5px;
-    align-items: center; /* Vertically align text with h4 */
-  }
-
-.for-40px-space h4 {
-margin: 0; /* Remove default margins for h4 */
-display: inline; /* Ensure inline behavior */
-}
-
 .background-layer { 
     position: absolute; 
     width: 100%; 
