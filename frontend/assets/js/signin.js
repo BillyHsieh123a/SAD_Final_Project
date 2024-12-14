@@ -8,6 +8,7 @@ async function SignIn() {
     const bdate = document.getElementById('birthday').value.trim();
     const gender = document.getElementById('gender').value.trim();
     const password = document.getElementById('password').value.trim();
+    console.log(document.getElementById('birthday').value);
     const data = {
         fname: fname,
         lname: lname,

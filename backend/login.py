@@ -35,8 +35,8 @@ def handle_login():
     if len(rows):
         session["login"] = True
         session["user_id"] = rows[0][0]
-        session["fname"] = rows[0][1]
-        session["lname"] = rows[0][2]
+        session["user_fname"] = rows[0][1]
+        session["user_lname"] = rows[0][2]
         session["phone"] = rows[0][3]
         session["email"] = rows[0][4]
         session["bdate"] = rows[0][5]

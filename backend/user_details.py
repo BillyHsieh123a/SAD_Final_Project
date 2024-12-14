@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
+import datetime
 
 user_details = Blueprint("user_details", __name__)
 
@@ -32,7 +33,7 @@ def user_details_load_user_data():
         "lname": user_data[1], 
         "phone": user_data[2],
         "email": user_data[3],
-        "bdate": user_data[4],
+        "bdate": user_data[4].strftime('%Y-%m-%d'),
         "gender": user_data[5]
     }), 200
 

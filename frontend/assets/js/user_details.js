@@ -15,9 +15,8 @@ async function LoadUserDetails() {
         if (response.ok) {
             const result = await response.json();
             userinfo = result; // Set the result from the API into the products object
-            console.log(userinfo); // Log the response from Flask
-            // Initialize product display
-            displayProducts(userinfo);
+            // console.log(userinfo); // Log the response from Flask
+            console.log(userinfo.bdate)
             document.getElementById('first-name').value = userinfo.fname;
             document.getElementById('last-name').value = userinfo.lname; 
             document.getElementById('phone').value = userinfo.phone; 
@@ -33,8 +32,6 @@ async function LoadUserDetails() {
         // console.error('Error:', error);
     }
 };
-
-
 
 async function ChangeUserDetails() {
 

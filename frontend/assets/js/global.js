@@ -93,34 +93,20 @@ wrapIconWithLink(profileIcon, "user_account_base");
 wrapIconWithLink(likeIcon, "favorite");
 wrapIconWithLink(bagIcon, "bag");
 
-document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
+// document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
 
-async function LoadUserName() {
-    try {
-        const response = await fetch(`${serverURL}/user_account_base_load_user_data?user_id=${get_user_id()}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        // Check if the response is successful
-        if (response.ok) {
-            const result = await response.json();
-            userinfo = result; // Set the result from the API into the products object
-            console.log(userinfo); // Log the response from Flask
-            // Initialize product display
-            displayProducts(userinfo);
-            document.getElementById('first-name').value = userinfo.fname;
-            document.getElementById('last-name').value = userinfo.lname; 
-            document.getElementById('First').value = userinfo.fname.charAt(0).toUpperCase();
-            document.getElementById('Last').value = userinfo.lname.charAt(0).toUpperCase();
-        }
-        // } else {
-        //     console.error("Failed to fetch data:", response.status, response.statusText);
-        // }
-    } 
-    catch (error) {
-        // console.error('Error:', error);
-    }
+function LoadUserName() {
+    // console.log(get_user_id());
+    // console.log(get_user_fname());
+    // console.log(get_user_lname());
+    // console.log(get_phone());
+    // console.log(get_email());
+    // console.log(get_bdate());
+    // console.log(get_gender());
+    document.getElementById('first-name').value = get_user_fname();
+    console.log(document.getElementById('first-name').value);
+    document.getElementById('last-name').value = get_user_lname(); 
+    console.log(document.getElementById('last-name').value);
+    document.getElementById('First').value = get_user_fname().charAt(0).toUpperCase();
+    document.getElementById('Last').value = get_user_lname().charAt(0).toUpperCase();
 };
