@@ -48,16 +48,16 @@ function displayProducts(products) {
             <img src="${".." + product.img}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.price}</p>
-            <div class="trash-icon" onclick="removeProduct(${product.id})">&#128465</div>
-            <button class="add-to-bag" onclick="addToBag(${product.id})">Add to Bag</button>
+            <div class="trash-icon" onclick="removeProduct(${product.id}, '${product.color}')">&#128465</div>
+            <button class="add-to-bag" onclick="addToBag(${product.id}, '${product.color}')">Add to Bag</button>
         `;
 
         container.appendChild(card);
     });
 }
 
-function addToBag(productId) {
-    const product = products.find(p => p.id === productId);
+function addToBag(productId, productColor) {
+    const product = products.find(p => (p.id === productId && p.color === productColor));
     if (product) {
         const productName = product.name;
         const productPrice = product.price;
@@ -99,8 +99,8 @@ async function deleteItemFromFavorite(user_id_d, clothes_id, color) {
   }
 
 // Function to remove product from favorites
-function removeProduct(id) {
-    const index = products.findIndex((product) => product.id === id);
+function removeProduct(id, color) {
+    const index = products.findIndex((p) => (p.id === id && p.color === color));
     if (index !== -1) {
         deleteItemFromFavorite(get_user_id(), products[index].id, products[index].color)
         products.splice(index, 1);

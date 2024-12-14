@@ -76,7 +76,7 @@ def checkout_():
             WITH moved_data AS (
                 SELECT bag.clothes_id, bag.color, bag.size, bag.purchase_qty
                 FROM bag
-                WHERE bag.user_id = %s
+                WHERE bag.user_id = %s FOR UPDATE
             ),
             insufficient_stock AS (
                 SELECT ccs.clothes_id, ccs.color, ccs.size

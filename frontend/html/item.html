@@ -48,37 +48,34 @@
                     <p id="product-price"></p>
                 </div>
 
-                <!-- Color and Size Options -->
-                <div class="product-options">
-                    <div class="product-color">
-                        <label for="color">Color:</label>
-                        <select id="color"></select>
+                <form action="javascript: addItemToBag();"> <!-- Included in form to enforce required and min max constraints -->
+                    <!-- Color and Size Options -->
+                    <div class="product-options">
+                        <div class="product-color">
+                            <label for="color">Color:</label>
+                            <select id="color" required></select>
+                        </div>
+                        <div class="product-size">
+                            <label for="size">Size:</label>
+                            <select id="size" required></select>
+                        </div>
+                        <div class="product-num">
+                            <label for="num">Num:</label>
+                            <input type="number" inputmode="numeric" id="num" min="1" max="100" required/>
+                        </div>
                     </div>
-                    <div class="product-size">
-                        <label for="size">Size:</label>
-                        <select id="size"></select>
-                    </div>
-                    <div class="product-num">
-                        <label for="num">Num:</label>
-                        <!-- <select id="num">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select> -->
-                        <input type="number" inputmode="numeric" id="num" min="1" max="100"/>
-                    </div>
-                </div>
 
-                <!-- Action Buttons -->
-                <div class="product-actions-section">
-                    <div class="product-actions">
-                        <button class="btn" id="add-to-bag">Add to Bag</button>
-                        <button class="btn" id="try-on">Try On</button>
-                        <button class="btn" id="add-to-favorite">
-                            <i class="fas fa-heart"></i>
-                        </button>
+                    <!-- Action Buttons -->
+                    <div class="product-actions-section">
+                        <div class="product-actions">
+                            <button class="btn" id="add-to-bag" type="submit">Add to Bag</button>
+                            <button class="btn" id="try-on" type="button">Try On</button>
+                            <button class="btn" id="add-to-favorite" type="button">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <div class="product-description-section">
                     <div class="product-description">
                         <h3>Product Details</h3>

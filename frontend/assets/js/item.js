@@ -20,16 +20,6 @@ productImgElement.style.width = "500px";  // Set the width to 400px
 productImgElement.style.height = "600px";  // Set the height to 600px
 productImgElement.style.objectFit = "cover";  // Crop and fill the box
 
-document.getElementById("add-to-bag").addEventListener("click", function () {
-    // Get the selected color and size
-    const selectedColor = document.getElementById("color").value;
-    const selectedSize = document.getElementById("size").value;
-    const selectedNum = document.getElementById("num").value;
-    
-    // Pass the selected options to the function
-    addItemToBag(productClothID, selectedColor, selectedSize, selectedNum);
-});
-
 document.getElementById("add-to-favorite").addEventListener("click", function () {
     // Get the selected color and size
     const selectedColor = document.getElementById("color").value;
@@ -38,7 +28,11 @@ document.getElementById("add-to-favorite").addEventListener("click", function ()
     addItemToFavorite(productClothID, selectedColor);
 });
 
-function addItemToBag(clothes_id, color, size, quantity) {
+function addItemToBag() {
+    const color = document.getElementById("color").value;
+    const size = document.getElementById("size").value;
+    const quantity = document.getElementById("num").value;
+
     fetch(`/add-to-bag`, {
         method: 'POST',
         headers: {
@@ -46,7 +40,7 @@ function addItemToBag(clothes_id, color, size, quantity) {
         },
         body: JSON.stringify({
             user_id: get_user_id(),
-            clothes_id: clothes_id,
+            clothes_id: productClothID,
             color: color.toUpperCase(),
             size: size,
             quantity: quantity
@@ -60,10 +54,12 @@ function addItemToBag(clothes_id, color, size, quantity) {
         return response.json();
     })
     .then(data => {
-        if(data.success == -1)
-            alert(`You already added ${name} (${color}, ${size}) into your bag!`);
-        else if(data.success == 0)
-            alert(`${name} (${color}, ${size}) has been added to your bag!`);
+        if(data.success === -2)  // insufficient stock
+            alert(`${productName} (${color}, ${size}) has only ${data.quantity} stocks remaining. Sorry :(`);
+        else if(data.success === -1)  // duplicate bag add
+            alert(`You already added ${productName} (${color}, ${size}) into your bag!`);
+        else if(data.success === 0)
+            alert(`${productName} (${color}, ${size}) has been added to your bag!`);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -91,10 +87,10 @@ function addItemToFavorite(clothes_id, color) {
         return response.json();
     })
     .then(data => {
-        if(data.success == -1)
-            alert(`You already added (${color}) into your favorites!`);
-        else if(data.success == 0)
-            alert(`$ (${color}) has been added to your favorites!`);
+        if(data.success === -1)
+            alert(`You already added ${productName} (${color}) into your favorites!`);
+        else if(data.success === 0)
+            alert(`${productName} (${color}) has been added to your favorites!`);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -120,11 +116,17 @@ goBackButton.addEventListener("click", function () {
 
 // when page is loaded, fetch colors from db
 var colorSelect = document.getElementById("color");
-document.addEventListener('DOMContentLoaded', getClothesColors);
-function getClothesColors(){
+const colorvalColornameMap = {
+    "B": "Blue", "G": "Green", "SM": "Smoke", "W": "White",
+    "BL": "Black", "BR": "Brown", "TA": "Tan", "GR": "Gray",
+    "R": "Red"
+};
+
+document.addEventListener('DOMContentLoaded', getClothesColorsAndDescription);
+function getClothesColorsAndDescription(){
     colorSelect.innerText = '';
 
-    fetch(`/get-clothes-colors`, {
+    fetch(`/get-clothes-colors-descr`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -144,9 +146,14 @@ function getClothesColors(){
         for(var i = 0; i < colors.length; i++){
             var option = document.createElement("option");
             option.value = colors[i][0];
-            option.text = colors[i][0];
-            colorSelect.appendChild(option)
+            option.text = colorvalColornameMap[colors[i][0]];
+            if(colors[i][0] === productInitColor)  // initially selected color
+                option.selected = true;
+            colorSelect.appendChild(option);
         }
+        document.getElementById("product-description").innerText = data.descr;
+
+        getClothesSizes();  // after getting colors, sizes needed to be fetched once
     })
     .catch(error => {
         console.error('Error:', error);
@@ -180,5 +187,41 @@ function changeClothesImage(){
     .catch(error => {
         console.error('Error:', error);
         // alert("An error occurred while loading clothes image.");
+    });
+}
+
+
+var sizeSelect = document.getElementById("size");
+colorSelect.addEventListener("change", getClothesSizes);
+function getClothesSizes(){
+    sizeSelect.innerText = '';
+
+    fetch(`/get-clothes-sizes`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            clothes_id: productClothID,
+            color: colorSelect.value
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const sizes = data.sizes
+        for(var i = 0; i < sizes.length; i++){
+            var option = document.createElement("option");
+            option.value = sizes[i];
+            option.text = sizes[i];
+            sizeSelect.appendChild(option);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 }
