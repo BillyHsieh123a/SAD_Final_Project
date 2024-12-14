@@ -1,6 +1,6 @@
 document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
 
-windows.onload = async function LoadUserDetails() {
+window.onload = async function LoadUserDetails() {
     try {
         const response = await fetch(`${serverURL}/user_details_load_user_data?user_id=${get_user_id()}`, {
             method: 'GET',
@@ -14,8 +14,7 @@ windows.onload = async function LoadUserDetails() {
             const result = await response.json();
             userinfo = result; // Set the result from the API into the products object
             console.log(userinfo); // Log the response from Flask
-            // Initialize product display
-            displayProducts(userinfo);
+            
             document.getElementById('first-name').value = userinfo.fname;
             document.getElementById('last-name').value = userinfo.lname; 
             document.getElementById('phone').value = userinfo.phone; 

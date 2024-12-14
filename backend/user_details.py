@@ -16,30 +16,24 @@ def user_details_load_user_data():
 
     cur.execute(
         '''
-        SELECT u.fname, u.lname, i.path, u.phone, u.email, u.bdate, u.gender, ui.upload_date
-        FROM user_image AS ui
-        JOIN "user" AS u ON ui.user_id = u.user_id
-        JOIN image AS i ON ui.image_filename = i.filename
-        WHERE ui.user_id = %s
-        ORDER BY ui.upload_date DESC
+        SELECT u.fname, u.lname, u.phone, u.email, u.bdate, u.gender
+        FROM public."user" AS u
+        WHERE u.user_id = %s
         LIMIT 1;
         ''',
         (user_id)
     )
 
     user_data = cur.fetchone()
-    new_user_data = list(user_data)
-    new_user_data[2] = url_for("static", filename='/images/' + user_data[2])
-
+    print(user_data)
     psql_conn.commit()
     return jsonify({
-        "fname": new_user_data[0],
-        "lname": new_user_data[1], 
-        "img": new_user_data[2],
-        "phone": new_user_data[3],
-        "email": new_user_data[4],
-        "bir": new_user_data[5],
-        "gender": new_user_data[6]
+        "fname": user_data[0],
+        "lname": user_data[1], 
+        "phone": user_data[2],
+        "email": user_data[3],
+        "bdate": user_data[4],
+        "gender": user_data[5]
     }), 200
 
 @user_details.route('/user_details_change_user_data', methods=['POST'])
@@ -56,7 +50,7 @@ def user_details_change_user_data():
     lname = data.get('lname')
     phone = data.get('phone')
     email = data.get('email')
-    bir = data.get('bir')
+    bir = data.get('bdate')
     gender = data.get('gender').upper()[0]
 
     cur.execute(

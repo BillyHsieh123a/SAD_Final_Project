@@ -12,6 +12,7 @@ from checkout import checkout
 from favorite import favorite
 from ordered import ordered
 from signin import signin
+from user_details import user_details
 
 from page_serve import page_serve
 
@@ -29,6 +30,7 @@ app.register_blueprint(favorite)
 app.register_blueprint(ordered)
 app.register_blueprint(item)
 app.register_blueprint(signin)
+app.register_blueprint(user_details)
 # app.register_blueprint(try_on)
 
 
