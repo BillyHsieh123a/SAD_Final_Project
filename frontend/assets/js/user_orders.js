@@ -31,11 +31,11 @@ window.onload = () => {
 
 async function LoadOrders(status) {
     try {
-        const userId = sessionStorage.getItem("user_id"); // 假設用 sessionStorage 儲存用戶 ID
-        if (!userId) {
-            console.error("User ID not found.");
-            return;
-        }
+        // const userId = get_user_id();
+        // if (!userId) {
+        //     console.error("User ID not found.");
+        //     return;
+        // }
 
         const response = await fetch(`/user_orders_load_orders?user_id=${get_user_id()}&status=${status}`, {
             method: 'GET',

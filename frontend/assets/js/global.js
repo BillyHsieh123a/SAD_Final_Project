@@ -103,10 +103,9 @@ function LoadUserName() {
     // console.log(get_email());
     // console.log(get_bdate());
     // console.log(get_gender());
-    document.getElementById('first-name').value = get_user_fname();
-    console.log(document.getElementById('first-name').value);
-    document.getElementById('last-name').value = get_user_lname(); 
-    console.log(document.getElementById('last-name').value);
-    document.getElementById('First').value = get_user_fname().charAt(0).toUpperCase();
-    document.getElementById('Last').value = get_user_lname().charAt(0).toUpperCase();
+    document.getElementById('first-name-big').innerText = get_user_fname();
+    document.getElementById('last-name-big').innerText = get_user_lname(); 
+    document.getElementById('First').innerText = get_user_fname().charAt(0).toUpperCase();
+    document.getElementById('Last').innerText = get_user_lname().charAt(0).toUpperCase();
+    console.log(document.getElementById('Last').innerText);
 };

@@ -34,7 +34,7 @@ def user_details_load_user_data():
         "phone": user_data[2],
         "email": user_data[3],
         "bdate": user_data[4].strftime('%Y-%m-%d'),
-        "gender": user_data[5]
+        "gender": 'male' if user_data[5] in ('M', 'm') else 'memale' if user_data[5] in ('F', 'f') else 'other'
     }), 200
 
 @user_details.route('/user_details_change_user_data', methods=['POST'])
@@ -57,7 +57,7 @@ def user_details_change_user_data():
     cur.execute(
         """
         UPDATE public."user"
-        SET fname = %s, lname = %s, phone = %s, email = %s, bir = %s, gender = %s
+        SET fname = %s, lname = %s, phone = %s, email = %s, bdate = %s, gender = %s
         WHERE user_id = %s
         """,
         (fname, lname, phone, email, bir, gender, user_id)

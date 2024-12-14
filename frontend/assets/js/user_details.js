@@ -44,6 +44,7 @@ async function ChangeUserDetails() {
     // const password = document.getElementById('password').value.trim();
 
     const data = {
+        user_id: get_user_id(),
         fname: fname,
         lname: lname,
         phone: phone,
@@ -72,6 +73,8 @@ async function ChangeUserDetails() {
             localStorage.setItem('email', email);
             localStorage.setItem('bdate', bdate);
             localStorage.setItem('gender', gender);
+            LoadUserDetails();
+            LoadUserName();
         } 
     //     else {
     //         console.error('Failed to sign up:', response.status, response.statusText);
