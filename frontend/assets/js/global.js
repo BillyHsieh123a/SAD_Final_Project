@@ -7,7 +7,7 @@ logoLink.addEventListener("click", function (event) {
 
     const currentPage = window.location.pathname;
     console.log(currentPage);
-    if (currentPage != '/user_orders' && currentPage != '/user_details' && currentPage != '/user_account_base' && currentPage != '/item'){
+    if (currentPage != '/user_orders' && currentPage != '/user_details' && currentPage != '/user_account_base' && currentPage != '/item' && currentPage != '/try-on'){
         // Reset the selected gender, category, and search input
         selectedGender = null;
         selectedCategory = null;
