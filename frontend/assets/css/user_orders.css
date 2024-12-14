@@ -104,12 +104,14 @@ body {
 }
 
 .content {
+    position: relative;
     flex-grow: 1;           /* 表單佔據剩餘空間 */
     width: 660px;       /* 表單最大寬度 */
-    background-color: #fff;
+    background-color: #f3f3f3;
     /* padding: 30px; */
     box-sizing: border-box;
     margin-top: 80px;
+    min-height: 100vh;
     /* padding: 10px 20px; */
     /* margin-inline: 10px 20px; */
 }
@@ -252,7 +254,7 @@ body {
 }
 
 .section h3 {
-    background-color: #fff;
+    /* background-color: #fff; */
     text-align: left;
     margin-bottom: 0px;
     font-size: 18px;
@@ -260,6 +262,8 @@ body {
 } 
 
 .section {
+    background-color: #fff;
+    position: sticky;
     padding: 10px 30px;
     display: block;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
@@ -331,9 +335,9 @@ body {
   }
    
   
-  .tab {
+  .tabs {
     flex: 1;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     border: 1px solid #ccc;
     background: #f9f9f9;
     text-align: center;
@@ -342,7 +346,7 @@ body {
     border-radius: 4px;
   }
   
-  .tab.active {
+  .tabs.active {
     background: #007bff;
     color: #fff;
     border-color: #007bff;
