@@ -13,7 +13,7 @@ from favorite import favorite
 from ordered import ordered
 from signin import signin
 from user_details import user_details
-
+from user_orders import user_orders
 from page_serve import page_serve
 
 serverURL = "http://127.0.0.1:5000"

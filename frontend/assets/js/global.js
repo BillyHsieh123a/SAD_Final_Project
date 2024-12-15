@@ -5,24 +5,32 @@ logoLink.addEventListener("click", function (event) {
     // Prevent default behavior of the link (navigation)
     event.preventDefault();
 
-    // Reset the selected gender, category, and search input
-    selectedGender = null;
-    selectedCategory = null;
-    searchInput.value = "";
+    const currentPage = window.location.pathname;
+    console.log(currentPage);
+    if (currentPage != '/user_orders' && currentPage != '/user_details' && currentPage != '/user_account_base' && currentPage != '/item' && currentPage != '/try-on'){
+        // Reset the selected gender, category, and search input
+        selectedGender = null;
+        selectedCategory = null;
+        // searchInput.value = "";
+        if (searchInput && typeof searchInput.value !== "undefined") {
+            searchInput.value = "";
+        }
 
-    // Clear sessionStorage to reset filters
-    sessionStorage.removeItem("filtersState");
+        // Clear sessionStorage to reset filters
+        sessionStorage.removeItem("filtersState");
 
-    // Remove active classes from gender and category buttons
-    navButtons.forEach(button => button.classList.remove("active"));
-    categoryButtons.forEach(button => button.classList.remove("active"));
+        // Remove active classes from gender and category buttons
+        navButtons.forEach(button => button.classList.remove("active"));
+        categoryButtons.forEach(button => button.classList.remove("active"));
 
-    // Hide category section and show the welcome picture
-    categoriesSection.classList.add("hidden");
-    toggleWelcomePicture();
+        // Hide category section and show the welcome picture
+        categoriesSection.classList.add("hidden");
+        toggleWelcomePicture();
 
-    // Reset the display of products (or show welcome message if no filters)
-    displayProducts();
+        // Reset the display of products (or show welcome message if no filters)
+        displayProducts();
+    }
+    window.location.href = 'category';
 });
 
 // Select the icons

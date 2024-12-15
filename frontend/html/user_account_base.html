@@ -19,13 +19,19 @@
         <div class="account-title">
             <h2>MY ACCOUNT</h2>
         </div>
+
+        <div class="icons">
+            <i class="fas fa-user" id="profile-icon"></i>
+            <i class="fas fa-heart" id="like-icon"></i>
+            <i class="fas fa-shopping-bag" id="bag-icon"></i>
+        </div>
     </header>
 
     <div class="main-container"> 
         <aside class="sidebar"> 
             <button class="user-info">
-                <div class="abbr"><h3 id="First"></h3><h3 id="Second"></h3></div> 
-                <div><span class="for-40px-space">Hi! <h2 id="first-name"></h2> <h2 id="last-name"></h2></span></div>
+                <div class="abbr"><h3 id="First"></h3><h3 id="Last"></h3></div> 
+                <div><span class="for-40px-space">Hi! <h4 id="first-name-big"></h4> <h4 id="last-name-big"></h4></span></div>
                 <span class="grey-rectangle1"></span>
                 <span class="grey-rectangle2"></span>
             </button> 
@@ -46,5 +52,7 @@
             <!-- </div>  -->
         </main> 
     </div>
+    <script src="{{url_for('static', filename='/js/global.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/user_account_base.js')}}"></script>
 </body>
 </html>

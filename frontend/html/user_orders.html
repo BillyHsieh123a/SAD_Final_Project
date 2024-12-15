@@ -19,6 +19,12 @@
         <div class="account-title">
             <h2>MY ACCOUNT</h2>
         </div>
+
+        <div class="icons">
+          <i class="fas fa-user" id="profile-icon"></i>
+          <i class="fas fa-heart" id="like-icon"></i>
+          <i class="fas fa-shopping-bag" id="bag-icon"></i>
+        </div>
     </header>
 
     <div class="main-container"> 
@@ -37,7 +43,7 @@
             </button>
         </aside> 
         
-        <div class="content">
+        <aside class="content">
             <div class="section">
                 <h3>MY ORDERS</h3>
                 <div class="note">Stay updated on the latest status of your orders.</div>
@@ -83,7 +89,7 @@
                 </div>
               </div> -->
             </div>
-          </div>
+          </aside>
     </div>
     <script src="{{url_for('static', filename='/js/global.js')}}"></script>
     <script src="{{url_for('static', filename='/js/user_orders.js')}}"></script>

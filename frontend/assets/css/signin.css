@@ -27,9 +27,9 @@ body {
 .header {
     background-color: #000;
     width: 100%;
-    padding: 15px 20px;
+    /* padding: 15px 20px; */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
@@ -43,15 +43,23 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
+    margin: 0;
+}
+
+.header .account-title {
+    margin: 0 auto; /* Center align the title */
+    text-align: center; /* Center text within this element */
+    width: 100%; /* Allow centering by taking up full width */
 }
 
 .header .account-title h2 {
     font-size: 20px;
-    margin: 0;
     text-transform: uppercase;
     text-align: center;
     color: #fff;
+    margin: 0;
 }
+
 
 .main-container {
     width: 100%;
