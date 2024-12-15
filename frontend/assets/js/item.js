@@ -100,8 +100,13 @@ function addItemToFavorite(clothes_id, color) {
 
 // Handle "Try On" button
 document.getElementById("try-on").addEventListener("click", function () {
+    const productImg = document.getElementById("product-img");
     // Redirect to the try-on page
-    window.location.href = "try-on";
+    var tryOnLink = `try-on?`
+    tryOnLink += `cloth_id=${productClothID}&`
+    tryOnLink += `color=${colorSelect.value}&`
+    tryOnLink += `img=${productImg.src}`
+    window.location.href = tryOnLink;
 });
 
 // Get the Go Back button
@@ -181,7 +186,7 @@ function changeClothesImage(){
         return response.json();
     })
     .then(data => {;
-        const productImg = document.getElementById("product-img");
+        var productImg = document.getElementById("product-img");
         productImg.src = data["image_src"];
     })
     .catch(error => {

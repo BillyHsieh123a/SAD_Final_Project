@@ -31,7 +31,7 @@ app.register_blueprint(ordered)
 app.register_blueprint(item)
 app.register_blueprint(signin)
 app.register_blueprint(user_details)
-# app.register_blueprint(try_on)
+app.register_blueprint(try_on)
 
 
 # Initialize the app and connect to the database.

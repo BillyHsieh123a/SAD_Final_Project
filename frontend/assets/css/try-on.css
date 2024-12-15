@@ -19,6 +19,14 @@ input[type="file"] {
     cursor: pointer;
 }
 
+button:disabled:hover, button:hover[disabled] {
+    background-color: #8f8f8f;
+}
+
+button:disabled, button[disabled] {
+    background-color: #8f8f8f;
+}
+
 #result-section {
     margin-top: 20px;
 }

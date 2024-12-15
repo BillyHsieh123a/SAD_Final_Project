@@ -18,10 +18,13 @@
     <main>
         <section class="try-on-section">
             <h2>Upload Your Image</h2>
-            <form id="try-on-form">
+            <form id="try-on-form" enctype="multipart/form-data">
                 <input type="file" id="upload-image" accept="image/*" required>
-                <button type="submit" class="btn">Upload & Try On</button>
+                <button type="submit" class="btn" id="tryon-submit-btn">Upload & Try On</button>
             </form>
+            <div id="processing-section" style="display: none;">
+                Processing...
+            </div>
             <div id="result-section" style="display: none;">
                 <h3>Result</h3>
                 <img id="processed-image" src="" alt="AI Processed Image">
