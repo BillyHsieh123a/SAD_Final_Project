@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
-from db import psql_conn
+from db import get_psql_conn
 import base64
 from dotenv import load_dotenv
 import os
@@ -7,6 +7,7 @@ import requests
 import json
 import jwt
 import time
+from datetime import datetime
 
 
 try_on = Blueprint("try_on", __name__)
@@ -58,6 +59,42 @@ def poll_task_status(authorization, task_id):
     return poll_res
 
 
+# save the generated try-on image on server
+def cache_image_on_server(result_image_src, user_id, clothes_id, color):
+    filename = f"u{user_id}_c{clothes_id}_cc{color}.png"
+    with open(f"../frontend/assets/images/tryon/{filename}", "wb") as f:
+        f.write(requests.get(result_image_src).content)
+    
+    cur = get_psql_conn().cursor()
+    cur.execute(
+        '''
+        SELECT image_filename
+        FROM TRY_ON
+        WHERE user_id = %s AND clothes_id = %s AND color = %s
+        FOR UPDATE
+        ''',
+        [user_id, clothes_id, color]
+    )
+    
+    if not len(cur.fetchall()):
+        cur.execute(
+            '''
+            INSERT INTO IMAGE
+            VALUES(%s, %s)
+            ''',
+            [filename, f"tryon/{filename}"]
+        )
+        
+        cur.execute(
+            '''
+            INSERT INTO TRY_ON
+            VALUES(%s, %s, %s, %s, %s)
+            ''',
+            [user_id, clothes_id, color, filename, datetime.now()]
+        )
+    get_psql_conn().commit()
+
+
 @try_on.post("/try-on")
 def try_on_clothes():
     try:
@@ -94,13 +131,47 @@ def try_on_clothes():
             time.sleep(1)
             poll_res = poll_task_status(authorization, task_id)
             poll_res_data = poll_res.json()
+            
             if poll_res_data["data"]["task_status"] == "succeed":
                 result_image_src = poll_res_data["data"]["task_result"]["images"][0]["url"]
+                cache_image_on_server(result_image_src, user_id, clothes_id, color)
                 return jsonify({"success": 1, "tryon_image": result_image_src})
             elif poll_res_data["data"]["task_status"] == "failed":
                 return jsonify({"error": "Image generation task failed"}), 500
         
         return jsonify({"error": "Image generation timed out"}), 504
     except Exception as e:
+        get_psql_conn().rollback()
         return jsonify({"error": str(e)}), 500
-    
+
+
+@try_on.post("/try-on-query-cache")
+def try_on_query_cache():
+    try:
+        user_id = session.get("user_id")
+        clothes_id = request.json["clothes_id"]
+        color = request.json["color"]
+        
+        cur = get_psql_conn().cursor()
+        cur.execute(
+            '''
+            SELECT path
+            FROM IMAGE AS I
+            JOIN TRY_ON AS TRO ON I.filename = TRO.image_filename
+            WHERE user_id = %s AND clothes_id = %s AND color = %s
+            ''',
+            [user_id, clothes_id, color]
+        )
+        get_psql_conn().commit()
+        
+        file_path_result = cur.fetchone()
+        if file_path_result:
+            img_path = "images/" + file_path_result[0]
+            return jsonify({"cached": 1, 
+                            "tryon_image": url_for("static", filename=img_path)}), 200
+        else:
+            return jsonify({"cached": 0}), 200
+    except Exception as e:
+        print(e)
+        get_psql_conn().rollback()
+        return jsonify({"error": str(e)}), 500

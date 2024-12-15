@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', getCachedTryonImage);
+
 document.getElementById("try-on-form").addEventListener("submit", async function (event) {
     event.preventDefault();
     // prevent repeated submission
@@ -5,8 +7,8 @@ document.getElementById("try-on-form").addEventListener("submit", async function
     document.getElementById("processing-section").style.display = "block";
     
     // clear previous result
-    const resultSection = document.getElementById("result-section");
-    const processedImage = document.getElementById("processed-image");
+    var resultSection = document.getElementById("result-section");
+    var processedImage = document.getElementById("processed-image");
     processedImage.src = "";
     resultSection.style.display = "none";
 
@@ -48,3 +50,36 @@ document.getElementById("try-on-form").addEventListener("submit", async function
         alert("An error occurred while trying on.");
     });
 });
+
+
+function getCachedTryonImage(){
+    const urlParams = new URLSearchParams(window.location.search);
+    var resultSection = document.getElementById("result-section");
+    var processedImage = document.getElementById("processed-image");
+    
+    fetch(`/try-on-query-cache`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            clothes_id: urlParams.get('cloth_id'),
+            color: urlParams.get('color')
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {;
+        if(data.cached === 1){
+            processedImage.src = data.tryon_image;
+            resultSection.style.display = "block";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
