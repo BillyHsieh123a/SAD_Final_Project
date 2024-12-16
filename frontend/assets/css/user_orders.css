@@ -89,7 +89,7 @@ body {
 .main-container {
     display: flex;
     justify-content: center; 
-    align-items: center;   
+    align-items: stretch; 
     min-height: 100vh;      
     gap: 40px;              
     padding: 20px;          
@@ -97,6 +97,8 @@ body {
 }
 
 .sidebar {
+    position: sticky;
+    margin-top: 80px;
     width: 300px;           /* 固定寬度 */
     background-color: #f3f3f3;
     padding: 20px;

@@ -142,6 +142,7 @@ def try_on_clothes():
         return jsonify({"error": "Image generation timed out"}), 504
     except Exception as e:
         get_psql_conn().rollback()
+        print(e)
         return jsonify({"error": str(e)}), 500
 
 
