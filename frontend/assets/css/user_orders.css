@@ -55,37 +55,6 @@ body {
     margin: 0;
 }
 
-/* .header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px; 
-} */
-
-/* .logo h1, .account-title h2 {
-    margin: 0; 
-} */
-
-/* .main-container {
-    width: 100%;
-    max-width: 660px;         
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 80px;           
-} */
-
-/* .sidebar {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 300px; 
-    height: calc(100vh - 80px); 
-    background-color: #f3f3f3; 
-    padding: 20px;
-    box-sizing: border-box; 
-} */
-
 .main-container {
     display: flex;
     justify-content: center; 
@@ -279,24 +248,9 @@ body {
     margin-bottom: 10px;
 }
 
-
-/**/
-
-.grey-rectangle3{
-    position: relative;
-    font-weight: bold;
-    /* top: 10px;
-    right : -10px;  */
-    display: block;
-    background: #f3f3f3;
-    width: 660px;
-    height: 20px;
-    text-align: center;
-    z-index: 1000;
-}
-
+.grey-rectangle3,
 .grey-rectangle4{
-    position: relative;
+    display: block;
     font-weight: bold;
     /* top: 10px;
     right : -10px;  */
@@ -306,7 +260,6 @@ body {
     height: 20px;
     text-align: center;
     z-index: 1000;
-
 }
 
 .orders-container {

@@ -7,7 +7,7 @@ logoLink.addEventListener("click", function (event) {
 
     const currentPage = window.location.pathname;
     console.log(currentPage);
-    if (currentPage != '/user_orders' && currentPage != '/user_details' && currentPage != '/user_account_base' && currentPage != '/item' && currentPage != '/try-on'){
+    if (currentPage != '/user_orders' && currentPage != '/user_details' && currentPage != '/user_account_base' && currentPage != '/item' && currentPage != '/try-on' && currentPage != '/signin' && currentPage != '/login'){
         // Reset the selected gender, category, and search input
         selectedGender = null;
         selectedCategory = null;
@@ -30,13 +30,13 @@ logoLink.addEventListener("click", function (event) {
         // Reset the display of products (or show welcome message if no filters)
         displayProducts();
     }
-    window.location.href = 'category';
+    if (currentPage == '/signin' || currentPage == '/login') {
+        window.location.href = 'login';
+    } else {
+        window.location.href = 'category';
+    }
 });
 
-// Select the icons
-const profileIcon = document.getElementById("profile-icon");
-const likeIcon = document.getElementById("like-icon");
-const bagIcon = document.getElementById("bag-icon");
 
 const serverURL = "http://127.0.0.1:5000";
 // var user_id = 0;
@@ -96,10 +96,19 @@ function wrapIconWithLink(icon, href) {
     link.appendChild(icon);
 }
 
-// Add links to each icon
-wrapIconWithLink(profileIcon, "user_account_base");
-wrapIconWithLink(likeIcon, "favorite");
-wrapIconWithLink(bagIcon, "bag");
+
+// Select the icons
+if (window.location.pathname != '/signin' && window.location.pathname != '/login') {
+    const profileIcon = document.getElementById("profile-icon");
+    const likeIcon = document.getElementById("like-icon");
+    const bagIcon = document.getElementById("bag-icon");
+
+    // Add links to each icon
+    wrapIconWithLink(profileIcon, "user_account_base");
+    wrapIconWithLink(likeIcon, "favorite");
+    wrapIconWithLink(bagIcon, "bag");
+}
+
 
 // document.getElementById("save-change").addEventListener("click", ChangeUserDetails);
 
