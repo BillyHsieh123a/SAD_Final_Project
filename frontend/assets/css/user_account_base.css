@@ -74,14 +74,16 @@ body {
 .main-container {
     display: flex;
     justify-content: center; /* 水平置中 */
-    align-items: center;    /* 垂直置中 */
-    min-height: 100vh;      /* 滿屏高度 */
+    align-items: stretch;    /* 垂直置中 */
+    min-height: 80vh;      /* 滿屏高度 */
     gap: 40px;              /* 左右間距 */
     padding: 20px;          /* 避免貼邊 */
     box-sizing: border-box;
 }
 
 .sidebar {
+    position: sticky;
+    margin-top: 80px;
     width: 300px;           /* 固定寬度 */
     background-color: #f3f3f3;
     padding: 20px;
@@ -183,7 +185,7 @@ body {
 
 .image-container { 
     width: 660px; 
-    height: 528px; 
+    height: 80vh; 
     overflow: hidden; 
 } 
 

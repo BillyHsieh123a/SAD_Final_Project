@@ -90,7 +90,7 @@ body {
     display: flex;
     justify-content: center; 
     align-items: stretch; 
-    min-height: 100vh;      
+    min-height: 80vh;      
     gap: 40px;              
     padding: 20px;          
     box-sizing: border-box;

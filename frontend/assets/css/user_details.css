@@ -78,14 +78,16 @@ body {
 .main-container {
     display: flex;
     justify-content: center; 
-    align-items: center;   
-    min-height: 100vh;      
+    align-items: stretch;  
+    min-height: 80vh;      
     gap: 40px;              
     padding: 20px;          
     box-sizing: border-box;
 }
 
 .sidebar {
+    position: sticky;
+    margin-top: 80px;
     width: 300px;           /* 固定寬度 */
     background-color: #f3f3f3;
     padding: 20px;
