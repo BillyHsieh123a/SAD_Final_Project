@@ -77,7 +77,7 @@ function RenderOrders(orders) {
                     <p>Shipping Fee: ${order.shipping_fee}</p>
                     <p>Description: ${order.description}</p>
                 </div>
-                <button class="more-details">More Details</button>
+                <!-- <button class="more-details">More Details</button> -->
             </div>
         `;
         ordersContainer.appendChild(orderElement);
