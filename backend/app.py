@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, session, redirect
-from db import init_db_conn
+from db import init_db_conn, close_psql_conn
 from flask_cors import CORS
 
 from category import category
@@ -40,8 +40,13 @@ def init_app():
     init_db_conn()
     app.secret_key = os.urandom(32)  # session key
 
+def finish_app():
+    close_psql_conn()
 
 
 if __name__ == '__main__':
-    init_app()
-    app.run()
+    try:
+        init_app()
+        app.run()
+    finally:
+        finish_app()

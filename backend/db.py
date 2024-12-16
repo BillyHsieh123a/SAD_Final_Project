@@ -35,3 +35,6 @@ def init_db_conn():
 def get_psql_conn():
     # print(psql_conn)
     return psql_conn
+
+def close_psql_conn():
+    psql_conn.close()
