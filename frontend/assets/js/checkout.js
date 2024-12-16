@@ -10,7 +10,7 @@ const defaultAddress = {
     firstName: 'John',
     lastName: 'Doe',
     mobile: '1234567890',
-    address: '123 Main St, City, Country'
+    address: 'Insert Your Own Address'
   };
 
 /*如果你需要讀取 HTML 內容，可以用 getElementById 搭配 innerText 或 textContent。
@@ -73,10 +73,15 @@ function updateTotal() {
 
 // 初始化頁面，顯示預設地址
 function loadDefaultAddress() {
-    document.getElementById('display-name').textContent = `${defaultAddress.firstName} ${defaultAddress.lastName}`;
+    document.getElementById('display-name').textContent = `${get_user_fname()} ${get_user_lname()}`;
     document.getElementById('display-address').textContent = defaultAddress.address;
-    document.getElementById('display-mobile').textContent = defaultAddress.mobile;
-    document.getElementById('display-email').textContent = defaultAddress.email;
+    document.getElementById('display-mobile').textContent = get_phone();
+    document.getElementById('display-email').textContent = get_email();
+    document.getElementById('first-name').value = get_user_fname();
+    document.getElementById('last-name').value = get_user_lname();
+    document.getElementById('address').value = defaultAddress.address;
+    document.getElementById('mobile').value = get_phone();
+    document.getElementById('email').value = get_email();
 };
 
 // 顯示表單並隱藏顯示的地址
@@ -87,11 +92,11 @@ function showForm() {
     document.getElementById('address-form').style.display = 'block';
 
     // 填充表單內容為預設地址資料
-    document.getElementById('first-name').value = defaultAddress.firstName;
-    document.getElementById('last-name').value = defaultAddress.lastName;
-    document.getElementById('address').value = defaultAddress.address;
-    document.getElementById('mobile').value = defaultAddress.mobile;
-    document.getElementById('email').value = 'example@email.com';  // 如果有，填充email欄位
+    // document.getElementById('first-name').value = defaultAddress.firstName;
+    // document.getElementById('last-name').value = defaultAddress.lastName;
+    // document.getElementById('address').value = defaultAddress.address;
+    // document.getElementById('mobile').value = defaultAddress.mobile;
+    // document.getElementById('email').value = 'example@email.com';  // 如果有，填充email欄位
 }
 
 // 保存地址並更新顯示
