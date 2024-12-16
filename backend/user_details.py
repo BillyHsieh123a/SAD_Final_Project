@@ -54,14 +54,21 @@ def user_details_change_user_data():
     bir = data.get('bdate')
     gender = data.get('gender').upper()[0]
 
-    cur.execute(
-        """
-        UPDATE public."user"
-        SET fname = %s, lname = %s, phone = %s, email = %s, bdate = %s, gender = %s
-        WHERE user_id = %s
-        """,
-        (fname, lname, phone, email, bir, gender, user_id)
-    )
+    try:
+        cur.execute(
+            """
+            UPDATE public."user"
+            SET fname = %s, lname = %s, phone = %s, email = %s, bdate = %s, gender = %s
+            WHERE user_id = %s
+            """,
+            (fname, lname, phone, email, bir, gender, user_id)
+        )
 
-    psql_conn.commit()
-    return jsonify({"message": "successfully changed data!!!!"}), 200
+        psql_conn.commit()
+        return jsonify({"message": "successfully changed data!!!!"}), 200
+    except Exception as e:
+        psql_conn.rollback()
+        print("An error occurred. Transaction rolled back.")
+        print("Error details:", e)
+        return jsonify({"error": str(e)}), 500
+    

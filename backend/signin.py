@@ -20,14 +20,21 @@ def signin_signin():
     email = data.get('email')
     bdate = data.get('bdate')
     gender = data.get('gender').upper()[0]
-    print(bdate)
-    cur.execute(
-        '''
-        INSERT INTO public."user" (fname, lname, password, phone, email, bdate, gender, role)
-        VALUES(%s, %s, %s, %s, %s, %s, %s, 'U')
-        ''',
-        (fname, lname, password, phone, email, bdate, gender)
-    )
+    # print(bdate)
 
-    psql_conn.commit()
-    return jsonify({"message": "successfully registered!"}), 200
+    try:
+        cur.execute(
+            '''
+            INSERT INTO public."user" (fname, lname, password, phone, email, bdate, gender, role)
+            VALUES(%s, %s, %s, %s, %s, %s, %s, 'U')
+            ''',
+            (fname, lname, password, phone, email, bdate, gender)
+        )
+
+        psql_conn.commit()
+        return jsonify({"message": "successfully registered!"}), 200
+    except Exception as e:
+        psql_conn.rollback()
+        print("An error occurred. Transaction rolled back.")
+        print("Error details:", e)
+        return jsonify({"error": str(e)}), 500
