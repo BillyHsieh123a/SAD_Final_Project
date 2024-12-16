@@ -279,7 +279,7 @@ main {
     display: block;
     width: 20;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #999;
     color: white;
     font-size: 18px;
     text-align: center;
@@ -289,5 +289,6 @@ main {
 }
 
 .buy-now:hover {
-    background-color: #45a049;
+    background-color: #000000; /* 修改為更亮眼的綠色 */
+    color: white; /* 確保文字仍然清晰 */
 }

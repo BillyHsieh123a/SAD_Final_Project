@@ -58,8 +58,8 @@ function addItemToBag() {
             alert(`${productName} (${color}, ${size}) has only ${data.quantity} stocks remaining. Sorry :(`);
         else if(data.success === -1)  // duplicate bag add
             alert(`You already added ${productName} (${color}, ${size}) into your bag!`);
-        else if(data.success === 0)
-            alert(`${productName} (${color}, ${size}) has been added to your bag!`);
+        // else if(data.success === 0)
+            // alert(`${productName} (${color}, ${size}) has been added to your bag!`);
     })
     .catch(error => {
         console.error('Error:', error);
