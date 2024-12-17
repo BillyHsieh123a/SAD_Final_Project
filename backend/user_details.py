@@ -34,7 +34,7 @@ def user_details_load_user_data():
         "phone": user_data[2],
         "email": user_data[3],
         "bdate": user_data[4].strftime('%Y-%m-%d'),
-        "gender": 'male' if user_data[5] in ('M', 'm') else 'memale' if user_data[5] in ('F', 'f') else 'other'
+        "gender": 'male' if user_data[5] in ('M', 'm') else 'female' if user_data[5] in ('F', 'f') else 'other'
     }), 200
 
 @user_details.route('/user_details_change_user_data', methods=['POST'])
