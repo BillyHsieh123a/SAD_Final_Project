@@ -303,3 +303,6 @@ document.getElementById("buy-now").addEventListener("click", () => {
     }
   });
 
+
+  // show visa form initially
+  document.addEventListener('DOMContentLoaded', showcForm('visa-form'));

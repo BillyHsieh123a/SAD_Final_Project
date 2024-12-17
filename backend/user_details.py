@@ -22,7 +22,7 @@ def user_details_load_user_data():
         WHERE u.user_id = %s
         LIMIT 1;
         ''',
-        (user_id)
+        (user_id,)
     )
 
     user_data = cur.fetchone()
