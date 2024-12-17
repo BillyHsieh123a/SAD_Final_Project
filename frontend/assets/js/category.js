@@ -13,7 +13,7 @@ function convertToCategoryFormat(data) {
             tops: [],
             bottoms: [],
             outerwear: [],
-            activewear: [],
+            dresses: [],
         },
         man: {
             tops: [],
@@ -39,6 +39,9 @@ function convertToCategoryFormat(data) {
                 break;
             case "A":
                 category = "activewear";
+                break;
+            case "D":
+                category = "dresses";
                 break;
             default:
                 break;

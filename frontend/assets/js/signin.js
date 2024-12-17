@@ -32,7 +32,7 @@ async function SignIn() {
         if (response.ok) {
             const result = await response.json();
             console.log(result.message); // Output: "successfully deleted!"
-            window.location.href = 'login';
+            window.location.href = '/login';
         } 
     //     else {
     //         console.error('Failed to sign up:', response.status, response.statusText);
