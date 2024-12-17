@@ -124,7 +124,7 @@ var colorSelect = document.getElementById("color");
 const colorvalColornameMap = {
     "B": "Blue", "G": "Green", "SM": "Smoke", "W": "White",
     "BL": "Black", "BR": "Brown", "TA": "Tan", "GR": "Gray",
-    "R": "Red"
+    "R": "Red", "P": "Pink"
 };
 
 document.addEventListener('DOMContentLoaded', getClothesColorsAndDescription);
