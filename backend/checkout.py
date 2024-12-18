@@ -70,6 +70,18 @@ def checkout_():
 
     
     try:
+        cur.execute(
+            """
+            SELECT bag.clothes_id
+            FROM bag
+            WHERE bag.user_id = %s FOR UPDATE
+            """,
+            (user_id,)
+        )
+        if cur.fetchone() is None:
+            # If there are rows in `insufficient_stock`, rollback the transaction
+            raise Exception("No item in your bag.")
+
         # get items in "bag" and add them into "order_contains", then delete them from "bag"
         cur.execute(
             """
