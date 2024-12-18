@@ -8,6 +8,12 @@ async function SignIn() {
     const bdate = document.getElementById('birthday').value.trim();
     const gender = document.getElementById('gender').value.trim();
     const password = document.getElementById('password').value.trim();
+    const confirm_password = document.getElementById('confirm-password').value.trim();
+    if (confirm_password != password) {
+        alert("enter confirm password again!!");
+        return;
+    }
+
     console.log(document.getElementById('birthday').value);
     const data = {
         fname: fname,
