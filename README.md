@@ -66,7 +66,6 @@ For the frontend design, we drew inspiration from various online fashion retail 
 - The system uses a structured database schema to store user information, product details, orders, and transaction history.
 
 ## System Demo
-(A demo showcasing the platform's functionality and user experience.)
 
 ## Future Prospects
 
