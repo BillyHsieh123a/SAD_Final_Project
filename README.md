@@ -67,6 +67,8 @@ For the frontend design, we drew inspiration from various online fashion retail 
 
 ## System Demo
 
+[Watch the System Demo on YouTube](https://youtu.be/zoOFwGNFLf4)
+
 ## Future Prospects
 
 Looking ahead, we plan to enhance the platform with the following features:
