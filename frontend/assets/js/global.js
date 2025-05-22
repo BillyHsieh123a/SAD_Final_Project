@@ -102,11 +102,13 @@ if (window.location.pathname != '/signin' && window.location.pathname != '/login
     const profileIcon = document.getElementById("profile-icon");
     const likeIcon = document.getElementById("like-icon");
     const bagIcon = document.getElementById("bag-icon");
+    const clothesIcon = document.getElementById("clothes-icon"); // 新增衣服icon
 
     // Add links to each icon
     wrapIconWithLink(profileIcon, "user_account_base");
     wrapIconWithLink(likeIcon, "favorite");
     wrapIconWithLink(bagIcon, "bag");
+    wrapIconWithLink(clothesIcon, "try-on"); // 這裡不要加 .html
 }
 
 
