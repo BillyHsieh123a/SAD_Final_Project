@@ -1,38 +1,168 @@
-
-.try-on-section {
-    margin: 40px auto;
-    max-width: 600px;
-    padding: 20px;
-    border: 2px solid #000000;
-    border-radius: 8px;
+.try-on-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-input[type="file"] {
-    margin: 20px 0;
+.top-section {
+  display: flex;
+  gap: 20px;
+  width: 100%;
 }
 
-.btn {
-    padding: 10px 20px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+/* 左側收藏欄 */
+.left-column {
+  flex: 0 0 64%;
+  max-width: 64%;
+  display: flex;
+  flex-direction: column;
 }
 
-button:disabled:hover, button:hover[disabled] {
-    background-color: #8f8f8f;
+.favorite-section {
+  flex: 1;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
-button:disabled, button[disabled] {
-    background-color: #8f8f8f;
+.category-tabs {
+  display: flex;
+  border-bottom: 2px solid #000;
+  margin-bottom: 12px;
 }
 
-#result-section {
-    margin-top: 20px;
+.tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  background-color: #f0f0f0;
+  border: none;
+  border-right: 1px solid #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.tab-btn:last-child {
+  border-right: none;
+}
+
+.tab-btn.active {
+  background-color: #d0d0d0;
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 500px;
+  padding-right: 4px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.product-card h3 {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.product-card p {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 右側 AI 結果欄 */
+.right-panel {
+  flex: 0 0 33%;
+  max-width: 33%;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.result-display {
+  text-align: center;
+}
+
+.result-display h3 {
+  margin-bottom: 10px;
 }
 
 #processed-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #888;
+}
+
+.ai-comment {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 16px;
+  text-align: center;
+}
+
+.ai-comment h3 {
+  margin-bottom: 8px;
+}
+
+#ai-comment-text {
+  font-style: italic;
+  color: #333;
+}
+
+/* Recommendation 全寬在底部 */
+.recommendation-panel {
+  border: 2px solid #000;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 16px;
+  width: 98%;
+}
+
+.recommendation-panel h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+#recommendation-content {
+  min-height: 100px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.product-card {
+  background: white;
+  border: 2px solid transparent; /* ← always 2px */
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-card.selected {
+  border-color: #000000; /* ← only color changes */
+  background-color: #f0f8ff;
 }
