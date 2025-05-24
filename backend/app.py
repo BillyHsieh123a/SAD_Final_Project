@@ -16,7 +16,7 @@ from user_details import user_details
 from user_orders import user_orders
 from page_serve import page_serve
 
-serverURL = "http://13.210.124.195:5000"
+serverURL = "http://127.0.0.1:5000"
 
 # Global Flask app (SUBJECT TO CHANGE)
 app = Flask(__name__, template_folder="../frontend/html", static_folder="../frontend/assets")
