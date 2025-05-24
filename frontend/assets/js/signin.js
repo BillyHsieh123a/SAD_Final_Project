@@ -1,4 +1,4 @@
-// document.getElementById("submit-button").addEventListener("click", SignIn);
+document.getElementById("submit-button").addEventListener("click", SignIn);
 
 async function SignIn() {
     const fname = document.getElementById('first-name').value.trim();
