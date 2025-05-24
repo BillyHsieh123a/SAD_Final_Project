@@ -2,7 +2,7 @@ import psycopg2
 import os
 from dotenv import dotenv_values, load_dotenv
 from pathlib import Path
-#hi
+
 # global psql connection instance
 psql_conn = None
 
