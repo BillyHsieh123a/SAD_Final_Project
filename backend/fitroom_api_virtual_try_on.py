@@ -4,8 +4,9 @@ import os
 from dotenv import load_dotenv
 import time
 
-load_dotenv()
-API_KEY = os.getenv("FITROOM_API_KEY")
+def init_fitroom_api_key():
+    load_dotenv()
+    return os.getenv("FITROOM_API_KEY")
 AVATAR_PATH = Path("avatar.jpg")
 GARMENT_PATH = Path("strpshirt_white.jpg")
 
@@ -124,7 +125,9 @@ def create_tryon_task_v2(cloth_path, model_path, cloth_type, api_key, waittime_t
         print("❌ Failed to parse response:", e)
         print("Raw response:", res.text)
 
+
 # ✅ 呼叫範例
+API_KEY = init_fitroom_api_key()
 create_tryon_task_v2(
     cloth_path=GARMENT_PATH,
     model_path=AVATAR_PATH,
