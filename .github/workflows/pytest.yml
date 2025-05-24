@@ -23,5 +23,5 @@ jobs:
 
     - name: Run login and signup tests
       run: |
-        python test/
+        pytest test/
  
