@@ -56,7 +56,6 @@ def add_item_to_favorite():
     print(clothes_id)
     print(color)
     
-    
     try:
         cur = get_psql_conn().cursor()
         cur.execute("""
