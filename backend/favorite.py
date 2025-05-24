@@ -51,6 +51,7 @@ def favorite_load_favorite_clothes():
         return jsonify({"error": str(e)}), 500
 
 
+
 @favorite.delete('/item')#/favorite_delete_item
 def favorite_delete_item():
     psql_conn = get_psql_conn()

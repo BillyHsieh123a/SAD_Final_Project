@@ -25,7 +25,7 @@ async function loadFavorites(category) {
     container.innerHTML = "<p>Loading...</p>";
 
     try {
-        const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${get_user_id()}`);
+        const response = await fetch(`${serverURL}//api/favorite/allitem?user_id=${get_user_id()}`);
         if (!response.ok) throw new Error("Request failed");
         
         let favorites = await response.json();
