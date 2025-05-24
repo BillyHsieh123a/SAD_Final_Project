@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,20 +23,34 @@
     </header>
 
     <main>
-        <section class="try-on-section">
-            <h2>Upload Your Image</h2>
-            <form id="try-on-form" enctype="multipart/form-data">
-                <input type="file" id="upload-image" accept="image/*" required>
-                <button type="submit" class="btn" id="tryon-submit-btn">Upload & Try On</button>
+        <section class="try-on-section" style="position: relative; width: 512px; height: auto; margin: auto;">
+
+            <!-- ⬆ Upload button in top-left -->
+            <form id="try-on-form" enctype="multipart/form-data" style="position: absolute; top: 10px; left: 10px; z-index: 10;">
+                <input type="file" id="upload-image" accept="image/*" required hidden onchange="document.getElementById('tryon-submit-btn').click();">
+                <button type="button" onclick="document.getElementById('upload-image').click();">⬆ Upload</button>
+                <button type="submit" id="tryon-submit-btn" style="display: none;">Submit</button>
             </form>
-            <div id="processing-section" style="display: none;">
-                Processing...
+        
+            <!-- 🔗 Share button in top-right -->
+            <button onclick="shareImage()" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+                🔗 Share
+            </button>
+        
+            <!-- 🖼 Result box -->
+            <div id="result-section" style="width: 512px; height: 512px; border: 2px solid #000; margin-top: 50px; display: flex; justify-content: center; align-items: center;">
+                <img id="processed-image" src="/static/placeholder.png" alt="result" style="max-width: 100%; max-height: 100%; object-fit: contain;">
             </div>
-            <div id="result-section" style="display: none;">
-                <h3>Result</h3>
-                <img id="processed-image" src="" alt="AI Processed Image">
+        
+            <!-- 🧠 AI comment button -->
+            <div style="margin-top: 20px; text-align: center;">
+                <button id="ai-comment-btn" class="btn" onclick="getAIComment()">💬 Press to Get AI Comment</button>
+                <p id="ai-comment-output" style="margin-top: 10px;"></p>
             </div>
+        
         </section>
+        
+        
     </main>
 
     <footer>
@@ -54,5 +68,37 @@
 
     <script src="{{url_for('static', filename='/js/global.js')}}"></script>
     <script src="{{url_for('static', filename='/js/try-on.js')}}"></script>
+    <script>
+        function getAIComment() {
+            const commentBox = document.getElementById('ai-comment-output');
+            commentBox.innerText = "🧠 Thinking...";
+        
+            // Simulated AI comment (replace with fetch() later)
+            setTimeout(() => {
+                commentBox.innerText = "Looking sharp! This outfit is giving futuristic fashion vibes. 🔥";
+            }, 1000);
+            //replace with real fetch later
+            // fetch('/get-comment', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ image: 'current' }) // or however you track the image
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     commentBox.innerText = data.comment;
+            // })
+            // .catch(err => {
+            //     commentBox.innerText = "❌ Error getting AI comment.";
+            //     console.error(err);
+            // });
+
+        }
+        
+        function shareImage() {
+            const imageUrl = document.getElementById('processed-image').src;
+            alert("Share this image: " + imageUrl);  // Replace with real logic later
+        }
+        </script>
+        
 </body>
 </html>
