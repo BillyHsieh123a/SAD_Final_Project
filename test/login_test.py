@@ -2,7 +2,7 @@ import pytest
 import json
 from unittest.mock import Mock, patch, MagicMock
 from flask import Flask
-from backend import login  # Import your login blueprint
+from login import login  # Import your login blueprint
 
 
 @pytest.fixture
@@ -127,7 +127,7 @@ class TestHandleLogin:
         }
         
         # Act
-        response = client.post('/submit_login',
+        response = client.post('/api/login/submission',
                              data=json.dumps(login_data),
                              content_type='application/json')
         
@@ -151,7 +151,7 @@ class TestHandleLogin:
         
         # Act & Assert
         with pytest.raises(KeyError):
-            response = client.post('/submit_login',
+            response = client.post('/api/login/submission',
                                  data=json.dumps(login_data),
                                  content_type='application/json')
     
@@ -159,7 +159,7 @@ class TestHandleLogin:
     def test_login_with_invalid_json(self, client):
         """Test login with invalid JSON data"""
         # Act
-        response = client.post('/submit_login',
+        response = client.post('/api/login/submission',
                              data='invalid json',
                              content_type='application/json')
         
@@ -180,7 +180,7 @@ class TestHandleLogin:
         
         # Act & Assert
         with pytest.raises(AttributeError):  # Will fail when trying to call cursor() on None
-            response = client.post('/submit_login',
+            response = client.post('/api/login/submission',
                                  data=json.dumps(login_data),
                                  content_type='application/json')
 
@@ -197,7 +197,7 @@ class TestLoginEdgeCases:
         
         # Test pure digits (should be treated as phone)
         login_data = {'email_or_phone': '1234567890', 'user_password': 'pass'}
-        client.post('/submit_login', data=json.dumps(login_data), content_type='application/json')
+        client.post('/api/login/submission', data=json.dumps(login_data), content_type='application/json')
         
         executed_query = mock_cursor.execute.call_args[0][0]
         assert 'phone' in executed_query
@@ -207,7 +207,7 @@ class TestLoginEdgeCases:
         
         # Test email format (should be treated as email)
         login_data = {'email_or_phone': 'user@domain.com', 'user_password': 'pass'}
-        client.post('/submit_login', data=json.dumps(login_data), content_type='application/json')
+        client.post('/api/login/submission', data=json.dumps(login_data), content_type='application/json')
         
         executed_query = mock_cursor.execute.call_args[0][0]
         assert 'email' in executed_query

@@ -2,7 +2,7 @@ import pytest
 import json
 from unittest.mock import Mock, patch
 from flask import Flask
-from backend import signin  # Import your signin blueprint
+from signin import signin  # Import your signin blueprint
 
 
 @pytest.fixture
@@ -58,7 +58,7 @@ class TestSigninSignin:
         mock_conn.commit.return_value = None
         
         # Act
-        response = client.post('/signin_',
+        response = client.post('/api/signin/allitem',
                              data=json.dumps(valid_signin_data),
                              content_type='application/json')
         
@@ -93,7 +93,7 @@ class TestSigninSignin:
         mock_cursor.execute.side_effect = Exception('Database constraint violation')
         
         # Act
-        response = client.post('/signin_',
+        response = client.post('/api/signin/allitem',
                              data=json.dumps(valid_signin_data),
                              content_type='application/json')
         
@@ -117,7 +117,7 @@ class TestSigninSignin:
         
         # Act & Assert
         with pytest.raises(AttributeError):  # Will fail when trying to call cursor() on None
-            response = client.post('/signin_',
+            response = client.post('/api/signin/allitem',
                                  data=json.dumps(valid_signin_data),
                                  content_type='application/json')
     
@@ -137,7 +137,7 @@ class TestSigninSignin:
         
         for incomplete_data in incomplete_data_cases:
             # Act
-            response = client.post('/signin_',
+            response = client.post('/api/signin/allitem',
                                  data=json.dumps(incomplete_data),
                                  content_type='application/json')
             
@@ -150,7 +150,7 @@ class TestSigninSignin:
     def test_invalid_json_data(self, client):
         """Test registration with invalid JSON"""
         # Act
-        response = client.post('/signin_',
+        response = client.post('/api/signin/allitem',
                              data='invalid json data',
                              content_type='application/json')
         
@@ -176,7 +176,7 @@ class TestSigninSignin:
         }
         
         # Act
-        response = client.post('/signin_',
+        response = client.post('/api/signin/allitem',
                              data=json.dumps(empty_data),
                              content_type='application/json')
         
@@ -212,7 +212,7 @@ class TestSigninIntegration:
         }
         
         # Act
-        response = client.post('/signin_',
+        response = client.post('/api/signin/allitem',
                              data=json.dumps(realistic_user_data),
                              content_type='application/json')
         
