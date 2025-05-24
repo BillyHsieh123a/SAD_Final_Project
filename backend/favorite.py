@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
-favorite = Blueprint("favorite", __name__)
+favorite = Blueprint("favorite", __name__, url_prefix="/api/favorite")
 
 # return cloth name, price, image url, cloth_id, color
-@favorite.route('/favorite_load_favorite_clothes', methods=['GET'])
+@favorite.get('/allitem')#'/favorite_load_favorite_clothes'
 def favorite_load_favorite_clothes():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
@@ -47,7 +47,7 @@ def favorite_load_favorite_clothes():
         return jsonify({"error": str(e)}), 500
 
 
-@favorite.route('/favorite_delete_item', methods=['POST'])
+@favorite.delete('/item')#/favorite_delete_item
 def favorite_delete_item():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

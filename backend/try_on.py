@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 
-try_on = Blueprint("try_on", __name__)
+try_on = Blueprint("try_on", __name__, url_prefix="/api/try-on")
 
 
 def encode_jwt_token(ak, sk):
@@ -95,7 +95,7 @@ def cache_image_on_server(result_image_src, user_id, clothes_id, color):
     get_psql_conn().commit()
 
 
-@try_on.post("/try-on")
+@try_on.post("/image")
 def try_on_clothes():
     try:
         user_id = session.get("user_id")
@@ -146,7 +146,7 @@ def try_on_clothes():
         return jsonify({"error": str(e)}), 500
 
 
-@try_on.post("/try-on-query-cache")
+@try_on.get("/image")
 def try_on_query_cache():
     try:
         user_id = session.get("user_id")

@@ -245,7 +245,7 @@ async function checkout() {
 
     try {
         // Send a POST request with the data as JSON
-        const response = await fetch(`${serverURL}/checkout_`, {
+        const response = await fetch(`${serverURL}/api/checkout/allitem`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -270,7 +270,7 @@ async function checkout() {
 // 合併初始化邏輯
 window.onload = async function() {
     try {
-        const response = await fetch(`${serverURL}/checkout_load_bag?user_id=${get_user_id()}`, {
+        const response = await fetch(`${serverURL}/api/checkout/allitem?user_id=${get_user_id()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

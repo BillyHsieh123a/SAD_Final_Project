@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
 
-item = Blueprint("item", __name__)
+item = Blueprint("item", __name__, url_prefix="/api/item")
 
-
-@item.post('/add-to-bag')
+# Remind that here should be functions for adjusting bag, but current functions are doing adding
+@item.post('/bag')#'/add-to-bag'
 def add_item_to_bag():
     user_id = session.get("user_id")
     clothes_id = request.json['clothes_id']
@@ -47,7 +47,7 @@ def add_item_to_bag():
         return jsonify({"error": str(e)}), 500
     
 
-@item.post('/add-to-favorite')
+@item.post('/favorite')#'/add-to-favorite'
 def add_item_to_favorite():
     user_id = session.get("user_id")
     clothes_id = request.json['clothes_id']
@@ -81,7 +81,7 @@ def add_item_to_favorite():
         return jsonify({"error": str(e)}), 500
 
 
-@item.post('/get-clothes-colors-descr')
+@item.post('/color')# /get-clothes-colors-descr
 def get_clothes_colors():
     clothes_id = request.json['clothes_id']
     
@@ -110,7 +110,7 @@ def get_clothes_colors():
         return jsonify({"error": str(e)}), 500
 
     
-@item.post('/change-clothes-image')
+@item.post('/image') # /change-clothes-image
 def get_clothes_color_image():
     clothes_id = request.json['clothes_id']
     color = request.json['color']
@@ -133,7 +133,7 @@ def get_clothes_color_image():
         return jsonify({"error": str(e)}), 500
 
 
-@item.post('/get-clothes-sizes')
+@item.post('/size')# /get-clothes-sizes
 def get_clothes_sizes():
     clothes_id = request.json['clothes_id']
     color = request.json['color']

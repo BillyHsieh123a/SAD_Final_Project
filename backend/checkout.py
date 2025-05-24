@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
-checkout = Blueprint("checkout", __name__)
+checkout = Blueprint("checkout", __name__, url_prefix="/api/checkout")
 
-# return cloth name, price, image url, cloth_id, color
-@checkout.route('/checkout_load_bag', methods=['GET'])
+# load cloth info(cloth name, price, image url, cloth_id, color) for those should be checked out
+@checkout.get('/allitem')#'/checkout_load_bag'
 def checkout_load_bag():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
@@ -46,7 +46,8 @@ def checkout_load_bag():
     psql_conn.commit()
     return jsonify(update_all_clothes_in_bag_data), 200
 
-@checkout.route('/checkout_', methods=['POST'])
+# work on check out
+@checkout.post('/allitem')#'/checkout_'
 def checkout_():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

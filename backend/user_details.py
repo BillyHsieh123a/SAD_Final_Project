@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 import datetime
 
-user_details = Blueprint("user_details", __name__)
+user_details = Blueprint("user_details", __name__, url_prefix="/api/user-detail")
 
 # return cloth name, price, image url, cloth_id, color
-@user_details.route('/user_details_load_user_data', methods=['GET'])
+@user_details.get('/info')#'/user_details_load_user_data'
 def user_details_load_user_data():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
@@ -37,7 +37,7 @@ def user_details_load_user_data():
         "gender": 'male' if user_data[5] in ('M', 'm') else 'female' if user_data[5] in ('F', 'f') else 'other'
     }), 200
 
-@user_details.route('/user_details_change_user_data', methods=['POST'])
+@user_details.post('/info')#'/user_details_change_user_data'
 def user_details_change_user_data():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

@@ -9,12 +9,18 @@
 cartItems = []
 window.onload = async function () {
   try {
-      const response = await fetch(`${serverURL}/bag_load_bag?user_id=${get_user_id()}`, {
+      const response = await fetch(`${serverURL}/api/bag/allitem?user_id=${get_user_id()}`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
           },
       });
+    //   const response = await fetch(`${serverURL}/bag_load_bag?user_id=${get_user_id()}`, {
+    //       method: 'GET',
+    //       headers: {
+    //           'Content-Type': 'application/json',
+    //       },
+    //   });
       
       // Check if the response is successful
       if (response.ok) {
@@ -74,13 +80,21 @@ async function deleteItemFromBag(user_id_d, clothes_id, color, size) {
   };
 
   try {
-      const response = await fetch(`${serverURL}/bag_delete_item`, {
-          method: 'POST',
+      const response = await fetch(`${serverURL}/api/bag/item`, {
+          method: 'DELETE',
           headers: {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)  // Send the data in the request body as JSON
       });
+    //   try {
+    //   const response = await fetch(`${serverURL}/bag_delete_item`, {
+    //       method: 'POST',
+    //       headers: {
+    //           'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify(data)  // Send the data in the request body as JSON
+    //   });
 
       // Check if the response is successful
       if (response.ok) {

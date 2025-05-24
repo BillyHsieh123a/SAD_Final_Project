@@ -26,7 +26,7 @@ async function SignIn() {
     };
     console.log(data);
     try {
-        const response = await fetch(`${serverURL}/signin_`, {
+        const response = await fetch(`${serverURL}/api/signin/allitem`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
