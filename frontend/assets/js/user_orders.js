@@ -37,7 +37,7 @@ async function LoadOrders(status) {
         //     return;
         // }
 
-        const response = await fetch(`/user_orders_load_orders?user_id=${get_user_id()}&status=${status}`, {
+        const response = await fetch(`/api/user-order/order/allitem?user_id=${get_user_id()}&status=${status}`, {
             method: 'GET',
         });
 

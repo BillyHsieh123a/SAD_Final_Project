@@ -4,7 +4,7 @@ document.getElementById("save-change").addEventListener("click", ChangeUserDetai
 
 async function LoadUserDetails() {
     try {
-        const response = await fetch(`${serverURL}/user_details_load_user_data?user_id=${get_user_id()}`, {
+        const response = await fetch(`${serverURL}/api/user-detail/info?user_id=${get_user_id()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ async function ChangeUserDetails() {
     };
   
     try {
-        const response = await fetch(`${serverURL}/user_details_change_user_data`, {
+        const response = await fetch(`${serverURL}/api/user-detail/info`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

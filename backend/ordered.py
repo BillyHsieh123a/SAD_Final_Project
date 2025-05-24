@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 from db import get_psql_conn
 
-ordered = Blueprint("ordered", __name__)
+ordered = Blueprint("ordered", __name__, url_prefix="/api/ordered")
 
-@ordered.route('/ordered_', methods=['GET'])
+@ordered.get('/order')#'ordered_'
 def get_order():
     # print("LLLLLL")
     ordered_id = request.args.get('ordered_id')

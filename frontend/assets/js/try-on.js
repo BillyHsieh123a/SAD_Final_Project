@@ -27,7 +27,7 @@ document.getElementById("try-on-form").addEventListener("submit", async function
     formData.append('clothes-id', urlParams.get('cloth_id'));
     formData.append('color', urlParams.get('color'));
     formData.append('product-img-path', urlParams.get('img'));
-    fetch(`/try-on`, {
+    fetch(`/api/try-on/image`, {
         method: 'POST',
         body: formData
     })
@@ -57,8 +57,8 @@ function getCachedTryonImage(){
     var resultSection = document.getElementById("result-section");
     var processedImage = document.getElementById("processed-image");
     
-    fetch(`/try-on-query-cache`, {
-        method: 'POST',
+    fetch(`/api/try-on/image`, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },

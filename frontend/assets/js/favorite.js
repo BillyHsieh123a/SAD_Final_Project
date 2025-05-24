@@ -12,7 +12,7 @@ products = []; // Declare the products object outside to ensure it is available 
 window.onload = async function () {
     console.log(get_user_id());
     try {
-        const response = await fetch(`${serverURL}/favorite_load_favorite_clothes?user_id=${get_user_id()}`, {
+        const response = await fetch(`${serverURL}/api/favorite/allitem?user_id=${get_user_id()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,8 +78,8 @@ async function deleteItemFromFavorite(user_id_d, clothes_id, color) {
     };
   
     try {
-        const response = await fetch(`${serverURL}/favorite_delete_item`, {
-            method: 'POST',
+        const response = await fetch(`${serverURL}/api/favorite/item`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },

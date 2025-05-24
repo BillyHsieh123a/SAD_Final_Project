@@ -10,7 +10,7 @@ function submitLogin() {
         return;
     }
 
-    fetch('/submit_login', {
+    fetch('/api/login/submission', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

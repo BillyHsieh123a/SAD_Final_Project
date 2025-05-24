@@ -4,7 +4,7 @@ const ordered_id = urlParams.get('order_id');
 console.log(ordered_id);
 window.onload = async function () {
     try {
-        const response = await fetch(`${serverURL}/ordered_?ordered_id=${ordered_id}`, {
+        const response = await fetch(`${serverURL}/api/ordered/order?ordered_id=${ordered_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

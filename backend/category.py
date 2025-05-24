@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
-category = Blueprint("category", __name__)
+category = Blueprint("category", __name__, url_prefix="/api/category")
 
-# return cloth name, price, image url, cloth_id, color
-@category.route('/category_load_clothes_data', methods=['GET'])
+# load clth info(cloth name, price, image url, cloth_id, color) for those that should appear in category page
+@category.get('/allitem')#'/category_load_clothes_data'
 def category_load_clothes_data():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

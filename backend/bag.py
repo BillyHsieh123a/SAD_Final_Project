@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
-bag = Blueprint("bag", __name__)
+bag = Blueprint("bag", __name__, url_prefix="/api/bag")
 
-# return cloth name, price, image url, cloth_id, color
-@bag.route('/bag_load_bag', methods=['GET'])
+# return cloth info(cloth name, price, image url, cloth_id, color) for those have been added into bag
+@bag.get('/allitem')#'bag_load_bag' 
 def bag_load_bag():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
@@ -51,7 +51,8 @@ def bag_load_bag():
         print("Error details:", e)
         return jsonify({"error": str(e)}), 500
 
-@bag.route('/bag_delete_item', methods=['POST'])
+# delete
+@bag.delete('/item')#'/bag_delete_item'->because we don't use delete now
 def bag_delete_item():
     psql_conn = get_psql_conn()
     if psql_conn is not None:
