@@ -248,7 +248,7 @@ function displayProducts() {
 // Restore state from sessionStorage
 window.addEventListener("load", async function () {
     try {
-        const response = await fetch(`${serverURL}/category_load_clothes_data`, {
+        const response = await fetch(`${serverURL}/api/category/allitem`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

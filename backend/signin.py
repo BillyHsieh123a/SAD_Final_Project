@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 
-signin = Blueprint("signin", __name__)
+signin = Blueprint("signin", __name__, url_prefix="/api/signin")
 
 # return cloth name, price, image url, cloth_id, color
-@signin.route('/signin_', methods=['POST'])
+@signin.post('/allitem')#/signin_
 def signin_signin():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

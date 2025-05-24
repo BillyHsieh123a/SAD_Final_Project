@@ -33,7 +33,7 @@ function addItemToBag() {
     const size = document.getElementById("size").value;
     const quantity = document.getElementById("num").value;
 
-    fetch(`/add-to-bag`, {
+    fetch(`/api/item/bag`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function addItemToBag() {
 }
 
 function addItemToFavorite(clothes_id, color) {
-    fetch(`/add-to-favorite`, {
+    fetch(`api/item/favorite`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -98,16 +98,16 @@ function addItemToFavorite(clothes_id, color) {
     });
 }
 
-// Handle "Try On" button
-document.getElementById("try-on").addEventListener("click", function () {
-    const productImg = document.getElementById("product-img");
-    // Redirect to the try-on page
-    var tryOnLink = `try-on?`
-    tryOnLink += `cloth_id=${productClothID}&`
-    tryOnLink += `color=${colorSelect.value}&`
-    tryOnLink += `img=${productImg.src}`
-    window.location.href = tryOnLink;
-});
+// // Handle "Try On" button
+// document.getElementById("try-on").addEventListener("click", function () {
+//     const productImg = document.getElementById("product-img");
+//     // Redirect to the try-on page
+//     var tryOnLink = `try-on?`
+//     tryOnLink += `cloth_id=${productClothID}&`
+//     tryOnLink += `color=${colorSelect.value}&`
+//     tryOnLink += `img=${productImg.src}`
+//     window.location.href = tryOnLink;
+// });
 
 // Get the Go Back button
 const goBackButton = document.querySelector(".go-back-btn");
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', getClothesColorsAndDescription);
 function getClothesColorsAndDescription(){
     colorSelect.innerText = '';
 
-    fetch(`/get-clothes-colors-descr`, {
+    fetch(`/api/item/color`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ function getClothesColorsAndDescription(){
 // when clothes color change, change image 
 colorSelect.addEventListener("change", changeClothesImage);
 function changeClothesImage(){
-    fetch(`/change-clothes-image`, {
+    fetch(`/api/item/image`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ colorSelect.addEventListener("change", getClothesSizes);
 function getClothesSizes(){
     sizeSelect.innerText = '';
 
-    fetch(`/get-clothes-sizes`, {
+    fetch(`/api/item/size`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

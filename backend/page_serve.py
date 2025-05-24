@@ -2,7 +2,7 @@ from flask import (Blueprint, jsonify, request, session, render_template,
                    url_for, redirect)
 
 
-page_serve = Blueprint("page_serve", __name__)
+page_serve = Blueprint("page_serve", __name__)# , url_prefix="/page"
 
 # index html
 @page_serve.get('/')

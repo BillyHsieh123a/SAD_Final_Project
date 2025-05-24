@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify, request, session, render_template
 from db import get_psql_conn
 
 
-login = Blueprint("login", __name__)
+login = Blueprint("login", __name__, url_prefix="/api/login")
 
-@login.post('/submit_login')
+@login.post('/submission')#'/submit_login'
 def handle_login():
     # check email or phone
     accountInput = request.json['email_or_phone']

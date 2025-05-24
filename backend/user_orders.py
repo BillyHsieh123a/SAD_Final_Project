@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, session, render_template, url_for
 from db import get_psql_conn
 import datetime
-user_orders = Blueprint("user_orders", __name__)
+user_orders = Blueprint("user_orders", __name__, url_prefix="/api/user-order")
 
 # return cloth name, price, image url, cloth_id, color
-@user_orders.route('/user_orders_load_orders', methods=['GET'])
+@user_orders.get('/order/allitem')#/user_orders_load_orders
 def user_orders_load_orders():
     psql_conn = get_psql_conn()
     if psql_conn is not None:

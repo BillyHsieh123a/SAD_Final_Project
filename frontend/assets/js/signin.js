@@ -1,4 +1,4 @@
-// document.getElementById("submit-button").addEventListener("click", SignIn);
+document.getElementById("submit-button").addEventListener("click", SignIn);
 
 async function SignIn() {
     const fname = document.getElementById('first-name').value.trim();
@@ -26,7 +26,7 @@ async function SignIn() {
     };
     console.log(data);
     try {
-        const response = await fetch(`${serverURL}/signin_`, {
+        const response = await fetch(`${serverURL}/api/signin/allitem`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
