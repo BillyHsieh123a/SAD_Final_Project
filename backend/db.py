@@ -16,13 +16,15 @@ def init_db_conn():
     DB_USER_PASSWORD = os.getenv('DB_USER_PASSWORD')
     DB_ADDRESS       = os.getenv('DB_ADDRESS')
     DB_NAME          = os.getenv('DB_NAME')
+    DB_PORT          = os.getenv('DB_PORT')  # 17 PostgreSQL port is 5432
     
     try:
         psql_conn = psycopg2.connect(
             dbname = DB_NAME,
             user = DB_USER_NAME,
             host = DB_ADDRESS,
-            password = DB_USER_PASSWORD
+            password = DB_USER_PASSWORD,
+            port = DB_PORT
         )
         
     except Exception as e:

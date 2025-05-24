@@ -52,7 +52,7 @@ class TestHandleLogin:
         }
         
         # Act
-        response = client.post('/submit_login', 
+        response = client.post('/api/login/submission', 
                              data=json.dumps(login_data),
                              content_type='application/json')
         
@@ -92,7 +92,7 @@ class TestHandleLogin:
         }
         
         # Act
-        response = client.post('/submit_login',
+        response = client.post('/api/login/submission',
                              data=json.dumps(login_data),
                              content_type='application/json')
         
