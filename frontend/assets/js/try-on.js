@@ -19,7 +19,9 @@ function setupTabButtons() {
     if (defaultTab) defaultTab.click();
 }
 
-// 根據選擇的 tab 顯示收藏的衣服
+let selectedProduct = null; // Stores selected product
+let selectedCard = null;    // Stores the selected DOM element
+
 async function loadFavorites(category) {
     const container = document.getElementById("recommendation-list");
     container.innerHTML = "<p>Loading...</p>";
@@ -27,20 +29,13 @@ async function loadFavorites(category) {
     try {
         const response = await fetch(`${serverURL}//api/favorite/allitem?user_id=${get_user_id()}`);
         if (!response.ok) throw new Error("Request failed");
-        
+
         let favorites = await response.json();
 
-        console.log("🔍 原始收藏資料：", favorites);
-        console.log("🔍 目前點擊的分類：", category);
-        console.log("🔍 所有 part 值：", favorites.map(f => f.part));
-
-        // 篩選 top / bottom
         if (category === "top") {
             favorites = favorites.filter(item => item.part === "T");
-            console.log("✅ 篩選後 top：", favorites);
         } else if (category === "bottom") {
             favorites = favorites.filter(item => item.part === "B");
-            console.log("✅ 篩選後 bottom：", favorites);
         }
 
         if (favorites.length === 0) {
@@ -56,8 +51,30 @@ async function loadFavorites(category) {
                 <img src="${".." + product.img}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.price}</p>
-                <p style="font-size:12px;color:#888;">part: ${product.part}</p> <!-- 顯示 part 方便除錯 -->
             `;
+
+            // Toggle selection on click
+            card.addEventListener("click", () => {
+                const isSelected = card.classList.contains('selected');
+
+                // Deselect if already selected
+                if (isSelected) {
+                    card.classList.remove('selected');
+                    selectedProduct = null;
+                    selectedCard = null;
+                    console.log("🟡 取消選擇");
+                } else {
+                    // Deselect previous
+                    if (selectedCard) selectedCard.classList.remove('selected');
+
+                    // Select current
+                    card.classList.add('selected');
+                    selectedProduct = product;
+                    selectedCard = card;
+                    console.log("🟢 選擇的商品：", selectedProduct);
+                }
+            });
+
             container.appendChild(card);
         });
 
