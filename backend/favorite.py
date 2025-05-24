@@ -11,12 +11,14 @@ def favorite_load_favorite_clothes():
         cur = psql_conn.cursor()
     else:
         print("Failed to connect to the database.")
+        return jsonify({"error": "DB connection failed"}), 500
+
     user_id = request.args.get('user_id')
 
     try:
         cur.execute(
             '''
-            SELECT f.clothes_id, cl.name, cl.price, i.path, f.color
+            SELECT f.clothes_id, cl.name, cl.price, i.path, f.color, cl.part
             FROM favorite AS f
             JOIN clothes_color AS cc ON f.clothes_id = cc.clothes_id AND f.color = cc.color
             JOIN image AS i ON cc.image_filename = i.filename
@@ -30,21 +32,24 @@ def favorite_load_favorite_clothes():
         update_all_clothes_favorite = []
         for cloth in all_clothes_favorite:
             new_cloth = {
-                "id": cloth[0], 
-                "name": cloth[1], 
-                "price": cloth[2], 
+                "id": cloth[0],
+                "name": cloth[1],
+                "price": cloth[2],
                 "img": url_for("static", filename='images/' + cloth[3]),
-                "color": cloth[4]
+                "color": cloth[4],
+                "part": cloth[5]  # ✅ 加上這一行
             }
             update_all_clothes_favorite.append(new_cloth)
-        # print(update_all_clothes_in_bag_data)
+
         psql_conn.commit()
         return jsonify(update_all_clothes_favorite), 200
+
     except Exception as e:
         psql_conn.rollback()
         print("An error occurred. Transaction rolled back.")
         print("Error details:", e)
         return jsonify({"error": str(e)}), 500
+
 
 
 @favorite.route('/favorite_delete_item', methods=['POST'])
