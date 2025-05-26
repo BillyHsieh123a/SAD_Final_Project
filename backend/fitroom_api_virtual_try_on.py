@@ -4,9 +4,13 @@ import os
 from dotenv import load_dotenv
 import time
 
+API_KEY = None
+
 def init_fitroom_api_key():
+    global API_KEY
     load_dotenv()
-    return os.getenv("FITROOM_API_KEY")
+    API_KEY =  os.getenv("FITROOM_API_KEY")
+    
 AVATAR_PATH = Path("avatar.jpg")
 GARMENT_PATH = Path("strpshirt_white.jpg")
 
@@ -52,10 +56,10 @@ GARMENT_PATH = Path("strpshirt_white.jpg")
 # # 執行衣服圖片檢查
 # clothes_check(GARMENT_PATH, API_KEY)
 
-def poll_tryon_result(task_id, api_key, poll_interval=2, max_retries=10):
+def poll_tryon_result(task_id, poll_interval=2, max_retries=10):
     url = f"https://platform.fitroom.app/api/tryon/v2/tasks/{task_id}"
     headers = {
-        "X-API-KEY": api_key
+        "X-API-KEY": API_KEY
     }
 
     for attempt in range(max_retries):
@@ -96,10 +100,10 @@ def poll_tryon_result(task_id, api_key, poll_interval=2, max_retries=10):
 # ✅ 執行輪詢與下載
 # poll_tryon_result(task_id=TASK_ID, api_key=API_KEY)
 
-def create_tryon_task_v2(cloth_path, model_path, cloth_type, api_key, waittime_to_poll=12):
+def create_tryon_task_v2(cloth_path, model_path, cloth_type, waittime_to_poll=12):
     url = "https://platform.fitroom.app/api/tryon/v2/tasks"
     headers = {
-        "X-API-KEY": api_key
+        "X-API-KEY": API_KEY
     }
 
     with cloth_path.open("rb") as cloth_img, model_path.open("rb") as model_img:
@@ -119,7 +123,7 @@ def create_tryon_task_v2(cloth_path, model_path, cloth_type, api_key, waittime_t
         print("Response JSON:", response_json)
         TASK_ID = response_json["task_id"]
         time.sleep(waittime_to_poll)
-        poll_tryon_result(task_id=TASK_ID, api_key=api_key)
+        poll_tryon_result(task_id=TASK_ID)
 
     except Exception as e:
         print("❌ Failed to parse response:", e)
@@ -127,10 +131,9 @@ def create_tryon_task_v2(cloth_path, model_path, cloth_type, api_key, waittime_t
 
 
 # ✅ 呼叫範例
-API_KEY = init_fitroom_api_key()
+init_fitroom_api_key()
 create_tryon_task_v2(
     cloth_path=GARMENT_PATH,
     model_path=AVATAR_PATH,
-    cloth_type="upper",
-    api_key=API_KEY
+    cloth_type="upper"
 )

@@ -3,11 +3,14 @@ import os
 from dotenv import load_dotenv
 # import re
 
-def init_get_ai_comments():
-    load_dotenv()
-    return os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = None
 
-def get_comments(OPENAI_API_KEY, image_url): # need to pass OPENAI_API_KEY and image url
+def init_get_ai_comments():
+    global OPENAI_API_KEY
+    load_dotenv()
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+def get_comments(image_url): # need to pass OPENAI_API_KEY and image url
     client = OpenAI(api_key=OPENAI_API_KEY)
 
     response = client.chat.completions.create(
@@ -27,7 +30,6 @@ def get_comments(OPENAI_API_KEY, image_url): # need to pass OPENAI_API_KEY and i
                         "type": "text",
                         "text": """
                             請根據這張穿搭照給出購買建議與穿搭評價，包括整體評價、推薦建議。
-                            顧客年齡約 25 歲，女性，身高 160 公分。
                             【請輸出以下格式】
 
                             ### 整體評價：
@@ -80,8 +82,9 @@ def get_comments(OPENAI_API_KEY, image_url): # need to pass OPENAI_API_KEY and i
 
 sample_image_url = "https://shoplineimg.com/5f4760ee70e52e003f4199b5/657bfa1a28b4fe001af779e3/800x.jpg"
 
-OPENAI_API_KEY = init_get_ai_comments()
-overall_comment, recommendation_comment = get_comments(OPENAI_API_KEY, sample_image_url)
+# OPENAI_API_KEY = init_get_ai_comments()
+init_get_ai_comments()
+overall_comment, recommendation_comment = get_comments(sample_image_url)
 
 # 印出結果
 # print("整體評價：")
