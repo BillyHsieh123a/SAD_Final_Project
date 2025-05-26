@@ -1,85 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
-    setupTabButtons();
+  setupUploadButtons();
+  loadFavoritesTop();
+  loadFavoritesBottom();
 });
 
-// 綁定 tab 行為
-function setupTabButtons() {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const category = btn.dataset.category;
-            loadFavorites(category); // ← 根據選取的類別載入收藏
-        });
+// 綁定所有 Upload 按鈕點擊行為
+function setupUploadButtons() {
+  document.querySelectorAll('.upload-btn').forEach(label => {
+    label.addEventListener('click', () => {
+      const input = label.nextElementSibling;
+      if (input && input.type === 'file') {
+        input.click();
+      }
     });
-
-    // 預設自動點 All
-    const defaultTab = document.querySelector('.tab-btn[data-category="all"]');
-    if (defaultTab) defaultTab.click();
+  });
 }
 
-let selectedProduct = null; // Stores selected product
-let selectedCard = null;    // Stores the selected DOM element
+// 紀錄選擇狀態
+let selectedTopProduct = null;
+let selectedTopCard = null;
+let selectedBottomProduct = null;
+let selectedBottomCard = null;
 
-async function loadFavorites(category) {
-    const container = document.getElementById("recommendation-list");
-    container.innerHTML = "<p>Loading...</p>";
+async function loadFavoritesTop() {
+  await loadFavoritesByPart("T", "top-list", "top");
+}
 
-    try {
-        const response = await fetch(`${serverURL}//api/favorite/allitem?user_id=${get_user_id()}`);
-        if (!response.ok) throw new Error("Request failed");
+async function loadFavoritesBottom() {
+  await loadFavoritesByPart("B", "bottom-list", "bottom");
+}
 
-        let favorites = await response.json();
+async function loadFavoritesByPart(partCode, containerId, categoryKey) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "<p>Loading...</p>";
 
-        if (category === "top") {
-            favorites = favorites.filter(item => item.part === "T");
-        } else if (category === "bottom") {
-            favorites = favorites.filter(item => item.part === "B");
-        }
+  try {
+    const response = await fetch(`${serverURL}/api/favorite/allitem?user_id=${get_user_id()}`);
+    if (!response.ok) throw new Error("Request failed");
 
-        if (favorites.length === 0) {
-            container.innerHTML = "<p>沒有符合的收藏商品。</p>";
-            return;
-        }
+    let favorites = await response.json();
+    favorites = favorites.filter(item => item.part === partCode);
 
-        container.innerHTML = "";
-        favorites.forEach(product => {
-            const card = document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
-                <img src="${".." + product.img}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>${product.price}</p>
-            `;
-
-            // Toggle selection on click
-            card.addEventListener("click", () => {
-                const isSelected = card.classList.contains('selected');
-
-                // Deselect if already selected
-                if (isSelected) {
-                    card.classList.remove('selected');
-                    selectedProduct = null;
-                    selectedCard = null;
-                    console.log("🟡 取消選擇");
-                } else {
-                    // Deselect previous
-                    if (selectedCard) selectedCard.classList.remove('selected');
-
-                    // Select current
-                    card.classList.add('selected');
-                    selectedProduct = product;
-                    selectedCard = card;
-                    console.log("🟢 選擇的商品：", selectedProduct);
-                }
-            });
-
-            container.appendChild(card);
-        });
-
-    } catch (error) {
-        console.error("❌ 錯誤發生：", error);
-        container.innerHTML = "<p>載入失敗。</p>";
+    if (favorites.length === 0) {
+      container.innerHTML = "<p>目前沒有符合的收藏商品。</p>";
+      return;
     }
+
+    container.innerHTML = "";
+
+    favorites.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${".." + product.img}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.price} NTD</p>
+      `;
+
+      // 若為選中項目，自動加上 selected 樣式
+      const isSelected = (categoryKey === "top" && selectedTopProduct?.id === product.id) ||
+                         (categoryKey === "bottom" && selectedBottomProduct?.id === product.id);
+
+      if (isSelected) {
+        card.classList.add("selected");
+        if (categoryKey === "top") selectedTopCard = card;
+        else selectedBottomCard = card;
+      }
+
+      card.addEventListener("click", () => {
+        const wasSelected = card.classList.contains("selected");
+
+        // 清除舊選擇
+        if (categoryKey === "top") {
+          if (selectedTopCard) selectedTopCard.classList.remove("selected");
+          selectedTopProduct = wasSelected ? null : product;
+          selectedTopCard = wasSelected ? null : card;
+        } else {
+          if (selectedBottomCard) selectedBottomCard.classList.remove("selected");
+          selectedBottomProduct = wasSelected ? null : product;
+          selectedBottomCard = wasSelected ? null : card;
+        }
+
+        if (!wasSelected) card.classList.add("selected");
+        else card.classList.remove("selected");
+
+        console.log(`🔘 ${categoryKey.toUpperCase()} 選擇：`, wasSelected ? null : product);
+      });
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("❌ 載入錯誤：", error);
+    container.innerHTML = "<p>載入失敗。</p>";
+  }
 }
