@@ -31,6 +31,8 @@ def recommandation(OPENAI_API_KEY, comment):
     for i in top_k:
         print(f"推薦商品：{i}，相似度：{similarities[i]:.2f}")
 
+    
+
 
 OPENAI_API_KEY = init_recommandation_api_key()
 # create_product_vecs(OPENAI_API_KEY)

@@ -82,6 +82,7 @@ sample_image_url = "https://shoplineimg.com/5f4760ee70e52e003f4199b5/657bfa1a28b
 
 OPENAI_API_KEY = init_get_ai_comments()
 overall_comment, recommendation_comment = get_comments(OPENAI_API_KEY, sample_image_url)
+
 # 印出結果
 # print("整體評價：")
 # print(overall_comment)
