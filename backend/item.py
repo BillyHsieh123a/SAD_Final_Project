@@ -78,6 +78,57 @@ def add_item_to_favorite():
     except Exception as e:
         get_psql_conn().rollback()
         return jsonify({"error": str(e)}), 500
+    
+@item.delete('/favorite')
+def remove_item_from_favorite():
+    user_id = session.get("user_id")
+    clothes_id = request.json['clothes_id']
+    color = request.json['color']
+    
+    try:
+        conn = get_psql_conn()
+        cur = conn.cursor()
+        
+        # Check if the item exists first
+        cur.execute("""
+            SELECT 1 FROM FAVORITE
+            WHERE user_id = %s AND clothes_id = %s AND color = %s
+            FOR UPDATE
+        """, [user_id, clothes_id, color])
+        
+        if not cur.fetchone():  # Item doesn't exist in favorite
+            conn.rollback()
+            return jsonify({"success": -1, "message": "Item not found in favorites"}), 200
+
+        # Proceed to delete
+        cur.execute("""
+            DELETE FROM FAVORITE
+            WHERE user_id = %s AND clothes_id = %s AND color = %s
+        """, [user_id, clothes_id, color])
+        
+        conn.commit()
+        return jsonify({"success": 1, "message": "Item removed from favorites"}), 200
+    except Exception as e:
+        get_psql_conn().rollback()
+        return jsonify({"error": str(e)}), 500
+    
+@item.get('/favorite')
+def check_favorite_status():
+    user_id = session.get("user_id")
+    clothes_id = request.args.get('clothes_id')
+    color = request.args.get('color')
+
+    try:
+        cur = get_psql_conn().cursor()
+        cur.execute("""
+            SELECT 1 FROM FAVORITE
+            WHERE user_id = %s AND clothes_id = %s AND color = %s
+        """, [user_id, clothes_id, color])
+        
+        is_favorite = cur.fetchone() is not None
+        return jsonify({"isFavorite": is_favorite}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @item.post('/color')# /get-clothes-colors-descr
