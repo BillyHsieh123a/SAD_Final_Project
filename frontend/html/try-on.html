@@ -25,26 +25,36 @@
   <!-- Main Layout -->
   <main>
     <section class="try-on-layout">
-
-      <!-- 上方：收藏清單 + AI 結果 -->
       <div class="top-section">
-
-        <!-- 收藏 -->
+        <!-- 左側 Top 和 Bottom 分欄 -->
         <div class="left-column">
+          <!-- Top 區塊 -->
           <div class="favorite-section">
-            <div class="category-tabs">
-              <!-- 移除 All，預設 Top 為 active -->
-              <button class="tab-btn active" data-category="top">Top</button>
-              <button class="tab-btn" data-category="bottom">Bottom</button>
+            <div class="upload-area">
+              <label for="upload-top" class="upload-btn">Upload</label>
+              <input type="file" id="upload-top" accept="image/*" />
             </div>
-            <div class="item-list" id="recommendation-list">
-              <!-- 收藏商品卡片將插入這裡 -->
+            <div class="section-label"><strong>Top</strong></div>
+            <div class="item-list" id="top-list"></div>
+          </div>
+
+          <!-- Bottom 區塊 -->
+          <div class="favorite-section">
+            <div class="upload-area">
+              <label for="upload-bottom" class="upload-btn">Upload</label>
+              <input type="file" id="upload-bottom" accept="image/*" />
             </div>
+            <div class="section-label"><strong>Bottom</strong></div>
+            <div class="item-list" id="bottom-list"></div>
           </div>
         </div>
 
-        <!-- AI 結果 -->
+        <!-- 右側 AI 結果 -->
         <div class="right-panel">
+          <div class="upload-area-right">
+            <label for="upload-right" class="upload-btn">Upload</label>
+            <input type="file" id="upload-right" accept="image/*" />
+          </div>
           <div class="result-display">
             <h3>Result</h3>
             <img id="processed-image" src="" alt="AI Processed Image" />
@@ -54,17 +64,7 @@
             <p id="ai-comment-text">Try something bold! This top suits you well.</p>
           </div>
         </div>
-
       </div>
-
-      <!-- Recommendation 區塊（整欄最底下） -->
-      <div class="recommendation-panel">
-        <h3>Recommendation</h3>
-        <div id="recommendation-content">
-          <!-- 預設空白 -->
-        </div>
-      </div>
-
     </section>
   </main>
 
