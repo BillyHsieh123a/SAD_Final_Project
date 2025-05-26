@@ -130,7 +130,7 @@ def create_tryon_task_v2(cloth_path, model_path, cloth_type, waittime_to_poll=12
         print("Raw response:", res.text)
 
 
-# ✅ 呼叫範例
+# example
 init_fitroom_api_key()
 create_tryon_task_v2(
     cloth_path=GARMENT_PATH,

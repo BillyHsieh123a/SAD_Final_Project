@@ -34,11 +34,7 @@ def recommandation(comment):
     for i in top_k:
         print(f"推薦商品：{i}，相似度：{similarities[i]:.2f}")
 
-    
-
-
-init_recommandation_api_key()
-# create_product_vecs(OPENAI_API_KEY)
-
+# example
 comment = """搭配一件淺色系牛仔外套或米色針織開衫，可以增加層次感並保持整體風格協調。灰白色運動鞋或白色帆布鞋與這套穿搭相當契合，自然輕鬆。選擇一款顏色相似的上衣，添加可愛印花或有趣字樣，以保持整體趣味性和一致的風格。考慮選擇略短的 T 恤，展示出纖細的腰線，提高視覺比例，讓整體看起來更顯高挑。"""
+init_recommandation_api_key()
 recommandation(comment)
