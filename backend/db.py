@@ -28,7 +28,7 @@ def init_db_conn():
         )
         
     except Exception as e:
-        # print(f"Error connecting to database: {e}")
+        print(f"Error connecting to database: {e}")
         psql_conn = None
 
     # print(f"conneted to database: {psql_conn}")

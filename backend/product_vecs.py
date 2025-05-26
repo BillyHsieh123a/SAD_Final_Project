@@ -2,6 +2,7 @@ from openai import OpenAI
 import numpy as np
 import os
 from dotenv import load_dotenv
+from db import init_db_conn, get_psql_conn
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -27,6 +28,35 @@ product_texts = [
     "卡其色風衣外套，中長版設計，防潑水材質",
     "粉橘色襯衫，雪紡材質，微微透膚"
 ]
+
+try:
+    init_db_conn()
+    conn = get_psql_conn()
+    if conn is None:
+        raise ValueError("資料庫連線失敗：get_psql_conn() 回傳 None11")
+    cur = conn.cursor()
+    
+    cur.execute(
+        '''
+        SELECT description
+        FROM clothes
+        ORDER BY clothes_id ASC
+        FOR UPDATE
+        '''
+    )
+    
+    rows = cur.fetchall()  # 取出所有資料
+    
+    product_texts = [row[0] for row in rows] if rows else []  # 存到 list
+
+    conn.commit()  # 若 SELECT FOR UPDATE 是在交易中，需提交
+
+except Exception as e:
+    descriptions = []
+    print(f"資料庫錯誤或無資料：{e}")
+
+print(product_texts)
+
 def create_product_vecs(OPENAI_API_KEY):
     global product_vecs
     global product_texts
@@ -34,4 +64,4 @@ def create_product_vecs(OPENAI_API_KEY):
     product_vecs = [get_embedding(OPENAI_API_KEY, text) for text in product_texts]
     np.save("product_vecs.npy", np.array(product_vecs))
 
-create_product_vecs(OPENAI_API_KEY)
+# create_product_vecs(OPENAI_API_KEY)
