@@ -68,4 +68,6 @@ def create_product_vecs():
     product_vecs = [get_embedding(text) for text in product_texts]
     np.save("product_vecs.npy", np.array(product_vecs))
 
-# create_product_vecs(OPENAI_API_KEY)
+# example
+# init_api_key()
+# create_product_vecs()
